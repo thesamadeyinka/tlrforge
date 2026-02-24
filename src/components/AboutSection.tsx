@@ -23,7 +23,7 @@ const AboutSection = () => {
             <span className="text-gradient-gold">An Ecosystem.</span>
           </h2>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto text-center mb-12">
-            Founded on a singular belief: anyone can live a fulfilling life — if they engage the knowledge and practice that produces transformation.
+            A dynamic ecosystem where emerging leaders, executives, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
           </p>
         </ScrollReveal>
 
@@ -36,7 +36,7 @@ const AboutSection = () => {
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                A world where leaders rise with clarity, character, and competence.
+                A world where leaders and organisations rise with clarity, character, and competence to shape transformative impact across societies.
               </p>
             </div>
           </ScrollReveal>
@@ -47,7 +47,7 @@ const AboutSection = () => {
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Mission</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Illuminate pathways through guided learning, structured mentorship, and actionable practice.
+                To illuminate pathways for strategic transformational growth through guided learning, structured mentorship, and actionable practice that drives lasting impact.
               </p>
             </div>
           </ScrollReveal>

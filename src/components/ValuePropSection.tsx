@@ -12,7 +12,7 @@ const ValuePropSection = () => {
             Stop Aspiring. Start Becoming.
           </h2>
           <p className="text-accent-foreground/80 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
-            Structured growth frameworks, expert mentorship, and transformational accountability — so you can rise with clarity and purpose.
+            Guided learning, customized change frameworks, structured mentorship, and transformational accountability — so you can rise with clarity, character, and competence.
           </p>
           <Button
             asChild
