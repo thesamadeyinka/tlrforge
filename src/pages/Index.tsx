@@ -6,19 +6,22 @@ import ProgrammesSection from "@/components/ProgrammesSection";
 import ValuePropSection from "@/components/ValuePropSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <HeroSection />
-      <AboutSection />
-      <PhilosophySection />
-      <ProgrammesSection />
-      <ValuePropSection />
-      <TestimonialsSection />
-      <Footer />
-    </div>
+    <PageTransition>
+      <div className="min-h-screen">
+        <Header />
+        <HeroSection />
+        <AboutSection />
+        <PhilosophySection />
+        <ProgrammesSection />
+        <ValuePropSection />
+        <TestimonialsSection />
+        <Footer />
+      </div>
+    </PageTransition>
   );
 };
 

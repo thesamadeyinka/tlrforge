@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import evolveLogo from "@/assets/evolve-logo.png";
 
@@ -53,6 +54,7 @@ const ApplyEvolve = () => {
 
   if (submitted) {
     return (
+      <PageTransition>
       <div className="min-h-screen">
         <Header />
         <div className="pt-16 min-h-screen flex items-center justify-center bg-background">
@@ -69,10 +71,12 @@ const ApplyEvolve = () => {
         </div>
         <Footer />
       </div>
+      </PageTransition>
     );
   }
 
   return (
+    <PageTransition>
     <div className="min-h-screen">
       <Header />
       <div className="pt-24 pb-16 bg-background">
@@ -153,6 +157,7 @@ const ApplyEvolve = () => {
       </div>
       <Footer />
     </div>
+    </PageTransition>
   );
 };
 
