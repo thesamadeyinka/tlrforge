@@ -43,7 +43,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg md:text-xl text-primary-foreground/85 mb-10 max-w-3xl mx-auto font-light leading-relaxed"
         >
-          A premier platform for strategic growth — where emerging leaders and organisations access the frameworks and accountability needed to rise with clarity and competence.
+          A premier platform for strategic growth and intentional transformation — where emerging leaders, executives, and organisations access the knowledge, tools, and support needed to rise with clarity, character, and competence.
         </motion.p>
 
         <motion.div

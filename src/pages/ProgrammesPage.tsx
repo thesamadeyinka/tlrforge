@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
-import { TrendingUp, Brain, Heart, Wallet, ArrowRight, Clock, Users, Target, CheckCircle } from "lucide-react";
+import { TrendingUp, Brain, Heart, Wallet, Users, ArrowRight, Clock, Target, CheckCircle, BookOpen, Video, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -11,35 +11,79 @@ import patternBg from "@/assets/pattern-bg.jpg";
 
 const modules = [
   {
-    title: "Growth & Transformation",
+    title: "Module 1: Foundations of Growth & Transformation",
     icon: TrendingUp,
     weeks: "Weeks 1–4",
-    topics: ["The AKA-RB Method", "Growth vs Transformation", "Designing Your Transformation", "Building Growth Systems"],
+    topics: [
+      "Growth vs Transformation & How Change Occurs",
+      "The Equation for Success",
+      "Spirituality, Purpose & Assignment",
+      "Defining Your Growth Path: Vision, Mission & Values",
+      "Mental Wellness, Resilience & Overcoming Limiting Beliefs",
+    ],
   },
   {
-    title: "Decisions & Personal Effectiveness",
+    title: "Module 2: Decisions & Personal Effectiveness",
     icon: Brain,
-    weeks: "Weeks 5–8",
-    topics: ["Decision Frameworks", "Personal Effectiveness Systems", "Time Architecture", "Strategic Priority Management"],
+    weeks: "Weeks 5–6",
+    topics: [
+      "Making Strategic Decisions & Decision Frameworks",
+      "Aligning Decisions to Growth Plans",
+      "Dealing with Unconscious Bias",
+      "The Illusion of Time Management",
+      "Goal Setting, Execution & Overcoming Procrastination",
+    ],
   },
   {
-    title: "Relationships & Emotional Intelligence",
+    title: "Module 3: Relationships",
     icon: Heart,
-    weeks: "Weeks 9–12",
-    topics: ["Emotional Intelligence Foundations", "Building Relational Capital", "Conflict Resolution", "Influence & Persuasion"],
+    weeks: "Week 7",
+    topics: [
+      "Building Strategic Relationships",
+      "Effective Communication & Conflict Resolution",
+      "The Power of Mentorship & Networking",
+    ],
   },
   {
-    title: "Career & Finance",
+    title: "Module 4: Career & Business Development",
+    icon: Users,
+    weeks: "Weeks 8–9",
+    topics: [
+      "Career Pathway & Professional Development",
+      "Developing Essential Soft & Technical Skills",
+      "Navigating the Workplace: Professionalism & Leadership",
+      "Fundamentals of Entrepreneurship & Business Development",
+      "Identifying Profitable Business Ideas & Market Trends",
+      "Building a Scalable Business Model",
+    ],
+  },
+  {
+    title: "Module 5: Financial Intelligence & Wealth Creation",
     icon: Wallet,
-    weeks: "Weeks 13–16",
-    topics: ["Career Strategy & Positioning", "Financial Foundations for Leaders", "Wealth Creation Principles", "Legacy Planning"],
+    weeks: "Weeks 10–12",
+    topics: [
+      "Money: Purpose & Principles — The Origin of Money",
+      "The Principles of Wealth Creation & The First Principle: Increase",
+      "Fundamentals of Multiplication: Budgeting, Saving & Investing",
+      "Financial Intelligence & Money Management",
+      "Business Finance, Cash Flow & Investment Strategies",
+      "Financial Independence & Retirement Planning",
+    ],
   },
 ];
 
+const highlights = [
+  { icon: Video, label: "Weekly Pre-recorded Sessions", desc: "Structured lessons with the lead coach" },
+  { icon: Mic, label: "Bi-Monthly Live Sessions", desc: "Online sessions with guest lectures from industry leaders" },
+  { icon: Users, label: "Monthly Live Classes", desc: "Live classes with the lead coach and growth mentors" },
+  { icon: BookOpen, label: "Growth Electives", desc: "Select electives specific to your growth focus or goals" },
+  { icon: Target, label: "Final Growth Project", desc: "Present a Growth Blueprint applying AKA-RB principles" },
+];
+
 const features = [
-  { icon: Clock, label: "4-Month Programme", desc: "16 weeks of structured, intensive mentorship" },
-  { icon: Users, label: "Small Cohorts", desc: "Intimate groups for maximum engagement" },
-  { icon: Target, label: "Accountability Partners", desc: "Paired with peers for mutual accountability" },
+  { icon: Clock, label: "4-Month Programme", desc: "12 weeks of structured, immersive mentorship" },
+  { icon: Users, label: "Hybrid Delivery", desc: "In-person & virtual sessions for flexibility" },
+  { icon: Target, label: "Accountability Checkpoints", desc: "Regular evaluations and milestone reviews" },
 ];
 
 const ProgrammesPage = () => {
@@ -60,7 +104,7 @@ const ProgrammesPage = () => {
                   Growth Mentorship <span className="text-gradient-gold">Programme</span>
                 </h1>
                 <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
-                  A 4-month immersive experience for individuals committed to whole-person transformation.
+                  A 4-month immersive experience designed to foster learning, growth, and accountability while opening doors to unparalleled opportunities.
                 </p>
               </ScrollReveal>
             </div>
@@ -76,7 +120,7 @@ const ProgrammesPage = () => {
                   What is <span className="text-gradient-gold">EVOLVE</span>?
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-                  EVOLVE is not a course. It is a covenant — a structured commitment to becoming the best version of yourself through intentional growth across four transformational modules.
+                  EVOLVE is the mentorship platform of The Luminary Rise, built on the belief that true success is intentional and requires structured development. Through a 4-month immersive experience, participants embark on a transformational journey that enhances their mindset, skills, growth-drive, and strategies for success.
                 </p>
               </div>
             </ScrollReveal>
@@ -97,8 +141,34 @@ const ProgrammesPage = () => {
           </div>
         </section>
 
-        {/* Module Breakdown */}
+        {/* Programme Highlights */}
         <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <ScrollReveal>
+              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
+                Programme <span className="text-gradient-gold">Highlights</span>
+              </h2>
+            </ScrollReveal>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              {highlights.map((h, i) => (
+                <ScrollReveal key={h.label} delay={i * 0.08}>
+                  <div className="bg-background rounded-2xl p-5 border border-border h-full flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
+                      <h.icon className="w-5 h-5 text-accent" />
+                    </div>
+                    <div>
+                      <h4 className="font-heading font-bold text-foreground text-sm mb-1">{h.label}</h4>
+                      <p className="text-xs text-muted-foreground">{h.desc}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Module Breakdown */}
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-5xl">
             <ScrollReveal>
               <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
@@ -112,7 +182,7 @@ const ProgrammesPage = () => {
                   <motion.div
                     whileHover={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="bg-background rounded-2xl p-6 md:p-8 border border-border hover:border-accent/30 transition-colors"
+                    className="bg-secondary rounded-2xl p-6 md:p-8 border border-border hover:border-accent/30 transition-colors"
                   >
                     <div className="flex flex-col md:flex-row md:items-start gap-6">
                       <div className="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center shrink-0">
@@ -120,13 +190,13 @@ const ProgrammesPage = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3 mb-3">
-                          <h3 className="font-heading text-xl font-bold text-foreground">{m.title}</h3>
+                          <h3 className="font-heading text-lg font-bold text-foreground">{m.title}</h3>
                           <span className="text-xs font-medium text-accent bg-accent/10 rounded-full px-3 py-1">{m.weeks}</span>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-2">
                           {m.topics.map((topic) => (
-                            <div key={topic} className="flex items-center gap-2">
-                              <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                            <div key={topic} className="flex items-start gap-2">
+                              <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                               <span className="text-sm text-muted-foreground">{topic}</span>
                             </div>
                           ))}
@@ -141,7 +211,7 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Who It's For */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-muted">
           <div className="container mx-auto px-4 max-w-4xl">
             <ScrollReveal>
               <div className="text-center mb-12">
@@ -149,12 +219,12 @@ const ProgrammesPage = () => {
               </div>
               <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
                 {[
-                  "Emerging leaders seeking structure",
-                  "Young professionals wanting clarity",
+                  "Emerging leaders seeking structure and clarity",
+                  "Mid- to senior executives refining leadership capacity",
                   "Entrepreneurs building with intention",
-                  "Individuals ready for a growth covenant",
+                  "Individuals ready for whole-person transformation",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 bg-secondary rounded-xl p-4 border border-border">
+                  <div key={item} className="flex items-center gap-3 bg-background rounded-xl p-4 border border-border">
                     <CheckCircle className="w-5 h-5 text-accent shrink-0" />
                     <span className="text-sm font-medium text-foreground">{item}</span>
                   </div>

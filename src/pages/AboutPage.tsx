@@ -8,17 +8,21 @@ import { Link } from "react-router-dom";
 import patternBg from "@/assets/pattern-bg.jpg";
 
 const values = [
-  { label: "Intentionality", icon: Target, desc: "Every programme, framework, and interaction is designed with purpose." },
-  { label: "Innovation", icon: Lightbulb, desc: "Pioneering new approaches to leadership development and growth." },
-  { label: "Integrity", icon: Shield, desc: "Authentic, transparent, and consistent in all we do." },
-  { label: "Excellence", icon: Award, desc: "Pursuing the highest standards in delivery and outcomes." },
-  { label: "Mentorship", icon: Compass, desc: "Walking with people through the process of becoming." },
-  { label: "Community", icon: Users, desc: "Building a tribe of intentional, growth-driven individuals." },
-  { label: "Legacy", icon: Gem, desc: "Building beyond ourselves — creating lasting impact for generations." },
+  { label: "Intentionality", icon: Target, desc: "Nothing is accidental; every change is designed." },
+  { label: "Innovation", icon: Lightbulb, desc: "We embrace new ideas and adaptive solutions." },
+  { label: "Integrity", icon: Shield, desc: "We uphold what is right, consistently." },
+  { label: "Excellence", icon: Award, desc: "We pursue the highest standards in every engagement — excellence is our minimum standard." },
+  { label: "Mentorship", icon: Compass, desc: "We believe that growth is accelerated when guided." },
+  { label: "Community", icon: Users, desc: "We create a system of collaboration and accountability." },
+  { label: "Legacy", icon: Gem, desc: "We build impact that endures." },
 ];
 
 const team = [
-  { name: "Dr Samuel Omenka", role: "President & Lead Coach", bio: "A thought leader in strategic transformation, Dr Omenka brings decades of experience in leadership development, organisational consulting, and personal effectiveness coaching." },
+  {
+    name: "Dr Samuel Omenka",
+    role: "President & Lead Coach",
+    bio: "Dr. Samuel Omenka is a senior economist, trusted advisor, visionary leader, and kingdom strategist whose life and work are defined by the dual call to transform economies and amplify Jesus Christ. He brings together deep technical expertise in macroeconomic frameworks, public financial management systems, fiscal reforms, and development policy analysis with a mission-driven commitment to advancing kingdom values. As a trusted policy advisor, Samuel has successfully provided incisive economic strategies and secured consensus for critical fiscal and governance reforms. Beyond economics, Samuel is a visionary investor, entrepreneur, and mentor who builds businesses, strategic investment platforms, and growth mentorship programmes — all rooted in integrity, excellence, and stewardship. Through initiatives such as The Luminary Rise, he empowers leaders through transformational growth and creates opportunities that inspire hope, foster growth, and enable abundant living.",
+  },
 ];
 
 const AboutPage = () => {
@@ -38,33 +42,70 @@ const AboutPage = () => {
                   About <span className="text-gradient-gold">The Luminary Rise</span>
                 </h1>
                 <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
-                  More than a school — an ecosystem for strategic transformation.
+                  More than a school — a dynamic ecosystem for strategic growth and intentional transformation.
                 </p>
               </ScrollReveal>
             </div>
           </div>
         </section>
 
-        {/* Origin Story */}
+        {/* What is TLR */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
             <ScrollReveal>
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="grid md:grid-cols-2 gap-12 items-start">
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6">Why We Exist</h2>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6">Who We Are</h2>
                   <div className="space-y-4 text-muted-foreground leading-relaxed">
                     <p>
-                      The Luminary Rise was founded on a singular belief: that anyone can be great and live a fulfilling life — if they engage, early enough and honestly enough, the knowledge and practice that produces transformation.
+                      The Luminary Rise (TLR) is a premier platform for strategic growth and intentional transformation. More than a school, TLR is a dynamic ecosystem where emerging leaders, mid- to senior executives, businesses, and corporate organisations access the knowledge, people, tools, and support needed to thrive in today's fast-changing world.
                     </p>
                     <p>
-                      Too many intelligent, capable, and purpose-driven individuals are living beneath their potential — not from lack of talent, but from lack of structure. They have aspirations without architectures.
+                      At TLR, we believe growth precedes transformation, and some levels of growth depend on transformation. That is why our programmes are designed to foster structured learning, mindset shifts, and actionable practice that create lasting impact across personal and professional spheres.
+                    </p>
+                    <p>
+                      Led by Dr Samuel Omenka alongside a faculty of seasoned experts, TLR functions as both a training hub and mentorship community. Through guided learning, customized change frameworks, accountability, and shared experiences, we equip leaders and enterprises to rise with clarity, character, and competence.
                     </p>
                   </div>
                 </div>
-                <div className="bg-secondary rounded-3xl p-8 border border-border">
-                  <h3 className="font-heading text-lg font-bold text-foreground mb-3">The AKA-RB Method</h3>
+                <div className="space-y-6">
+                  <div className="bg-secondary rounded-3xl p-8 border border-border">
+                    <h3 className="font-heading text-lg font-bold text-foreground mb-3">The Problem We Solve</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      People desire and aspire to live a better life, often accompanied by great expectations. Often, they are disappointed by realities that deviate significantly from their expectations and dreams — due to the absence of requisite all-round, balanced, purpose-driven action for a life of fulfilment.
+                    </p>
+                  </div>
+                  <div className="bg-secondary rounded-3xl p-8 border border-border">
+                    <h3 className="font-heading text-lg font-bold text-foreground mb-3">Our Belief</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Anyone can be great and live a fulfilling life if they know and engage early the things they learned later in life, and if they have and utilize the opportunities for learning and growth on time.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Brand Promise & AKA-RB */}
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="grid md:grid-cols-2 gap-6">
+              <ScrollReveal delay={0.1}>
+                <div className="bg-background rounded-2xl p-8 border border-border h-full">
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-4">Brand Promise</h3>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Clarity for emerging leaders.</li>
+                    <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Momentum for personal, professional, and corporate growth.</li>
+                    <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Structure for sustainable transformation.</li>
+                  </ul>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delay={0.2}>
+                <div className="bg-background rounded-2xl p-8 border border-border h-full">
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-3">The AKA-RB Method</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    Our approach ensures participants don't just acquire insight — they apply it, refine it, and build it into the fabric of how they operate.
+                    A structured framework that ensures participants not only understand transformational growth principles but also apply them effectively and consistently.
                   </p>
                   <div className="space-y-3">
                     {["Awareness", "Knowledge", "Action", "Repeat Better"].map((step, i) => (
@@ -77,17 +118,17 @@ const AboutPage = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           </div>
         </section>
 
         {/* Vision & Mission */}
-        <section className="py-20 bg-muted">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="grid md:grid-cols-2 gap-6">
               <ScrollReveal delay={0.1}>
-                <div className="bg-background rounded-2xl p-8 border border-border h-full">
+                <div className="bg-secondary rounded-2xl p-8 border border-border h-full">
                   <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5">
                     <Compass className="w-6 h-6 text-accent" />
                   </div>
@@ -98,13 +139,13 @@ const AboutPage = () => {
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
-                <div className="bg-background rounded-2xl p-8 border border-border h-full">
+                <div className="bg-secondary rounded-2xl p-8 border border-border h-full">
                   <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5">
                     <Target className="w-6 h-6 text-accent" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-3">Mission</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    To illuminate pathways for strategic transformational growth through guided learning, structured mentorship, and actionable practice that drives lasting impact.
+                    To illuminate pathways for strategic transformational growth for leaders and organisations through guided learning, structured mentorship, and actionable practice that drives lasting impact.
                   </p>
                 </div>
               </ScrollReveal>
@@ -113,7 +154,7 @@ const AboutPage = () => {
         </section>
 
         {/* Core Values */}
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-muted">
           <div className="container mx-auto px-4 max-w-5xl">
             <ScrollReveal>
               <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
@@ -123,7 +164,7 @@ const AboutPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {values.map((v, i) => (
                 <ScrollReveal key={v.label} delay={i * 0.07}>
-                  <div className="bg-secondary rounded-2xl p-6 border border-border hover:border-accent/30 transition-colors h-full group">
+                  <div className="bg-background rounded-2xl p-6 border border-border hover:border-accent/30 transition-colors h-full group">
                     <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <v.icon className="w-5 h-5 text-accent" />
                     </div>
@@ -133,6 +174,28 @@ const AboutPage = () => {
                 </ScrollReveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Who It's For */}
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <ScrollReveal>
+              <h2 className="font-heading text-3xl font-bold text-foreground mb-8">Who TLR Is For</h2>
+              <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                {[
+                  "Individuals seeking personal excellence",
+                  "Entrepreneurs pursuing business growth",
+                  "Senior executives refining leadership capacity",
+                  "Organisations pursuing sustainable growth",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 bg-secondary rounded-xl p-4 border border-border text-left">
+                    <ArrowRight className="w-4 h-4 text-accent shrink-0" />
+                    <span className="text-sm font-medium text-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
@@ -156,10 +219,21 @@ const AboutPage = () => {
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-1">{member.name}</h3>
                   <p className="text-sm text-accent font-medium mb-4">{member.role}</p>
-                  <p className="text-muted-foreground leading-relaxed">{member.bio}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{member.bio}</p>
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+        </section>
+
+        {/* Tagline */}
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4 max-w-3xl text-center">
+            <ScrollReveal>
+              <p className="font-heading text-xl md:text-2xl font-semibold text-foreground italic">
+                "We don't just adapt to change — we lead it, inspire it, and rise with it."
+              </p>
+            </ScrollReveal>
           </div>
         </section>
 

@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Brain, Heart, Wallet, ArrowRight } from "lucide-react";
+import { TrendingUp, Brain, Heart, Users, Wallet, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import evolveLogo from "@/assets/evolve-logo.png";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const modules = [
-  { title: "Growth & Transformation", icon: TrendingUp, desc: "Build growth systems and design your personal transformation journey." },
-  { title: "Decisions & Effectiveness", icon: Brain, desc: "Master decision frameworks, time architecture and strategic priorities." },
-  { title: "Relationships & EQ", icon: Heart, desc: "Develop emotional intelligence, relational capital and influence." },
-  { title: "Career & Finance", icon: Wallet, desc: "Strategic career positioning, financial foundations and wealth creation." },
+  { title: "Growth & Transformation", icon: TrendingUp, desc: "Build growth systems and design your transformation journey." },
+  { title: "Decisions & Effectiveness", icon: Brain, desc: "Master decision frameworks and strategic priorities." },
+  { title: "Relationships", icon: Heart, desc: "Communication, conflict resolution, and mentorship." },
+  { title: "Career & Business", icon: Users, desc: "Professional development, entrepreneurship, and business strategy." },
+  { title: "Financial Intelligence", icon: Wallet, desc: "Wealth creation, money management, and investment strategies." },
 ];
 
 const ProgrammesSection = () => {
@@ -39,10 +40,10 @@ const ProgrammesSection = () => {
 
               <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
               <h3 className="font-heading text-xl md:text-2xl font-semibold mb-6 text-primary-foreground/80">
-                Growth Mentorship Programme
+                Growth Mentorship Programme — 4 Months
               </h3>
 
-              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 {modules.map((m) => (
                   <div key={m.title} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                     <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center shrink-0">
