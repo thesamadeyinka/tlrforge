@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Brain, Heart, Wallet, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import evolveLogo from "@/assets/evolve-logo.png";
 
 const modules = [
   { title: "Growth & Transformation", icon: TrendingUp },
@@ -31,8 +32,9 @@ const ProgrammesSection = () => {
               Flagship Programme
             </div>
 
-            <h3 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              EVOLVE Growth Mentorship Programme
+            <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
+            <h3 className="font-heading text-xl md:text-2xl font-semibold mb-4 text-primary-foreground/80">
+              Growth Mentorship Programme
             </h3>
 
             <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl leading-relaxed">

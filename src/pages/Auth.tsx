@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import tlrLogo from "@/assets/tlr-logo.svg";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -42,7 +43,7 @@ const Auth = () => {
     <div className="min-h-screen gradient-radiant flex items-center justify-center px-4">
       <div className="bg-background rounded-2xl shadow-2xl p-8 w-full max-w-md">
         <Link to="/" className="block text-center mb-6">
-          <h2 className="font-heading text-2xl font-bold text-foreground">The Luminary Rise</h2>
+          <img src={tlrLogo} alt="The Luminary Rise" className="h-12 mx-auto" />
         </Link>
 
         <h3 className="font-heading text-xl font-semibold text-foreground mb-6 text-center">
