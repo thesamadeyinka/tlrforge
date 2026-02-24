@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center gradient-radiant overflow-hidden pt-16">
-      {/* Decorative glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px] animate-glow-pulse pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-sky/10 blur-[100px] pointer-events-none" />
 
@@ -28,19 +28,12 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            asChild
-            size="lg"
-            className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 py-6 shadow-lg shadow-accent/25"
-          >
-            <a href="#programmes">Begin Your Transformation</a>
+          <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 py-6 shadow-lg shadow-accent/25">
+            <Link to="/apply">
+              Begin Your Transformation <ArrowRight className="w-4 h-4 ml-1" />
+            </Link>
           </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-white/30 text-primary-foreground hover:bg-white/10 font-heading font-semibold text-base px-8 py-6"
-          >
+          <Button asChild size="lg" variant="outline" className="border-white/30 text-primary-foreground hover:bg-white/10 font-heading font-semibold text-base px-8 py-6">
             <a href="#programmes">Explore EVOLVE</a>
           </Button>
         </div>

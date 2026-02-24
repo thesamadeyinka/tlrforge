@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Brain, Heart, Wallet, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const modules = [
   { title: "Growth & Transformation", icon: TrendingUp },
@@ -22,7 +23,6 @@ const ProgrammesSection = () => {
           </p>
         </div>
 
-        {/* EVOLVE Card */}
         <div className="gradient-radiant rounded-2xl p-8 md:p-12 text-primary-foreground max-w-4xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-accent/10 blur-[80px] pointer-events-none" />
 
@@ -41,10 +41,7 @@ const ProgrammesSection = () => {
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {modules.map((m) => (
-                <div
-                  key={m.title}
-                  className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/10"
-                >
+                <div key={m.title} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/10">
                   <div className="w-9 h-9 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
                     <m.icon className="w-4 h-4 text-accent" />
                   </div>
@@ -59,14 +56,10 @@ const ProgrammesSection = () => {
               </p>
             </div>
 
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 shadow-lg shadow-accent/25"
-            >
-              <a href="#contact">
+            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 shadow-lg shadow-accent/25">
+              <Link to="/apply">
                 Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
