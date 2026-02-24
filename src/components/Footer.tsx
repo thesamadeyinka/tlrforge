@@ -45,9 +45,9 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-sm mb-4 text-primary-foreground/80">Quick Links</h4>
             <nav className="space-y-2">
-              {[{ label: "About", href: "#about" }, { label: "Philosophy", href: "#philosophy" }, { label: "Programmes", href: "#programmes" }].map((link) => (
-                <a key={link.label} href={link.href} className="block text-sm text-primary-foreground/60 hover:text-accent transition-colors">{link.label}</a>
-              ))}
+              <Link to="/about" className="block text-sm text-primary-foreground/60 hover:text-accent transition-colors">About</Link>
+              <Link to="/philosophy" className="block text-sm text-primary-foreground/60 hover:text-accent transition-colors">Philosophy</Link>
+              <Link to="/programmes" className="block text-sm text-primary-foreground/60 hover:text-accent transition-colors">Programmes</Link>
               <Link to="/resources" className="block text-sm text-primary-foreground/60 hover:text-accent transition-colors">Resources</Link>
               <Link to="/apply" className="block text-sm text-primary-foreground/60 hover:text-accent transition-colors">Apply to EVOLVE</Link>
             </nav>

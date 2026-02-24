@@ -37,7 +37,6 @@ const ProgrammesSection = () => {
                 Flagship Programme
               </div>
 
-              {/* EVOLVE logo — white version for dark gradient bg */}
               <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
               <h3 className="font-heading text-xl md:text-2xl font-semibold mb-6 text-primary-foreground/80">
                 Growth Mentorship Programme
@@ -54,11 +53,16 @@ const ProgrammesSection = () => {
                 ))}
               </div>
 
-              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 shadow-lg shadow-accent/25">
-                <Link to="/apply">
-                  Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-1" />
-                </Link>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 shadow-lg shadow-accent/25">
+                  <Link to="/apply">
+                    Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-white/30 text-primary-foreground hover:bg-white/10 font-heading font-semibold">
+                  <Link to="/programmes">View Full Programme</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </ScrollReveal>

@@ -8,9 +8,9 @@ import tlrLogo from "@/assets/tlr-logo.svg";
 import tlrLogoWhite from "@/assets/tlr-logo-white.png";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Philosophy", href: "#philosophy" },
-  { label: "Programmes", href: "#programmes" },
+  { label: "About", href: "/about", isRoute: true },
+  { label: "Philosophy", href: "/philosophy", isRoute: true },
+  { label: "Programmes", href: "/programmes", isRoute: true },
   { label: "Resources", href: "/resources", isRoute: true },
   { label: "Contact", href: "#contact" },
 ];
@@ -23,7 +23,6 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center">
-          {/* White logo for dark header — works in both themes */}
           <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-10 hidden dark:block" />
           <img src={tlrLogo} alt="The Luminary Rise" className="h-10 brightness-0 invert dark:hidden" />
         </Link>
