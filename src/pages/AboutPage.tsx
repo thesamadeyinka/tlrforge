@@ -18,7 +18,7 @@ const values = [
 ];
 
 const team = [
-  { name: "Dr Samuel Omenka", role: "Founder & Lead Faculty", bio: "A thought leader in strategic transformation, Dr Omenka brings decades of experience in leadership development, organisational consulting, and personal effectiveness coaching." },
+  { name: "Dr Samuel Omenka", role: "President & Lead Coach", bio: "A thought leader in strategic transformation, Dr Omenka brings decades of experience in leadership development, organisational consulting, and personal effectiveness coaching." },
 ];
 
 const AboutPage = () => {
@@ -147,8 +147,12 @@ const AboutPage = () => {
             {team.map((member) => (
               <ScrollReveal key={member.name}>
                 <div className="bg-background rounded-2xl p-8 border border-border max-w-2xl mx-auto text-center">
-                  <div className="w-20 h-20 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-5">
-                    <Users className="w-8 h-8 text-accent" />
+                  <div className="w-24 h-24 rounded-full bg-muted mx-auto mb-5 overflow-hidden border-2 border-accent/20">
+                    <img
+                      src="/placeholder.svg"
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-1">{member.name}</h3>
                   <p className="text-sm text-accent font-medium mb-4">{member.role}</p>
