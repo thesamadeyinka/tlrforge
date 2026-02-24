@@ -14,7 +14,426 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      evolve_applications: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          job_title: string | null
+          motivation: string
+          phone: string | null
+          referral_source: string | null
+          status: string
+          user_id: string | null
+          years_experience: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          job_title?: string | null
+          motivation: string
+          phone?: string | null
+          referral_source?: string | null
+          status?: string
+          user_id?: string | null
+          years_experience?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          job_title?: string | null
+          motivation?: string
+          phone?: string | null
+          referral_source?: string | null
+          status?: string
+          user_id?: string | null
+          years_experience?: string | null
+        }
+        Relationships: []
+      }
+      lms_assignments: {
+        Row: {
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          module_id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          module_id: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          module_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_assignments_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "lms_modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_discussion_replies: {
+        Row: {
+          content: string
+          created_at: string
+          discussion_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          discussion_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          discussion_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_discussion_replies_discussion_id_fkey"
+            columns: ["discussion_id"]
+            isOneToOne: false
+            referencedRelation: "lms_discussions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_discussions: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          module_id: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          module_id?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          module_id?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_discussions_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "lms_modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_enrollments: {
+        Row: {
+          enrolled_at: string
+          id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          enrolled_at?: string
+          id?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          enrolled_at?: string
+          id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      lms_lessons: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          lesson_order: number
+          module_id: string
+          title: string
+          video_url: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          lesson_order?: number
+          module_id: string
+          title: string
+          video_url?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          lesson_order?: number
+          module_id?: string
+          title?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_lessons_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "lms_modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_modules: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          module_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          module_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          module_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      lms_progress: {
+        Row: {
+          completed: boolean
+          completed_at: string | null
+          id: string
+          lesson_id: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          completed_at?: string | null
+          id?: string
+          lesson_id: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          completed_at?: string | null
+          id?: string
+          lesson_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lms_lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_submissions: {
+        Row: {
+          assignment_id: string
+          content: string | null
+          feedback: string | null
+          file_url: string | null
+          id: string
+          status: string
+          submitted_at: string
+          user_id: string
+        }
+        Insert: {
+          assignment_id: string
+          content?: string | null
+          feedback?: string | null
+          file_url?: string | null
+          id?: string
+          status?: string
+          submitted_at?: string
+          user_id: string
+        }
+        Update: {
+          assignment_id?: string
+          content?: string | null
+          feedback?: string | null
+          file_url?: string | null
+          id?: string
+          status?: string
+          submitted_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_submissions_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "lms_assignments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      newsletter_signups: {
+        Row: {
+          email: string
+          id: string
+          is_active: boolean
+          subscribed_at: string
+        }
+        Insert: {
+          email: string
+          id?: string
+          is_active?: boolean
+          subscribed_at?: string
+        }
+        Update: {
+          email?: string
+          id?: string
+          is_active?: boolean
+          subscribed_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      resources: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          download_count: number
+          file_url: string | null
+          id: string
+          is_premium: boolean
+          thumbnail_url: string | null
+          title: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          download_count?: number
+          file_url?: string | null
+          id?: string
+          is_premium?: boolean
+          thumbnail_url?: string | null
+          title: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          download_count?: number
+          file_url?: string | null
+          id?: string
+          is_premium?: boolean
+          thumbnail_url?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          client_name: string
+          client_photo_url: string | null
+          client_role: string | null
+          created_at: string
+          display_order: number
+          id: string
+          is_featured: boolean
+          quote: string
+        }
+        Insert: {
+          client_name: string
+          client_photo_url?: string | null
+          client_role?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_featured?: boolean
+          quote: string
+        }
+        Update: {
+          client_name?: string
+          client_photo_url?: string | null
+          client_role?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_featured?: boolean
+          quote?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
