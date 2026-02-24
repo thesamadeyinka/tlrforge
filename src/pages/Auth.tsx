@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import PageTransition from "@/components/PageTransition";
 import tlrLogo from "@/assets/tlr-logo.svg";
 
 const Auth = () => {
@@ -40,44 +41,47 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-radiant flex items-center justify-center px-4">
-      <div className="bg-background rounded-2xl shadow-2xl p-8 w-full max-w-md">
-        <Link to="/" className="block text-center mb-6">
-          <img src={tlrLogo} alt="The Luminary Rise" className="h-12 mx-auto" />
-        </Link>
+    <PageTransition>
+      <div className="min-h-screen gradient-radiant flex items-center justify-center px-4">
+        <div className="bg-background rounded-2xl shadow-2xl p-8 w-full max-w-md">
+          <Link to="/" className="block text-center mb-6">
+            {/* On light bg card, show original dark logo */}
+            <img src={tlrLogo} alt="The Luminary Rise" className="h-12 mx-auto" />
+          </Link>
 
-        <h3 className="font-heading text-xl font-semibold text-foreground mb-6 text-center">
-          {isSignUp ? "Create Your Account" : "Welcome Back"}
-        </h3>
+          <h3 className="font-heading text-xl font-semibold text-foreground mb-6 text-center">
+            {isSignUp ? "Create Your Account" : "Welcome Back"}
+          </h3>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {isSignUp && (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {isSignUp && (
+              <div>
+                <Label htmlFor="fullName">Full Name</Label>
+                <Input id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+              </div>
+            )}
             <div>
-              <Label htmlFor="fullName">Full Name</Label>
-              <Input id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
-          )}
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </div>
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
-          </div>
-          <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold" disabled={loading}>
-            {loading ? "Please wait..." : isSignUp ? "Sign Up" : "Sign In"}
-          </Button>
-        </form>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
+            </div>
+            <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold" disabled={loading}>
+              {loading ? "Please wait..." : isSignUp ? "Sign Up" : "Sign In"}
+            </Button>
+          </form>
 
-        <p className="text-sm text-muted-foreground text-center mt-4">
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-          <button onClick={() => setIsSignUp(!isSignUp)} className="text-accent font-semibold hover:underline">
-            {isSignUp ? "Sign In" : "Sign Up"}
-          </button>
-        </p>
+          <p className="text-sm text-muted-foreground text-center mt-4">
+            {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+            <button onClick={() => setIsSignUp(!isSignUp)} className="text-accent font-semibold hover:underline">
+              {isSignUp ? "Sign In" : "Sign Up"}
+            </button>
+          </p>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

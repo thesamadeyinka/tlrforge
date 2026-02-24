@@ -184,11 +184,13 @@ const Dashboard = () => {
   if (authLoading) return <div className="min-h-screen flex items-center justify-center bg-background"><p>Loading...</p></div>;
 
   return (
-    <div className="min-h-screen bg-muted">
+    <div className="min-h-screen bg-muted transition-colors">
       {/* Top bar */}
       <header className="bg-primary text-primary-foreground h-14 flex items-center justify-between px-4 sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <a href="/"><img src={tlrLogo} alt="The Luminary Rise" className="h-8 brightness-0 invert" /></a>
+          <a href="/">
+            <img src={tlrLogo} alt="The Luminary Rise" className="h-8 brightness-0 invert" />
+          </a>
           <span className="text-primary-foreground/40">|</span>
           <span className="text-sm text-primary-foreground/70">Student Dashboard</span>
         </div>
