@@ -1,6 +1,8 @@
-import { Brain, Heart, Flame, BarChart3, Users, Wallet } from "lucide-react";
+import { Brain, Heart, Flame, BarChart3, Users, Wallet, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const pillars = [
   { label: "Mental Clarity", icon: Brain, desc: "Sharpened focus & strategic thinking" },
@@ -23,20 +25,18 @@ const PhilosophySection = () => {
             </h2>
             <div className="w-20 h-1 gradient-gold rounded-full mx-auto mb-6" />
             <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              Real change is designed — built around structure, frameworks, and accountability systems that produce measurable transformation.
+              Real change is designed — built around structure, frameworks, and accountability systems.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Whole Person Pillars */}
         <ScrollReveal>
           <div className="text-center mb-8">
             <h3 className="font-heading text-lg font-semibold text-foreground mb-1">The Whole Person Integration</h3>
-            <p className="text-sm text-muted-foreground">Six interconnected pillars of transformation.</p>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10">
           {pillars.map((p, i) => (
             <ScrollReveal key={p.label} delay={i * 0.08}>
               <motion.div
@@ -53,6 +53,14 @@ const PhilosophySection = () => {
             </ScrollReveal>
           ))}
         </div>
+
+        <ScrollReveal delay={0.3}>
+          <div className="text-center">
+            <Button asChild variant="outline" className="font-heading font-semibold">
+              <Link to="/philosophy">Explore Our Philosophy <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            </Button>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

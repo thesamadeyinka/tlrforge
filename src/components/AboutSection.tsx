@@ -1,5 +1,7 @@
-import { Target, Compass, Heart, Lightbulb, Shield, Users, Award, Gem } from "lucide-react";
+import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const values = [
   { label: "Intentionality", icon: Target },
@@ -20,13 +22,13 @@ const AboutSection = () => {
             More Than a School.{" "}
             <span className="text-gradient-gold">An Ecosystem.</span>
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto text-center mb-16">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto text-center mb-12">
             Founded on a singular belief: anyone can live a fulfilling life — if they engage the knowledge and practice that produces transformation.
           </p>
         </ScrollReveal>
 
-        {/* Vision & Mission — visual cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
+        {/* Vision & Mission */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           <ScrollReveal delay={0.1}>
             <div className="bg-secondary rounded-2xl p-8 border border-border h-full group hover:border-accent/30 transition-colors">
               <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
@@ -34,7 +36,7 @@ const AboutSection = () => {
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                A world where leaders rise with clarity, character, and competence to shape transformative impact across societies.
+                A world where leaders rise with clarity, character, and competence.
               </p>
             </div>
           </ScrollReveal>
@@ -45,7 +47,7 @@ const AboutSection = () => {
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Mission</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Illuminate pathways for strategic growth through guided learning, structured mentorship, and actionable practice.
+                Illuminate pathways through guided learning, structured mentorship, and actionable practice.
               </p>
             </div>
           </ScrollReveal>
@@ -53,10 +55,10 @@ const AboutSection = () => {
 
         {/* Core Values */}
         <ScrollReveal delay={0.15}>
-          <div className="text-center">
+          <div className="text-center mb-8">
             <h3 className="font-heading text-lg font-semibold text-foreground mb-6">Core Values</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {values.map((v, i) => (
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              {values.map((v) => (
                 <div
                   key={v.label}
                   className="inline-flex items-center gap-2 bg-muted rounded-full px-5 py-2.5 border border-border hover:border-accent/40 transition-colors"
@@ -66,6 +68,9 @@ const AboutSection = () => {
                 </div>
               ))}
             </div>
+            <Button asChild variant="outline" className="font-heading font-semibold">
+              <Link to="/about">Learn More About Us <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            </Button>
           </div>
         </ScrollReveal>
       </div>
