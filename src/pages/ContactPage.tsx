@@ -19,9 +19,9 @@ const contactSchema = z.object({
 });
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@theluminaryrise.com", href: "mailto:hello@theluminaryrise.com" },
+  { icon: Mail, label: "Email", value: "admin@theluminaryrise.org", href: "mailto:admin@theluminaryrise.org" },
   { icon: Phone, label: "Phone", value: "+234 000 000 0000", href: "tel:+2340000000000" },
-  { icon: MapPin, label: "Location", value: "Lagos, Nigeria" },
+  { icon: MapPin, label: "Location", value: "Abuja, Nigeria" },
 ];
 
 const ContactPage = () => {
