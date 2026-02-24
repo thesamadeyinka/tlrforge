@@ -19,7 +19,7 @@ const ValuePropSection = () => {
             size="lg"
             className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold text-base px-8 py-6"
           >
-            <a href="#contact">
+            <a href="/contact">
               Schedule a Discovery Call <ArrowRight className="w-4 h-4 ml-1" />
             </a>
           </Button>
