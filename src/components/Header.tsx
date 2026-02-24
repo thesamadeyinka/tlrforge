@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import tlrLogo from "@/assets/tlr-logo.svg";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -19,8 +20,8 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to="/" className="font-heading text-lg font-bold text-primary-foreground tracking-tight">
-          The Luminary Rise
+        <Link to="/" className="flex items-center">
+          <img src={tlrLogo} alt="The Luminary Rise" className="h-10 brightness-0 invert" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">

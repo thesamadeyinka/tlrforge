@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+import tlrLogoWhite from "@/assets/tlr-logo-white.png";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           <div>
-            <h3 className="font-heading text-xl font-bold mb-3">The Luminary Rise</h3>
+            <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-12 mb-3" />
             <p className="text-primary-foreground/60 text-sm leading-relaxed mb-4">Illuminate. Transform. Rise.</p>
             <p className="text-primary-foreground/50 text-xs leading-relaxed">Raising Luminaries with Structure and Intention.</p>
           </div>

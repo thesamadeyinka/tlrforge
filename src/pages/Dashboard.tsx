@@ -11,6 +11,7 @@ import {
   BookOpen, CheckCircle, Circle, Play, FileText, MessageSquare,
   LogOut, Home, ChevronRight, Send, User
 } from "lucide-react";
+import tlrLogo from "@/assets/tlr-logo.svg";
 
 interface Module {
   id: string;
@@ -187,7 +188,7 @@ const Dashboard = () => {
       {/* Top bar */}
       <header className="bg-primary text-primary-foreground h-14 flex items-center justify-between px-4 sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <a href="/" className="font-heading font-bold text-sm">The Luminary Rise</a>
+          <a href="/"><img src={tlrLogo} alt="The Luminary Rise" className="h-8 brightness-0 invert" /></a>
           <span className="text-primary-foreground/40">|</span>
           <span className="text-sm text-primary-foreground/70">Student Dashboard</span>
         </div>

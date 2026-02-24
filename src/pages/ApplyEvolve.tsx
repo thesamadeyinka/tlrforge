@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import evolveLogo from "@/assets/evolve-logo.png";
 
 const ApplyEvolve = () => {
   const { user } = useAuth();
@@ -77,9 +78,7 @@ const ApplyEvolve = () => {
       <div className="pt-24 pb-16 bg-background">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="text-center mb-10">
-            <div className="inline-block bg-accent/10 rounded-full px-4 py-1 text-sm font-semibold text-accent mb-4 border border-accent/20">
-              EVOLVE Programme
-            </div>
+            <img src={evolveLogo} alt="EVOLVE" className="h-10 mx-auto mb-4" />
             <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">Apply to EVOLVE</h1>
             <p className="text-muted-foreground">Begin your structured journey of intentional transformation.</p>
           </div>
