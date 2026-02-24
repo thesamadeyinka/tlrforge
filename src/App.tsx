@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import AboutPage from "./pages/AboutPage";
 import PhilosophyPage from "./pages/PhilosophyPage";
 import ProgrammesPage from "./pages/ProgrammesPage";
+import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const AnimatedRoutes = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/apply" element={<ApplyEvolve />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

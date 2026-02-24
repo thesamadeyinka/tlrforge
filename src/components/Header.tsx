@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Philosophy", href: "/philosophy", isRoute: true },
   { label: "Programmes", href: "/programmes", isRoute: true },
   { label: "Resources", href: "/resources", isRoute: true },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact", isRoute: true },
 ];
 
 const Header = () => {
