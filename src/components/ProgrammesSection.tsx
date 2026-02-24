@@ -5,10 +5,10 @@ import evolveLogo from "@/assets/evolve-logo.png";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const modules = [
-  { title: "Growth & Transformation", icon: TrendingUp },
-  { title: "Decisions & Effectiveness", icon: Brain },
-  { title: "Relationships & EQ", icon: Heart },
-  { title: "Finance & Career", icon: Wallet },
+  { title: "Growth & Transformation", icon: TrendingUp, desc: "Build growth systems and design your personal transformation journey." },
+  { title: "Decisions & Effectiveness", icon: Brain, desc: "Master decision frameworks, time architecture and strategic priorities." },
+  { title: "Relationships & EQ", icon: Heart, desc: "Develop emotional intelligence, relational capital and influence." },
+  { title: "Career & Finance", icon: Wallet, desc: "Strategic career positioning, financial foundations and wealth creation." },
 ];
 
 const ProgrammesSection = () => {
@@ -48,7 +48,10 @@ const ProgrammesSection = () => {
                     <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center shrink-0">
                       <m.icon className="w-5 h-5 text-accent" />
                     </div>
-                    <span className="text-sm font-medium">{m.title}</span>
+                    <div>
+                      <span className="text-sm font-medium block">{m.title}</span>
+                      <span className="text-xs text-white/60 block mt-0.5">{m.desc}</span>
+                    </div>
                   </div>
                 ))}
               </div>

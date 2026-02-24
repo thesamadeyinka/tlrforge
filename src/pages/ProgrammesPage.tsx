@@ -29,10 +29,10 @@ const modules = [
     topics: ["Emotional Intelligence Foundations", "Building Relational Capital", "Conflict Resolution", "Influence & Persuasion"],
   },
   {
-    title: "Finance & Career",
+    title: "Career & Finance",
     icon: Wallet,
     weeks: "Weeks 13–16",
-    topics: ["Financial Foundations for Leaders", "Career Strategy & Positioning", "Wealth Creation Principles", "Legacy Planning"],
+    topics: ["Career Strategy & Positioning", "Financial Foundations for Leaders", "Wealth Creation Principles", "Legacy Planning"],
   },
 ];
 
