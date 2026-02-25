@@ -40,7 +40,7 @@ const ProgrammesSection = () => {
 
               <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
               <h3 className="font-heading text-xl md:text-2xl font-semibold mb-6 text-primary-foreground/80">
-                Growth Mentorship Programme — 4 Months
+                Growth Mentorship Programme
               </h3>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
