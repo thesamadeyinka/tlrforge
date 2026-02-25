@@ -48,8 +48,8 @@ const PhilosophySection = () => {
                   <p.icon className="w-6 h-6 text-accent" />
                 </div>
                 <span className="text-sm font-bold text-foreground font-heading block mb-1">{p.label}</span>
-                <span className="text-xs text-muted-foreground block group-hover:hidden">{p.desc}</span>
-                <span className="text-xs text-muted-foreground hidden group-hover:block leading-relaxed">{p.detail}</span>
+                <span className="text-xs text-muted-foreground hidden md:block md:group-hover:hidden">{p.desc}</span>
+                <span className="text-xs text-muted-foreground block md:hidden md:group-hover:block leading-relaxed">{p.detail}</span>
               </motion.div>
             </ScrollReveal>
           ))}
