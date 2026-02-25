@@ -6,7 +6,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background image with overlay */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
@@ -23,8 +23,8 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-8 border border-white/15"
         >
-          <Sparkles className="w-4 h-4 text-accent" />
-          <span className="text-sm font-medium text-primary-foreground/90">Strategic Growth & Transformation</span>
+          <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+          <span className="text-sm font-medium text-primary-foreground/90">Transformational Growth</span>
         </motion.div>
 
         <motion.h1
@@ -57,7 +57,7 @@ const HeroSection = () => {
               Begin Your Transformation <ArrowRight className="w-4 h-4 ml-1" />
             </Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="border-white/30 text-primary-foreground hover:bg-white/10 font-heading font-semibold text-base px-8 py-6">
+          <Button asChild size="lg" className="border-2 border-accent/60 bg-accent/15 backdrop-blur-sm text-primary-foreground hover:bg-accent/25 font-heading font-semibold text-base px-8 py-6">
             <a href="#programmes">Explore EVOLVE</a>
           </Button>
         </motion.div>

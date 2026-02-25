@@ -31,8 +31,8 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           <ScrollReveal delay={0.1}>
             <div className="bg-secondary rounded-2xl p-8 border border-border h-full group hover:border-accent/30 transition-colors">
-              <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Compass className="w-6 h-6 text-accent" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-lg shadow-accent/10">
+                <Compass className="w-7 h-7 text-accent drop-shadow-sm" />
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
