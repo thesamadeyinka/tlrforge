@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const pillars = [
-  { label: "Mental Clarity", icon: Brain, desc: "Sharpened focus & strategic thinking" },
-  { label: "Spiritual Alignment", icon: Flame, desc: "Purpose-driven conviction" },
-  { label: "Emotional Resilience", icon: Heart, desc: "Strength through adversity" },
-  { label: "Strategic Thinking", icon: BarChart3, desc: "Systems for smart decisions" },
-  { label: "Relational Intelligence", icon: Users, desc: "Building meaningful connections" },
-  { label: "Financial Wisdom", icon: Wallet, desc: "Stewardship & abundance" },
+  { label: "Mental Clarity", icon: Brain, desc: "Sharpened focus & strategic thinking", detail: "Sharpened focus, critical thinking, and strategic decision-making. We train the mind to operate with precision under pressure." },
+  { label: "Spiritual Alignment", icon: Flame, desc: "Purpose-driven conviction", detail: "Finding your core purpose and operating from conviction. Alignment creates consistency even when motivation fades." },
+  { label: "Emotional Resilience", icon: Heart, desc: "Strength through adversity", detail: "Developing the emotional intelligence to navigate relationships, setbacks, and leadership challenges with composure." },
+  { label: "Strategic Thinking", icon: BarChart3, desc: "Systems for smart decisions", detail: "Systems-level thinking that turns insight into execution. Moving from reactive decision-making to intentional strategy." },
+  { label: "Relational Intelligence", icon: Users, desc: "Building meaningful connections", detail: "Building the relational capital that accelerates growth. Great leaders are great connectors." },
+  { label: "Financial Wisdom", icon: Wallet, desc: "Stewardship & abundance", detail: "Mastering the principles of wealth creation, stewardship, and strategic resource allocation." },
 ];
 
 const PhilosophySection = () => {
@@ -42,13 +42,14 @@ const PhilosophySection = () => {
               <motion.div
                 whileHover={{ y: -4, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="bg-background rounded-2xl p-6 text-center border border-border hover:border-accent/40 transition-colors group cursor-default h-full"
+                className="bg-background rounded-2xl p-6 text-left border border-border hover:border-accent/40 transition-colors group cursor-default h-full"
               >
-                <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
+                <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                   <p.icon className="w-6 h-6 text-accent" />
                 </div>
                 <span className="text-sm font-bold text-foreground font-heading block mb-1">{p.label}</span>
-                <span className="text-xs text-muted-foreground">{p.desc}</span>
+                <span className="text-xs text-muted-foreground block group-hover:hidden">{p.desc}</span>
+                <span className="text-xs text-muted-foreground hidden group-hover:block leading-relaxed">{p.detail}</span>
               </motion.div>
             </ScrollReveal>
           ))}
