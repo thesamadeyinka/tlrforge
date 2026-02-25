@@ -49,9 +49,6 @@ const AboutSection = () => {
               <p className="text-muted-foreground leading-relaxed">
                 We have a mandate "to illuminate pathways for strategic transformational growth for leaders and organisations through guided learning, structured mentorship, and actionable practice that drives lasting impact".
               </p>
-              <p className="text-muted-foreground/70 text-sm mt-2 italic">
-                Proverbs 4:18; Psalms 32:8 NLT; Isaiah 60:1
-              </p>
             </div>
           </ScrollReveal>
         </div>
