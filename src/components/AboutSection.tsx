@@ -36,7 +36,7 @@ const AboutSection = () => {
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                A world where leaders and organisations rise with clarity, character, and competence to shape transformative impact across societies.
+                Our vision is to build a world where leaders and organisations rise with clarity, character, and competence to shape transformative impact across societies.
               </p>
             </div>
           </ScrollReveal>
@@ -47,7 +47,10 @@ const AboutSection = () => {
               </div>
               <h3 className="font-heading text-xl font-bold text-foreground mb-3">Mission</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To illuminate pathways for strategic transformational growth through guided learning, structured mentorship, and actionable practice that drives lasting impact.
+                We have a mandate "to illuminate pathways for strategic transformational growth for leaders and organisations through guided learning, structured mentorship, and actionable practice that drives lasting impact".
+              </p>
+              <p className="text-muted-foreground/70 text-sm mt-2 italic">
+                Proverbs 4:18; Psalms 32:8 NLT; Isaiah 60:1
               </p>
             </div>
           </ScrollReveal>
