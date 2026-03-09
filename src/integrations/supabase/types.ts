@@ -16,46 +16,64 @@ export type Database = {
     Tables: {
       evolve_applications: {
         Row: {
-          company: string | null
+          brief_bio: string | null
+          city_state: string | null
           created_at: string
+          date_of_birth: string | null
           email: string
+          expectations: string | null
           full_name: string
           id: string
-          job_title: string | null
+          info_confirmed: boolean | null
+          kids_count: string | null
+          marital_status: string | null
+          mentorship_areas: string | null
           motivation: string
+          occupation: string | null
           phone: string | null
-          referral_source: string | null
           status: string
           user_id: string | null
-          years_experience: string | null
+          why_mentorship_dr: string | null
         }
         Insert: {
-          company?: string | null
+          brief_bio?: string | null
+          city_state?: string | null
           created_at?: string
+          date_of_birth?: string | null
           email: string
+          expectations?: string | null
           full_name: string
           id?: string
-          job_title?: string | null
+          info_confirmed?: boolean | null
+          kids_count?: string | null
+          marital_status?: string | null
+          mentorship_areas?: string | null
           motivation: string
+          occupation?: string | null
           phone?: string | null
-          referral_source?: string | null
           status?: string
           user_id?: string | null
-          years_experience?: string | null
+          why_mentorship_dr?: string | null
         }
         Update: {
-          company?: string | null
+          brief_bio?: string | null
+          city_state?: string | null
           created_at?: string
+          date_of_birth?: string | null
           email?: string
+          expectations?: string | null
           full_name?: string
           id?: string
-          job_title?: string | null
+          info_confirmed?: boolean | null
+          kids_count?: string | null
+          marital_status?: string | null
+          mentorship_areas?: string | null
           motivation?: string
+          occupation?: string | null
           phone?: string | null
-          referral_source?: string | null
           status?: string
           user_id?: string | null
-          years_experience?: string | null
+          why_mentorship_dr?: string | null
         }
         Relationships: []
       }
