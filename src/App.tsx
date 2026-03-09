@@ -15,6 +15,7 @@ import AboutPage from "./pages/AboutPage";
 import PhilosophyPage from "./pages/PhilosophyPage";
 import ProgrammesPage from "./pages/ProgrammesPage";
 import ContactPage from "./pages/ContactPage";
+import AdminApplications from "./pages/AdminApplications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const AnimatedRoutes = () => {
         <Route path="/resources" element={<Resources />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin/applications" element={<AdminApplications />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
