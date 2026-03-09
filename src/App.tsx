@@ -15,6 +15,7 @@ import AboutPage from "./pages/AboutPage";
 import PhilosophyPage from "./pages/PhilosophyPage";
 import ProgrammesPage from "./pages/ProgrammesPage";
 import ContactPage from "./pages/ContactPage";
+import AdminApplications from "./pages/AdminApplications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
