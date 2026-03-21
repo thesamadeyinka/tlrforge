@@ -120,7 +120,7 @@ const ProgrammesPage = () => {
                   What is <span className="text-gradient-gold">EVOLVE</span>?
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-                  EVOLVE is the mentorship platform of The Luminary Rise, built on the belief that true success is intentional and requires structured development. Through a 4-month immersive experience, participants embark on a transformational journey that enhances their mindset, skills, growth-drive, and strategies for success.
+                  EVOLVE is the structured development engine of The Luminary Rise. It is a high-impact mentorship and learning platform designed to cultivate clarity, discipline, resilience, and strategic competence. Built on the proprietary Awareness–Knowledge–Action–Repeat Better (AKA-RB) framework, EVOLVE transforms potential into measurable progress through guided learning, accountability systems, and practical execution. EVOLVE develops the person. We also believe that it is never too late to begin (again).
                 </p>
               </div>
             </ScrollReveal>
