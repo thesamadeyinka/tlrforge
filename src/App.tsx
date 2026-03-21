@@ -31,6 +31,8 @@ const AnimatedRoutes = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/programmes" element={<ProgrammesPage />} />
+        <Route path="/luminaries-hub" element={<LuminariesHubPage />} />
+        <Route path="/amplify-fund" element={<AmplifyFundPage />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/apply" element={<ApplyEvolve />} />
         <Route path="/resources" element={<Resources />} />
