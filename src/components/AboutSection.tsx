@@ -18,16 +18,19 @@ const pillars = [
     title: "EVOLVE",
     icon: Rocket,
     desc: "The structured development engine — a high-impact mentorship and learning platform built on the AKA-RB framework.",
+    link: "/programmes",
   },
   {
     title: "The Luminaries Hub",
     icon: Network,
     desc: "An invitation-only community of high-capacity leaders fostering strategic collaboration and peer-to-peer accountability.",
+    link: "/luminaries-hub",
   },
   {
     title: "Amplify Impact Fund",
     icon: BadgeDollarSign,
     desc: "The catalytic capital arm providing structured access to growth-enabling capital through grants, venture support, and strategic loans.",
+    link: "/amplify-fund",
   },
 ];
 
