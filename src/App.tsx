@@ -16,6 +16,8 @@ import PhilosophyPage from "./pages/PhilosophyPage";
 import ProgrammesPage from "./pages/ProgrammesPage";
 import ContactPage from "./pages/ContactPage";
 import AdminApplications from "./pages/AdminApplications";
+import LuminariesHubPage from "./pages/LuminariesHubPage";
+import AmplifyFundPage from "./pages/AmplifyFundPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +31,8 @@ const AnimatedRoutes = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/programmes" element={<ProgrammesPage />} />
+        <Route path="/luminaries-hub" element={<LuminariesHubPage />} />
+        <Route path="/amplify-fund" element={<AmplifyFundPage />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/apply" element={<ApplyEvolve />} />
         <Route path="/resources" element={<Resources />} />
