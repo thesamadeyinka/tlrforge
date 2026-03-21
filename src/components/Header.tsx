@@ -8,6 +8,7 @@ import tlrLogo from "@/assets/tlr-logo.svg";
 import tlrLogoWhite from "@/assets/tlr-logo-white.png";
 
 const navLinks = [
+  { label: "Home", href: "/", isRoute: true },
   { label: "About", href: "/about", isRoute: true },
   { label: "Philosophy", href: "/philosophy", isRoute: true },
   { label: "Programmes", href: "/programmes", isRoute: true },
