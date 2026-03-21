@@ -4,15 +4,15 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const ValuePropSection = () => {
   return (
-    <section className="py-32 md:py-40 bg-accent relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-accent relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-2xl text-center relative z-10">
         <ScrollReveal>
-          <p className="editorial-label text-accent-foreground/40 mb-8">Our Promise</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-accent-foreground mb-8 leading-[1.2] italic">
+          <p className="editorial-label text-accent-foreground/50 mb-6">Our Promise</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-accent-foreground mb-6 leading-[1.2] italic">
             Stop Aspiring. Start Becoming.
           </h2>
-          <div className="editorial-line mx-auto mb-8 !bg-accent-foreground/20" />
-          <p className="text-accent-foreground/60 text-base md:text-lg mb-14 max-w-lg mx-auto leading-[1.8]">
+          <div className="editorial-line mx-auto mb-6 !bg-accent-foreground/20" />
+          <p className="text-accent-foreground/70 text-[16px] md:text-lg mb-10 max-w-lg mx-auto leading-[1.8]">
             Guided learning, customized change frameworks, structured mentorship, and transformational accountability — so you can rise with clarity, character, and competence.
           </p>
           <Button
