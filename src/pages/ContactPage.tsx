@@ -51,7 +51,6 @@ const ContactPage = () => {
     }
 
     setLoading(true);
-    // Simulate submission — replace with actual endpoint when ready
     await new Promise((r) => setTimeout(r, 1000));
     toast({ title: "Message sent!", description: "We'll get back to you shortly." });
     setForm({ name: "", email: "", subject: "", message: "" });
@@ -68,13 +67,16 @@ const ContactPage = () => {
         <section className="relative pt-16">
           <div className="relative h-[40vh] min-h-[320px] flex items-center justify-center overflow-hidden">
             <img src={patternBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 gradient-radiant opacity-90" />
-            <div className="relative z-10 text-center px-4">
+            <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-85" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/50 via-transparent to-[hsl(224,50%,8%)]/70" />
+            <div className="relative z-10 max-w-3xl px-6">
               <ScrollReveal>
-                <h1 className="font-heading text-4xl md:text-6xl font-bold text-primary-foreground mb-4">
-                  Get In <span className="text-gradient-gold">Touch</span>
+                <p className="editorial-label text-white/40 mb-6 tracking-[0.25em]">Contact</p>
+                <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1]">
+                  Get In <span className="text-gradient-gold italic">Touch</span>
                 </h1>
-                <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
+                <div className="editorial-line mb-6" />
+                <p className="text-white/50 text-lg max-w-xl leading-relaxed">
                   Have a question or ready to start your journey? We'd love to hear from you.
                 </p>
               </ScrollReveal>
@@ -83,33 +85,34 @@ const ContactPage = () => {
         </section>
 
         {/* Contact Content */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="grid md:grid-cols-5 gap-12">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-5 gap-16">
               {/* Info */}
-              <div className="md:col-span-2 space-y-8">
+              <div className="md:col-span-2">
                 <ScrollReveal>
-                  <h2 className="font-heading text-2xl font-bold text-foreground mb-2">Let's Connect</h2>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="editorial-label text-accent mb-4">Reach Out</p>
+                  <h2 className="font-heading text-2xl font-bold text-foreground mb-3">Let's Connect</h2>
+                  <p className="text-muted-foreground text-[15px] leading-[1.8] mb-10">
                     Whether you're interested in our programmes, partnerships, or just want to say hello — reach out.
                   </p>
                 </ScrollReveal>
 
-                <div className="space-y-5">
+                <div className="space-y-6">
                   {contactInfo.map((item, i) => (
-                    <ScrollReveal key={item.label} delay={i * 0.1}>
+                    <ScrollReveal key={item.label} delay={i * 0.08}>
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
-                          <item.icon className="w-5 h-5 text-accent" />
+                        <div className="w-9 h-9 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                          <item.icon className="w-4 h-4 text-accent" />
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{item.label}</p>
+                          <p className="editorial-label text-muted-foreground mb-1">{item.label}</p>
                           {item.href ? (
-                            <a href={item.href} className="text-sm font-medium text-foreground hover:text-accent transition-colors">
+                            <a href={item.href} className="text-[15px] font-medium text-foreground hover:text-accent transition-colors duration-300">
                               {item.value}
                             </a>
                           ) : (
-                            <p className="text-sm font-medium text-foreground">{item.value}</p>
+                            <p className="text-[15px] font-medium text-foreground">{item.value}</p>
                           )}
                         </div>
                       </div>
@@ -121,22 +124,22 @@ const ContactPage = () => {
               {/* Form */}
               <div className="md:col-span-3">
                 <ScrollReveal delay={0.15}>
-                  <form onSubmit={handleSubmit} className="bg-secondary rounded-2xl p-6 md:p-8 border border-border space-y-5">
+                  <form onSubmit={handleSubmit} className="bg-card rounded-lg border border-border p-6 md:p-10 space-y-6">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5 block">Name</label>
+                        <label className="editorial-label text-muted-foreground mb-2 block">Name</label>
                         <Input
                           name="name"
                           value={form.name}
                           onChange={handleChange}
                           placeholder="Your full name"
                           maxLength={100}
-                          className="bg-background border-border"
+                          className="bg-background border-border rounded-md"
                         />
-                        {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
+                        {errors.name && <p className="text-xs text-destructive mt-1.5">{errors.name}</p>}
                       </div>
                       <div>
-                        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5 block">Email</label>
+                        <label className="editorial-label text-muted-foreground mb-2 block">Email</label>
                         <Input
                           name="email"
                           type="email"
@@ -144,27 +147,27 @@ const ContactPage = () => {
                           onChange={handleChange}
                           placeholder="you@example.com"
                           maxLength={255}
-                          className="bg-background border-border"
+                          className="bg-background border-border rounded-md"
                         />
-                        {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
+                        {errors.email && <p className="text-xs text-destructive mt-1.5">{errors.email}</p>}
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5 block">Subject</label>
+                      <label className="editorial-label text-muted-foreground mb-2 block">Subject</label>
                       <Input
                         name="subject"
                         value={form.subject}
                         onChange={handleChange}
                         placeholder="What's this about?"
                         maxLength={200}
-                        className="bg-background border-border"
+                        className="bg-background border-border rounded-md"
                       />
-                      {errors.subject && <p className="text-xs text-destructive mt-1">{errors.subject}</p>}
+                      {errors.subject && <p className="text-xs text-destructive mt-1.5">{errors.subject}</p>}
                     </div>
 
                     <div>
-                      <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5 block">Message</label>
+                      <label className="editorial-label text-muted-foreground mb-2 block">Message</label>
                       <Textarea
                         name="message"
                         value={form.message}
@@ -172,13 +175,13 @@ const ContactPage = () => {
                         placeholder="Tell us more..."
                         rows={5}
                         maxLength={2000}
-                        className="bg-background border-border resize-none"
+                        className="bg-background border-border resize-none rounded-md"
                       />
-                      {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
+                      {errors.message && <p className="text-xs text-destructive mt-1.5">{errors.message}</p>}
                     </div>
 
-                    <Button type="submit" disabled={loading} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold">
-                      {loading ? "Sending..." : <>Send Message <Send className="w-4 h-4 ml-1" /></>}
+                    <Button type="submit" disabled={loading} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold rounded-md tracking-wide">
+                      {loading ? "Sending..." : <>Send Message <Send className="w-4 h-4 ml-2" /></>}
                     </Button>
                   </form>
                 </ScrollReveal>

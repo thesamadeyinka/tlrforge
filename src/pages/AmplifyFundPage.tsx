@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
-import { BadgeDollarSign, TrendingUp, Handshake, Building2, Target, ShieldCheck, ArrowRight, CheckCircle } from "lucide-react";
+import { BadgeDollarSign, TrendingUp, Handshake, Building2, Target, ShieldCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import patternBg from "@/assets/pattern-bg.jpg";
@@ -25,13 +25,16 @@ const AmplifyFundPage = () => {
         <section className="relative pt-16">
           <div className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
             <img src={patternBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 gradient-radiant opacity-90" />
-            <div className="relative z-10 text-center px-4">
+            <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-85" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/50 via-transparent to-[hsl(224,50%,8%)]/70" />
+            <div className="relative z-10 max-w-3xl px-6">
               <ScrollReveal>
-                <h1 className="font-heading text-4xl md:text-6xl font-bold text-primary-foreground mb-4">
-                  Amplify <span className="text-gradient-gold">Impact Fund</span>
+                <p className="editorial-label text-white/40 mb-6 tracking-[0.25em]">Strategic Pillar</p>
+                <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1]">
+                  Amplify <span className="text-gradient-gold italic">Impact Fund</span>
                 </h1>
-                <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
+                <div className="editorial-line mb-6" />
+                <p className="text-white/50 text-lg max-w-xl leading-relaxed">
                   The catalytic capital arm of The Luminary Rise.
                 </p>
               </ScrollReveal>
@@ -40,45 +43,48 @@ const AmplifyFundPage = () => {
         </section>
 
         {/* Overview */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
-              <div className="max-w-3xl mx-auto">
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6">
-                  Supporting Vision <span className="text-gradient-gold">With Resources</span>
-                </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Amplify Impact Fund (AIF) is designed to support vision with resources, providing structured access to growth-enabling capital through grants, venture support, development funding, and strategic business loans.
-                  </p>
-                  <p>
-                    It exists to ensure that clarity and competence are not limited by a lack of capital.
-                  </p>
-                  <p>
-                    AIF is not merely a funding vehicle but a disciplined capital partnership designed to multiply vision responsibly.
-                  </p>
-                </div>
+              <p className="editorial-label text-accent mb-6">Overview</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6 leading-[1.2]">
+                Supporting Vision <span className="text-gradient-gold italic">With Resources</span>
+              </h2>
+              <div className="editorial-line mb-8" />
+              <div className="space-y-5 text-muted-foreground text-[16px] leading-[1.9]">
+                <p>
+                  Amplify Impact Fund (AIF) is designed to support vision with resources, providing structured access to growth-enabling capital through grants, venture support, development funding, and strategic business loans.
+                </p>
+                <p>
+                  It exists to ensure that clarity and competence are not limited by a lack of capital.
+                </p>
+                <p>
+                  AIF is not merely a funding vehicle but a disciplined capital partnership designed to multiply vision responsibly.
+                </p>
               </div>
             </ScrollReveal>
           </div>
         </section>
 
         {/* Focus Areas */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <section className="py-32 bg-secondary grain relative">
+          <div className="container mx-auto px-6 max-w-4xl relative z-10">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
-                What AIF <span className="text-gradient-gold">Focuses On</span>
-              </h2>
+              <div className="text-center mb-16">
+                <p className="editorial-label text-accent mb-6">Focus Areas</p>
+                <h2 className="font-heading text-3xl font-bold text-foreground leading-[1.15]">
+                  What AIF <span className="text-gradient-gold italic">Focuses On</span>
+                </h2>
+              </div>
             </ScrollReveal>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden max-w-3xl mx-auto">
               {focusAreas.map((item, i) => (
-                <ScrollReveal key={item.label} delay={i * 0.08}>
-                  <div className="bg-background rounded-2xl p-6 border border-border h-full flex items-start gap-4 hover:border-accent/30 transition-colors group">
-                    <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                      <item.icon className="w-5 h-5 text-accent" />
+                <ScrollReveal key={item.label} delay={i * 0.06}>
+                  <div className="bg-card p-7 h-full flex items-start gap-4 group">
+                    <div className="w-9 h-9 rounded-md bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/15 transition-colors duration-500">
+                      <item.icon className="w-4 h-4 text-accent" />
                     </div>
-                    <span className="text-sm font-medium text-foreground mt-2">{item.label}</span>
+                    <span className="text-[14px] font-medium text-foreground mt-1.5">{item.label}</span>
                   </div>
                 </ScrollReveal>
               ))}
@@ -87,15 +93,16 @@ const AmplifyFundPage = () => {
         </section>
 
         {/* Governance */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
-              <div className="bg-secondary rounded-3xl p-8 md:p-12 border border-border max-w-3xl mx-auto text-center">
-                <div className="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center mx-auto mb-6">
-                  <ShieldCheck className="w-7 h-7 text-accent" />
+              <div className="bg-card rounded-lg border border-border p-10 md:p-14 text-center">
+                <div className="w-11 h-11 rounded-md bg-accent/10 flex items-center justify-center mx-auto mb-6">
+                  <ShieldCheck className="w-5 h-5 text-accent" />
                 </div>
+                <p className="editorial-label text-accent mb-4">Governance</p>
                 <h3 className="font-heading text-xl font-bold text-foreground mb-4">Strong Governance & Accountability</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-[1.9] text-[15px] max-w-lg mx-auto">
                   AMPLIFY operates with strong governance, accountability, and measurable impact standards, ensuring that capital is deployed responsibly and sustainably. Every investment is aligned with disciplined growth frameworks and designed for lasting, generational impact.
                 </p>
               </div>
@@ -104,14 +111,16 @@ const AmplifyFundPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 gradient-gold">
-          <div className="container mx-auto px-4 max-w-3xl text-center">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
+        <section className="py-24 bg-accent">
+          <div className="container mx-auto px-6 max-w-2xl text-center">
+            <p className="editorial-label text-accent-foreground/40 mb-6">Partner</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4 italic">
               Partner With Us
             </h2>
-            <p className="text-accent-foreground/80 mb-8">Learn more about how Amplify Impact Fund can support your vision and growth journey.</p>
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold px-8 py-6">
-              <Link to="/contact">Contact Us <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            <div className="editorial-line mx-auto mb-6 !bg-accent-foreground/20" />
+            <p className="text-accent-foreground/60 mb-10 leading-[1.8]">Learn more about how Amplify Impact Fund can support your vision and growth journey.</p>
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-sans font-semibold px-8 py-6 rounded-md tracking-wide">
+              <Link to="/contact">Contact Us <ArrowRight className="w-4 h-4 ml-2" /></Link>
             </Button>
           </div>
         </section>

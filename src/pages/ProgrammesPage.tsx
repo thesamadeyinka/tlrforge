@@ -5,7 +5,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { TrendingUp, Brain, Heart, Wallet, Users, ArrowRight, Clock, Target, CheckCircle, BookOpen, Video, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import evolveLogo from "@/assets/evolve-logo.png";
 import patternBg from "@/assets/pattern-bg.jpg";
 
@@ -96,15 +95,17 @@ const ProgrammesPage = () => {
         <section className="relative pt-16">
           <div className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
             <img src={patternBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 gradient-radiant opacity-90" />
-            <div className="relative z-10 text-center px-4">
+            <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-85" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/50 via-transparent to-[hsl(224,50%,8%)]/70" />
+            <div className="relative z-10 max-w-3xl px-6 text-center">
               <ScrollReveal>
                 <img src={evolveLogo} alt="EVOLVE" className="h-12 md:h-16 mx-auto mb-4 brightness-0 invert" />
-                <h1 className="font-heading text-4xl md:text-6xl font-bold text-primary-foreground mb-4">
-                  Growth Mentorship <span className="text-gradient-gold">Programme</span>
+                <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1]">
+                  Growth Mentorship <span className="text-gradient-gold italic">Programme</span>
                 </h1>
-                <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
-                  A 4-month immersive experience designed to foster learning, growth, and accountability while opening doors to unparalleled opportunities and limitless possibilities.
+                <div className="editorial-line mx-auto mb-6" />
+                <p className="text-white/50 text-lg max-w-xl mx-auto leading-relaxed">
+                  A 4-month immersive experience designed to foster learning, growth, and accountability while opening doors to unparalleled opportunities.
                 </p>
               </ScrollReveal>
             </div>
@@ -112,28 +113,30 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Programme Overview */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-5xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-4xl">
             <ScrollReveal>
-              <div className="text-center mb-16">
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
-                  What is <span className="text-gradient-gold">EVOLVE</span>?
+              <div className="text-center mb-20">
+                <p className="editorial-label text-accent mb-6">Overview</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-[1.15]">
+                  What is <span className="text-gradient-gold italic">EVOLVE</span>?
                 </h2>
-                <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-                  EVOLVE is the structured development engine of The Luminary Rise. It is a high-impact mentorship and learning platform designed to cultivate clarity, discipline, resilience, and strategic competence. Built on the proprietary Awareness–Knowledge–Action–Repeat Better (AKA-RB) framework, EVOLVE transforms potential into measurable progress through guided learning, accountability systems, and practical execution. EVOLVE develops the person. We also believe that it is never too late to begin (again).
+                <div className="editorial-line mx-auto mb-8" />
+                <p className="text-muted-foreground text-[16px] max-w-2xl mx-auto leading-[1.9]">
+                  EVOLVE is the structured development engine of The Luminary Rise. It is a high-impact mentorship and learning platform designed to cultivate clarity, discipline, resilience, and strategic competence. Built on the proprietary AKA-RB framework, EVOLVE transforms potential into measurable progress. We also believe that it is never too late to begin (again).
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-16">
+            <div className="grid md:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden mb-16">
               {features.map((f, i) => (
-                <ScrollReveal key={f.label} delay={i * 0.1}>
-                  <div className="bg-secondary rounded-2xl p-6 border border-border text-center h-full">
-                    <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mx-auto mb-4">
-                      <f.icon className="w-6 h-6 text-accent" />
+                <ScrollReveal key={f.label} delay={i * 0.08}>
+                  <div className="bg-card p-8 text-center h-full">
+                    <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                      <f.icon className="w-4.5 h-4.5 text-accent" />
                     </div>
-                    <h3 className="font-heading font-bold text-foreground mb-1">{f.label}</h3>
-                    <p className="text-sm text-muted-foreground">{f.desc}</p>
+                    <h3 className="font-heading font-bold text-foreground mb-1 text-[15px]">{f.label}</h3>
+                    <p className="text-[13px] text-muted-foreground">{f.desc}</p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -142,23 +145,26 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Programme Highlights */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4 max-w-5xl">
+        <section className="py-32 bg-secondary grain relative">
+          <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
-                Programme <span className="text-gradient-gold">Highlights</span>
-              </h2>
+              <div className="text-center mb-16">
+                <p className="editorial-label text-accent mb-6">Structure</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-[1.15]">
+                  Programme <span className="text-gradient-gold italic">Highlights</span>
+                </h2>
+              </div>
             </ScrollReveal>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden max-w-4xl mx-auto">
               {highlights.map((h, i) => (
-                <ScrollReveal key={h.label} delay={i * 0.08}>
-                  <div className="bg-background rounded-2xl p-5 border border-border h-full flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center shrink-0">
-                      <h.icon className="w-5 h-5 text-accent" />
+                <ScrollReveal key={h.label} delay={i * 0.06}>
+                  <div className="bg-card p-7 h-full flex items-start gap-4">
+                    <div className="w-9 h-9 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                      <h.icon className="w-4 h-4 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-foreground text-sm mb-1">{h.label}</h4>
-                      <p className="text-xs text-muted-foreground">{h.desc}</p>
+                      <h4 className="font-heading font-bold text-foreground text-[14px] mb-1">{h.label}</h4>
+                      <p className="text-[12px] text-muted-foreground leading-[1.6]">{h.desc}</p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -168,42 +174,41 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Module Breakdown */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-5xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-4xl">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
-                Module <span className="text-gradient-gold">Breakdown</span>
-              </h2>
+              <div className="text-center mb-16">
+                <p className="editorial-label text-accent mb-6">Curriculum</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-[1.15]">
+                  Module <span className="text-gradient-gold italic">Breakdown</span>
+                </h2>
+              </div>
             </ScrollReveal>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {modules.map((m, i) => (
-                <ScrollReveal key={m.title} delay={i * 0.1}>
-                  <motion.div
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="bg-secondary rounded-2xl p-6 md:p-8 border border-border hover:border-accent/30 transition-colors"
-                  >
+                <ScrollReveal key={m.title} delay={i * 0.08}>
+                  <div className="bg-card rounded-lg border border-border p-6 md:p-8 card-glow">
                     <div className="flex flex-col md:flex-row md:items-start gap-6">
-                      <div className="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center shrink-0">
-                        <m.icon className="w-7 h-7 text-accent" />
+                      <div className="w-11 h-11 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                        <m.icon className="w-5 h-5 text-accent" />
                       </div>
                       <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
                           <h3 className="font-heading text-lg font-bold text-foreground">{m.title}</h3>
-                          <span className="text-xs font-medium text-accent bg-accent/10 rounded-full px-3 py-1">{m.weeks}</span>
+                          <span className="editorial-label text-accent bg-accent/8 rounded-md px-3 py-1">{m.weeks}</span>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-2">
                           {m.topics.map((topic) => (
-                            <div key={topic} className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                              <span className="text-sm text-muted-foreground">{topic}</span>
+                            <div key={topic} className="flex items-start gap-2.5">
+                              <CheckCircle className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                              <span className="text-[13px] text-muted-foreground leading-[1.6]">{topic}</span>
                             </div>
                           ))}
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </ScrollReveal>
               ))}
             </div>
@@ -211,22 +216,21 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Who It's For */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <section className="py-32 bg-secondary">
+          <div className="container mx-auto px-6 max-w-3xl text-center">
             <ScrollReveal>
-              <div className="text-center mb-12">
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-4">Who It's For</h2>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <p className="editorial-label text-accent mb-6">Audience</p>
+              <h2 className="font-heading text-3xl font-bold text-foreground mb-10">Who It's For</h2>
+              <div className="grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
                 {[
                   "Emerging leaders seeking structure and clarity",
                   "Mid- to senior executives refining leadership capacity",
                   "Entrepreneurs building with intention",
                   "Individuals ready for whole-person transformation",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 bg-background rounded-xl p-4 border border-border">
-                    <CheckCircle className="w-5 h-5 text-accent shrink-0" />
-                    <span className="text-sm font-medium text-foreground">{item}</span>
+                  <div key={item} className="flex items-center gap-3 bg-card rounded-md p-4 border border-border text-left">
+                    <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                    <span className="text-[14px] font-medium text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
@@ -235,14 +239,16 @@ const ProgrammesPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 gradient-gold">
-          <div className="container mx-auto px-4 max-w-3xl text-center">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
+        <section className="py-24 bg-accent">
+          <div className="container mx-auto px-6 max-w-2xl text-center">
+            <p className="editorial-label text-accent-foreground/40 mb-6">Apply Now</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4 italic">
               Ready to EVOLVE?
             </h2>
-            <p className="text-accent-foreground/80 mb-8">Applications are now open for the next cohort.</p>
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold px-8 py-6">
-              <Link to="/apply">Apply Now <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            <div className="editorial-line mx-auto mb-6 !bg-accent-foreground/20" />
+            <p className="text-accent-foreground/60 mb-10 leading-[1.8]">Applications are now open for the next cohort.</p>
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-sans font-semibold px-8 py-6 rounded-md tracking-wide">
+              <Link to="/apply">Apply Now <ArrowRight className="w-4 h-4 ml-2" /></Link>
             </Button>
           </div>
         </section>

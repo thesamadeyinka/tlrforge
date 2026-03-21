@@ -59,13 +59,16 @@ const AboutPage = () => {
         <section className="relative pt-16">
           <div className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
             <img src={patternBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 gradient-radiant opacity-90" />
-            <div className="relative z-10 text-center px-4">
+            <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-85" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/50 via-transparent to-[hsl(224,50%,8%)]/70" />
+            <div className="relative z-10 max-w-3xl px-6">
               <ScrollReveal>
-                <h1 className="font-heading text-4xl md:text-6xl font-bold text-primary-foreground mb-4">
-                  About <span className="text-gradient-gold">The Luminary Rise</span>
+                <p className="editorial-label text-white/40 mb-6 tracking-[0.25em]">About Us</p>
+                <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1]">
+                  About <span className="text-gradient-gold italic">The Luminary Rise</span>
                 </h1>
-                <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
+                <div className="editorial-line mb-6" />
+                <p className="text-white/50 text-lg max-w-xl leading-relaxed">
                   More than a school — a dynamic ecosystem for strategic growth and intentional transformation.
                 </p>
               </ScrollReveal>
@@ -74,13 +77,14 @@ const AboutPage = () => {
         </section>
 
         {/* What is TLR */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-5xl">
             <ScrollReveal>
-              <div className="grid md:grid-cols-2 gap-12 items-start">
-                <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6">Who We Are</h2>
-                  <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <div className="grid md:grid-cols-5 gap-16 items-start">
+                <div className="md:col-span-3">
+                  <p className="editorial-label text-accent mb-4">Who We Are</p>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-8 leading-[1.2]">A Premier Platform for Transformational Growth</h2>
+                  <div className="space-y-5 text-muted-foreground leading-[1.9] text-[15px]">
                     <p>
                       The Luminary Rise (TLR) is a premier platform for transformational growth. More than a school, TLR is a dynamic ecosystem where emerging leaders, mid- to senior professionals, businesses, and corporate organisations access the knowledge, people, tools, and support needed to thrive in today's world.
                     </p>
@@ -92,16 +96,16 @@ const AboutPage = () => {
                     </p>
                   </div>
                 </div>
-                <div className="space-y-6">
-                  <div className="bg-secondary rounded-3xl p-8 border border-border">
-                    <h3 className="font-heading text-lg font-bold text-foreground mb-3">The Problem We Solve</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                <div className="md:col-span-2 space-y-6">
+                  <div className="bg-card rounded-lg p-8 border border-border">
+                    <p className="editorial-label text-accent mb-3">The Problem</p>
+                    <p className="text-muted-foreground text-[15px] leading-[1.8]">
                       People desire and aspire to live a better life, often accompanied by great expectations. Often, they are disappointed by realities that deviate significantly from their expectations and dreams — due to the absence of requisite all-round, balanced, purpose-driven action for a life of fulfilment.
                     </p>
                   </div>
-                  <div className="bg-secondary rounded-3xl p-8 border border-border">
-                    <h3 className="font-heading text-lg font-bold text-foreground mb-3">Our Belief</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                  <div className="bg-card rounded-lg p-8 border border-border">
+                    <p className="editorial-label text-accent mb-3">Our Belief</p>
+                    <p className="text-muted-foreground text-[15px] leading-[1.8]">
                       Anyone can be great and live a fulfilling life if they know and engage early the things they learned later in life, and if they have and utilize the opportunities for learning and growth on time.
                     </p>
                   </div>
@@ -112,32 +116,32 @@ const AboutPage = () => {
         </section>
 
         {/* Brand Promise & AKA-RB */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="grid md:grid-cols-2 gap-6">
+        <section className="py-32 bg-secondary">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden">
               <ScrollReveal delay={0.1}>
-                <div className="bg-background rounded-2xl p-8 border border-border h-full">
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-4">Our Commitment</h3>
-                  <ul className="space-y-3 text-muted-foreground">
-                    <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Clarity for emerging leaders.</li>
-                    <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Momentum for personal, professional, and corporate growth.</li>
-                    <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Structure for sustainable transformation.</li>
+                <div className="bg-card p-10 md:p-12 h-full">
+                  <p className="editorial-label text-accent mb-4">Our Commitment</p>
+                  <ul className="space-y-4 text-foreground text-[15px] leading-[1.8]">
+                    <li className="flex items-start gap-3"><ArrowRight className="w-4 h-4 text-accent mt-1.5 shrink-0" /> Clarity for emerging leaders.</li>
+                    <li className="flex items-start gap-3"><ArrowRight className="w-4 h-4 text-accent mt-1.5 shrink-0" /> Momentum for personal, professional, and corporate growth.</li>
+                    <li className="flex items-start gap-3"><ArrowRight className="w-4 h-4 text-accent mt-1.5 shrink-0" /> Structure for sustainable transformation.</li>
                   </ul>
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
-                <div className="bg-background rounded-2xl p-8 border border-border h-full">
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-3">The AKA-RB Method</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                <div className="bg-card p-10 md:p-12 h-full">
+                  <p className="editorial-label text-accent mb-4">The AKA-RB Method</p>
+                  <p className="text-muted-foreground text-[15px] leading-[1.8] mb-6">
                     A structured framework that ensures participants not only understand transformational growth principles but also apply them effectively and consistently.
                   </p>
                   <div className="space-y-3">
                     {["Awareness", "Knowledge", "Action", "Repeat Better"].map((step, i) => (
                       <div key={step} className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent font-heading font-bold text-sm shrink-0">
+                        <div className="w-7 h-7 rounded-md bg-accent/10 flex items-center justify-center text-accent font-sans font-bold text-xs shrink-0">
                           {i + 1}
                         </div>
-                        <span className="text-sm font-medium text-foreground">{step}</span>
+                        <span className="text-[15px] font-medium text-foreground">{step}</span>
                       </div>
                     ))}
                   </div>
@@ -148,27 +152,21 @@ const AboutPage = () => {
         </section>
 
         {/* Vision & Mission */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="grid md:grid-cols-2 gap-6">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden">
               <ScrollReveal delay={0.1}>
-                <div className="bg-secondary rounded-2xl p-8 border border-border h-full">
-                  <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5">
-                    <Compass className="w-6 h-6 text-accent" />
-                  </div>
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-3">Vision</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                <div className="bg-card p-10 md:p-12 h-full">
+                  <p className="editorial-label text-accent mb-4">Vision</p>
+                  <p className="text-foreground leading-[1.9] text-[15px]">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
                 </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
-                <div className="bg-secondary rounded-2xl p-8 border border-border h-full">
-                  <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5">
-                    <Target className="w-6 h-6 text-accent" />
-                  </div>
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-3">Mission</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                <div className="bg-card p-10 md:p-12 h-full">
+                  <p className="editorial-label text-accent mb-4">Mission</p>
+                  <p className="text-foreground leading-[1.9] text-[15px]">
                     To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital to advance societies and create enduring economic value.
                   </p>
                 </div>
@@ -178,22 +176,25 @@ const AboutPage = () => {
         </section>
 
         {/* Core Values */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4 max-w-5xl">
+        <section className="py-32 bg-secondary grain relative">
+          <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
-                Our <span className="text-gradient-gold">Core Values</span>
-              </h2>
+              <div className="text-center mb-16">
+                <p className="editorial-label text-accent mb-6">What Guides Us</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-[1.15]">
+                  Our <span className="text-gradient-gold italic">Core Values</span>
+                </h2>
+              </div>
             </ScrollReveal>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden">
               {values.map((v, i) => (
-                <ScrollReveal key={v.label} delay={i * 0.07}>
-                  <div className="bg-background rounded-2xl p-6 border border-border hover:border-accent/30 transition-colors h-full group">
-                    <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <v.icon className="w-5 h-5 text-accent" />
+                <ScrollReveal key={v.label} delay={i * 0.06}>
+                  <div className="bg-card p-8 h-full group">
+                    <div className="w-9 h-9 rounded-md bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-500">
+                      <v.icon className="w-4 h-4 text-accent" />
                     </div>
-                    <h4 className="font-heading font-bold text-foreground mb-2">{v.label}</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                    <h4 className="font-heading font-bold text-foreground mb-2 text-[15px]">{v.label}</h4>
+                    <p className="text-[13px] text-muted-foreground leading-[1.7]">{v.desc}</p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -202,30 +203,34 @@ const AboutPage = () => {
         </section>
 
         {/* Strategic Pillars */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-5xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-5xl">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
-                The <span className="text-gradient-gold">Strategic Pillars</span>
-              </h2>
-              <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-12">
-                The Luminary Rise operates through three integrated pillars designed to move leaders and organisations forward. Together, they form a complete ecosystem for strategic growth, institutional excellence, and generational impact.
-              </p>
+              <div className="text-center mb-16">
+                <p className="editorial-label text-accent mb-6">Our Architecture</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-5 leading-[1.15]">
+                  The <span className="text-gradient-gold italic">Strategic Pillars</span>
+                </h2>
+                <div className="editorial-line mx-auto mb-6" />
+                <p className="text-muted-foreground max-w-lg mx-auto leading-[1.8]">
+                  Three integrated pillars designed to move leaders and organisations forward — forming a complete ecosystem for strategic growth.
+                </p>
+              </div>
             </ScrollReveal>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="space-y-6">
               {strategicPillars.map((p, i) => (
                 <ScrollReveal key={p.title} delay={i * 0.1}>
-                  <div className="bg-secondary rounded-2xl p-8 border border-border h-full group hover:border-accent/30 transition-colors">
-                    <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                      <p.icon className="w-6 h-6 text-accent" />
+                  <div className="bg-card rounded-lg border border-border p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start card-glow">
+                    <div className="w-12 h-12 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                      <p.icon className="w-5 h-5 text-accent" />
                     </div>
-                    <h3 className="font-heading text-lg font-bold text-foreground mb-3">{p.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
-                    {p.link && (
-                      <Button asChild variant="outline" size="sm" className="font-heading font-semibold">
-                        <Link to={p.link}>{p.linkLabel} <ArrowRight className="w-3 h-3 ml-1" /></Link>
+                    <div className="flex-1">
+                      <h3 className="font-heading text-xl font-bold text-foreground mb-3">{p.title}</h3>
+                      <p className="text-[15px] text-muted-foreground leading-[1.8] mb-5">{p.desc}</p>
+                      <Button asChild variant="outline" size="sm" className="font-sans font-semibold text-sm rounded-md tracking-wide">
+                        <Link to={p.link}>{p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" /></Link>
                       </Button>
-                    )}
+                    </div>
                   </div>
                 </ScrollReveal>
               ))}
@@ -234,20 +239,21 @@ const AboutPage = () => {
         </section>
 
         {/* Who It's For */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4 max-w-4xl text-center">
+        <section className="py-32 bg-secondary">
+          <div className="container mx-auto px-6 max-w-3xl text-center">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground mb-8">Who TLR Is For</h2>
-              <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <p className="editorial-label text-accent mb-6">Our Audience</p>
+              <h2 className="font-heading text-3xl font-bold text-foreground mb-10">Who TLR Is For</h2>
+              <div className="grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
                 {[
                   "Individuals seeking personal excellence",
                   "Entrepreneurs pursuing business growth",
                   "Senior executives refining leadership capacity",
                   "Organisations pursuing sustainable growth",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 bg-background rounded-xl p-4 border border-border text-left">
+                  <div key={item} className="flex items-center gap-3 bg-card rounded-md p-4 border border-border text-left">
                     <ArrowRight className="w-4 h-4 text-accent shrink-0" />
-                    <span className="text-sm font-medium text-foreground">{item}</span>
+                    <span className="text-[14px] font-medium text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
@@ -256,26 +262,21 @@ const AboutPage = () => {
         </section>
 
         {/* Leadership */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
-              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
-                Leadership
-              </h2>
+              <p className="editorial-label text-accent text-center mb-6">Leadership</p>
+              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-14">The Team Behind TLR</h2>
             </ScrollReveal>
             {team.map((member) => (
               <ScrollReveal key={member.name}>
-                <div className="bg-secondary rounded-2xl p-8 border border-border max-w-2xl mx-auto text-center">
-                  <div className="w-24 h-24 rounded-full bg-muted mx-auto mb-5 overflow-hidden border-2 border-accent/20">
-                    <img
-                      src="/placeholder.svg"
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
+                <div className="text-center">
+                  <div className="w-24 h-24 rounded-full bg-muted mx-auto mb-6 overflow-hidden border border-border">
+                    <img src="/placeholder.svg" alt={member.name} className="w-full h-full object-cover" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-1">{member.name}</h3>
-                  <p className="text-sm text-accent font-medium mb-4">{member.role}</p>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{member.bio}</p>
+                  <p className="editorial-label text-accent mb-6">{member.role}</p>
+                  <p className="text-muted-foreground leading-[1.9] text-[15px] max-w-2xl mx-auto">{member.bio}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -283,10 +284,10 @@ const AboutPage = () => {
         </section>
 
         {/* Tagline */}
-        <section className="py-12 bg-muted">
-          <div className="container mx-auto px-4 max-w-3xl text-center">
+        <section className="py-20 bg-secondary">
+          <div className="container mx-auto px-6 max-w-2xl text-center">
             <ScrollReveal>
-              <p className="font-heading text-xl md:text-2xl font-semibold text-foreground italic">
+              <p className="font-heading text-xl md:text-2xl font-medium text-foreground italic leading-[1.6]">
                 "At Luminary Rise, we don't just adapt to change — we lead it, inspire it, and rise with it."
               </p>
             </ScrollReveal>
@@ -294,14 +295,16 @@ const AboutPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 gradient-gold">
-          <div className="container mx-auto px-4 max-w-3xl text-center">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
+        <section className="py-24 bg-accent">
+          <div className="container mx-auto px-6 max-w-2xl text-center">
+            <p className="editorial-label text-accent-foreground/40 mb-6">Start Today</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4 italic">
               Ready to Begin Your Journey?
             </h2>
-            <p className="text-accent-foreground/80 mb-8">Join a community of intentional leaders committed to strategic transformation.</p>
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold px-8 py-6">
-              <Link to="/apply">Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            <div className="editorial-line mx-auto mb-6 !bg-accent-foreground/20" />
+            <p className="text-accent-foreground/60 mb-10 leading-[1.8]">Join a community of intentional leaders committed to strategic transformation.</p>
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-sans font-semibold px-8 py-6 rounded-md tracking-wide">
+              <Link to="/apply">Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-2" /></Link>
             </Button>
           </div>
         </section>
