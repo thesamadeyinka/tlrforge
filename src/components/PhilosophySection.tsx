@@ -14,36 +14,36 @@ const pillars = [
 
 const PhilosophySection = () => {
   return (
-    <section id="philosophy" className="py-32 md:py-40 bg-secondary relative grain">
+    <section id="philosophy" className="py-20 md:py-28 bg-secondary relative grain">
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <ScrollReveal>
-          <div className="max-w-2xl mx-auto text-center mb-20">
-            <p className="editorial-label text-accent mb-6">Our Philosophy</p>
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-6 leading-[1.15]">
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <p className="editorial-label text-accent mb-4">Our Philosophy</p>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-5 leading-[1.15]">
               Growth Precedes{" "}
               <span className="text-gradient-gold italic">Transformation</span>
             </h2>
-            <div className="editorial-line mx-auto mb-6" />
-            <p className="text-muted-foreground text-base leading-[1.8] max-w-lg mx-auto">
+            <div className="editorial-line mx-auto mb-5" />
+            <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg mx-auto">
               Real change is designed — built around structure, frameworks, and accountability systems.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal>
-          <p className="editorial-label text-center text-foreground mb-10">The Whole Person Integration</p>
+          <p className="editorial-label text-center text-foreground mb-8">The Whole Person Integration</p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden max-w-4xl mx-auto mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden max-w-4xl mx-auto mb-10">
           {pillars.map((p, i) => (
             <ScrollReveal key={p.label} delay={i * 0.05}>
-              <div className="bg-card p-8 h-full group">
-                <div className="w-9 h-9 rounded-md bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-500">
+              <div className="bg-card p-7 h-full group">
+                <div className="w-9 h-9 rounded-md bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/15 transition-colors duration-500">
                   <p.icon className="w-4 h-4 text-accent" />
                 </div>
-                <h4 className="text-[15px] font-bold text-foreground font-heading mb-2">{p.label}</h4>
-                <p className="text-[13px] text-muted-foreground hidden md:block md:group-hover:hidden leading-[1.7]">{p.desc}</p>
-                <p className="text-[13px] text-muted-foreground block md:hidden md:group-hover:block leading-[1.7]">{p.detail}</p>
+                <h4 className="text-[16px] font-bold text-foreground font-heading mb-2">{p.label}</h4>
+                <p className="text-[14px] text-muted-foreground hidden md:block md:group-hover:hidden leading-[1.7]">{p.desc}</p>
+                <p className="text-[14px] text-muted-foreground block md:hidden md:group-hover:block leading-[1.7]">{p.detail}</p>
               </div>
             </ScrollReveal>
           ))}
