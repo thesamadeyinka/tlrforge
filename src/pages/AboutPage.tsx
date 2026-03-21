@@ -29,11 +29,15 @@ const strategicPillars = [
     title: "The Luminaries Hub",
     icon: Network,
     desc: "The Luminaries Network is the relational and influence ecosystem of TLR. It is an invitation-only community of high-capacity leaders, professionals, founders, executives, policy influencers, and value-driven organisations committed to growth with integrity and excellence. The Network fosters strategic collaboration, curated partnerships, executive roundtables, thought leadership forums, and peer-to-peer accountability.",
+    link: "/luminaries-hub",
+    linkLabel: "Explore The Hub",
   },
   {
     title: "Amplify Impact Fund",
     icon: BadgeDollarSign,
     desc: "Amplify Impact Fund (AIF) is the catalytic capital arm of The Luminary Rise. AIF is designed to support vision with resources, providing structured access to growth-enabling capital through grants, venture support, development funding, and strategic business loans. It exists to ensure that clarity and competence are not limited by a lack of capital.",
+    link: "/amplify-fund",
+    linkLabel: "Explore AIF",
   },
 ];
 
