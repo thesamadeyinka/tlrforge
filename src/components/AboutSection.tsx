@@ -82,13 +82,13 @@ const AboutSection = () => {
           <div className="grid md:grid-cols-3 gap-4 mb-12">
             {pillars.map((p, i) => (
               <ScrollReveal key={p.title} delay={i * 0.08}>
-                <div className="bg-secondary rounded-2xl p-6 border border-border h-full group hover:border-accent/30 transition-colors text-center">
+                <Link to={p.link} className="bg-secondary rounded-2xl p-6 border border-border h-full group hover:border-accent/30 transition-colors text-center block">
                   <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                     <p.icon className="w-6 h-6 text-accent" />
                   </div>
                   <h4 className="font-heading font-bold text-foreground mb-2">{p.title}</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-                </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
