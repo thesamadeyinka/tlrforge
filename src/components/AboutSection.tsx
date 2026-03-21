@@ -36,40 +36,37 @@ const pillars = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-28 bg-background relative grain">
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+    <section id="about" className="py-32 md:py-40 bg-background relative">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <ScrollReveal>
-          <p className="text-accent font-heading font-semibold text-sm tracking-wider uppercase text-center mb-4">Who We Are</p>
-          <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground text-center mb-6 leading-tight tracking-tight">
-            More Than a School.{" "}
-            <span className="text-gradient-gold">An Ecosystem.</span>
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto text-center mb-16">
-            A dynamic ecosystem where emerging leaders, professionals, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
-          </p>
+          <div className="max-w-2xl mx-auto text-center mb-20">
+            <p className="editorial-label text-accent mb-6">Who We Are</p>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-6 leading-[1.15]">
+              More Than a School.{" "}
+              <span className="text-gradient-gold italic">An Ecosystem.</span>
+            </h2>
+            <div className="editorial-line mx-auto mb-6" />
+            <p className="text-muted-foreground text-base leading-[1.8] max-w-lg mx-auto">
+              A dynamic ecosystem where emerging leaders, professionals, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
+            </p>
+          </div>
         </ScrollReveal>
 
-        {/* Vision & Mission */}
-        <div className="grid md:grid-cols-2 gap-5 mb-16">
+        {/* Vision & Mission — editorial two-column */}
+        <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden mb-24">
           <ScrollReveal delay={0.1}>
-            <div className="bg-secondary rounded-2xl p-8 border border-border h-full card-glow">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5">
-                <Compass className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="font-heading text-lg font-bold text-foreground mb-3 tracking-tight">Vision</h3>
-              <p className="text-muted-foreground leading-relaxed text-sm">
+            <div className="bg-card p-10 md:p-12 h-full">
+              <p className="editorial-label text-accent mb-4">Vision</p>
+              <p className="text-foreground leading-[1.9] text-[15px]">
                 To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
               </p>
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
-            <div className="bg-secondary rounded-2xl p-8 border border-border h-full card-glow">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5">
-                <Target className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="font-heading text-lg font-bold text-foreground mb-3 tracking-tight">Mission</h3>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital to advance societies and create enduring economic value.
+            <div className="bg-card p-10 md:p-12 h-full">
+              <p className="editorial-label text-accent mb-4">Mission</p>
+              <p className="text-foreground leading-[1.9] text-[15px]">
+                To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital.
               </p>
             </div>
           </ScrollReveal>
@@ -77,40 +74,46 @@ const AboutSection = () => {
 
         {/* Strategic Pillars */}
         <ScrollReveal delay={0.1}>
-          <p className="text-accent font-heading font-semibold text-sm tracking-wider uppercase text-center mb-3">Our Pillars</p>
-          <h3 className="font-heading text-xl font-bold text-foreground text-center mb-8 tracking-tight">Three Integrated Pillars for Strategic Growth</h3>
-          <div className="grid md:grid-cols-3 gap-5 mb-16">
-            {pillars.map((p, i) => (
-              <ScrollReveal key={p.title} delay={i * 0.08}>
-                <Link to={p.link} className="bg-secondary rounded-2xl p-7 border border-border h-full block card-glow text-center">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mx-auto mb-4">
-                    <p.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <h4 className="font-heading font-bold text-foreground mb-2 text-sm tracking-tight">{p.title}</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{p.desc}</p>
-                </Link>
-              </ScrollReveal>
-            ))}
+          <div className="text-center mb-12">
+            <p className="editorial-label text-accent mb-4">Our Pillars</p>
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground leading-[1.2]">
+              Three Integrated Pillars
+            </h3>
           </div>
         </ScrollReveal>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-24">
+          {pillars.map((p, i) => (
+            <ScrollReveal key={p.title} delay={i * 0.1}>
+              <Link to={p.link} className="block bg-card rounded-lg border border-border p-8 h-full group card-glow">
+                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/15 transition-colors duration-500">
+                  <p.icon className="w-4.5 h-4.5 text-accent" />
+                </div>
+                <h4 className="font-heading font-bold text-foreground mb-3 text-lg">{p.title}</h4>
+                <p className="text-sm text-muted-foreground leading-[1.8]">{p.desc}</p>
+              </Link>
+            </ScrollReveal>
+          ))}
+        </div>
 
         {/* Core Values */}
         <ScrollReveal delay={0.15}>
           <div className="text-center">
-            <h3 className="font-heading text-lg font-bold text-foreground mb-6 tracking-tight">Core Values</h3>
-            <div className="flex flex-wrap justify-center gap-2.5 mb-10">
+            <p className="editorial-label text-accent mb-4">Core Values</p>
+            <h3 className="font-heading text-2xl font-bold text-foreground mb-8">What Guides Us</h3>
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
               {values.map((v) => (
                 <div
                   key={v.label}
-                  className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-sm"
+                  className="inline-flex items-center gap-2.5 bg-card rounded-md px-5 py-2.5 border border-border hover:border-accent/20 transition-all duration-400"
                 >
                   <v.icon className="w-3.5 h-3.5 text-accent" />
-                  <span className="text-xs font-semibold text-foreground">{v.label}</span>
+                  <span className="text-[13px] font-medium text-foreground">{v.label}</span>
                 </div>
               ))}
             </div>
-            <Button asChild variant="outline" className="font-heading font-semibold text-sm rounded-xl">
-              <Link to="/about">Learn More About Us <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            <Button asChild variant="outline" className="font-sans font-semibold text-sm rounded-md tracking-wide">
+              <Link to="/about">Learn More About Us <ArrowRight className="w-4 h-4 ml-2" /></Link>
             </Button>
           </div>
         </ScrollReveal>

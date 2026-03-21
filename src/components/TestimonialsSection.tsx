@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Quote } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { motion } from "framer-motion";
 
 interface Testimonial {
   id: string;
@@ -30,36 +29,32 @@ const TestimonialsSection = () => {
   }, []);
 
   return (
-    <section className="py-28 bg-secondary relative grain">
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+    <section className="py-32 md:py-40 bg-secondary relative grain">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <ScrollReveal>
-          <div className="text-center mb-16">
-            <p className="text-accent font-heading font-semibold text-sm tracking-wider uppercase mb-4">Testimonials</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
-              Voices of <span className="text-gradient-gold">Transformation</span>
+          <div className="text-center mb-20">
+            <p className="editorial-label text-accent mb-6">Testimonials</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 leading-[1.2]">
+              Voices of <span className="text-gradient-gold italic">Transformation</span>
             </h2>
-            <p className="text-muted-foreground text-sm">From our growing community of luminaries.</p>
+            <div className="editorial-line mx-auto" />
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden">
           {testimonials.map((t, i) => (
-            <ScrollReveal key={t.id} delay={i * 0.1}>
-              <motion.div
-                whileHover={{ y: -3 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="bg-background rounded-2xl p-8 border border-border relative h-full card-glow"
-              >
-                <Quote className="w-7 h-7 text-accent/20 mb-5" />
+            <ScrollReveal key={t.id} delay={i * 0.08}>
+              <div className="bg-card p-8 md:p-10 h-full relative">
+                <Quote className="w-6 h-6 text-accent/15 mb-6" />
                 {t.client_photo_url && (
-                  <img src={t.client_photo_url} alt={t.client_name} className="w-10 h-10 rounded-full object-cover mb-4" />
+                  <img src={t.client_photo_url} alt={t.client_name} className="w-10 h-10 rounded-full object-cover mb-5" />
                 )}
-                <p className="text-muted-foreground leading-relaxed mb-6 italic text-sm">"{t.quote}"</p>
-                <div>
+                <p className="text-muted-foreground leading-[1.8] mb-8 text-[15px] italic">"{t.quote}"</p>
+                <div className="border-t border-border pt-4">
                   <p className="font-heading font-semibold text-foreground text-sm">{t.client_name}</p>
-                  {t.client_role && <p className="text-xs text-muted-foreground mt-0.5">{t.client_role}</p>}
+                  {t.client_role && <p className="text-[12px] text-muted-foreground mt-1">{t.client_role}</p>}
                 </div>
-              </motion.div>
+              </div>
             </ScrollReveal>
           ))}
         </div>
