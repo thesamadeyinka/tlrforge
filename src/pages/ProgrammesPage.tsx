@@ -104,7 +104,7 @@ const ProgrammesPage = () => {
                   Growth Mentorship <span className="text-gradient-gold">Programme</span>
                 </h1>
                 <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
-                  A 4-month immersive experience designed to foster learning, growth, and accountability while opening doors to unparalleled opportunities.
+                  A 4-month immersive experience designed to foster learning, growth, and accountability while opening doors to unparalleled opportunities and limitless possibilities.
                 </p>
               </ScrollReveal>
             </div>

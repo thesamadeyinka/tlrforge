@@ -2,19 +2,39 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Target, Compass, Heart, Lightbulb, Shield, Users, Award, Gem, ArrowRight } from "lucide-react";
+import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import patternBg from "@/assets/pattern-bg.jpg";
 
 const values = [
   { label: "Intentionality", icon: Target, desc: "Nothing is accidental; every change is designed." },
-  { label: "Innovation", icon: Lightbulb, desc: "We embrace new ideas and adaptive solutions." },
-  { label: "Integrity", icon: Shield, desc: "We uphold what is right, consistently." },
-  { label: "Excellence", icon: Award, desc: "We pursue the highest standards in every engagement — excellence is our minimum standard." },
-  { label: "Mentorship", icon: Compass, desc: "We believe that growth is accelerated when guided." },
-  { label: "Community", icon: Users, desc: "We create a system of collaboration and accountability." },
-  { label: "Legacy", icon: Gem, desc: "We build impact that endures." },
+  { label: "Innovation", icon: Lightbulb, desc: "We cultivate adaptive thinking and creative solutions that anticipate change and position our leaders and organisations ahead of the curve." },
+  { label: "Integrity", icon: Shield, desc: "We remain steadfast in truth, choosing what is right over what is convenient in every sphere of influence." },
+  { label: "Excellence", icon: Award, desc: "We commit to superior standards in thought, character, execution, and outcomes — making excellence not an aspiration but our operational baseline." },
+  { label: "Mentorship", icon: Compass, desc: "We accelerate growth through guided wisdom, structured accountability, and the transfer of insight from experience to emerging potential." },
+  { label: "Community", icon: Users, desc: "We build ecosystems of collaboration, shared learning, and mutual accountability where collective growth strengthens individual success." },
+  { label: "Legacy", icon: Gem, desc: "We pursue impact that transcends the present, building systems, values, and leaders that endure across generations." },
+];
+
+const strategicPillars = [
+  {
+    title: "EVOLVE",
+    icon: Rocket,
+    desc: "EVOLVE is the structured development engine of The Luminary Rise. It is a high-impact mentorship and learning platform designed to cultivate clarity, discipline, resilience, and strategic competence in emerging leaders, executives, entrepreneurs, and organisations. Built on the proprietary Awareness–Knowledge–Action–Repeat Better (AKA-RB) framework, EVOLVE transforms potential into measurable progress through guided learning, accountability systems, and practical execution.",
+    link: "/programmes",
+    linkLabel: "Explore EVOLVE",
+  },
+  {
+    title: "The Luminaries Hub",
+    icon: Network,
+    desc: "The Luminaries Network is the relational and influence ecosystem of TLR. It is an invitation-only community of high-capacity leaders, professionals, founders, executives, policy influencers, and value-driven organisations committed to growth with integrity and excellence. The Network fosters strategic collaboration, curated partnerships, executive roundtables, thought leadership forums, and peer-to-peer accountability.",
+  },
+  {
+    title: "Amplify Impact Fund",
+    icon: BadgeDollarSign,
+    desc: "Amplify Impact Fund (AIF) is the catalytic capital arm of The Luminary Rise. AIF is designed to support vision with resources, providing structured access to growth-enabling capital through grants, venture support, development funding, and strategic business loans. It exists to ensure that clarity and competence are not limited by a lack of capital.",
+  },
 ];
 
 const team = [
@@ -58,7 +78,7 @@ const AboutPage = () => {
                   <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6">Who We Are</h2>
                   <div className="space-y-4 text-muted-foreground leading-relaxed">
                     <p>
-                      The Luminary Rise (TLR) is a premier platform for strategic growth and intentional transformation. More than a school, TLR is a dynamic ecosystem where emerging leaders, mid- to senior executives, businesses, and corporate organisations access the knowledge, people, tools, and support needed to thrive in today's fast-changing world.
+                      The Luminary Rise (TLR) is a premier platform for transformational growth. More than a school, TLR is a dynamic ecosystem where emerging leaders, mid- to senior professionals, businesses, and corporate organisations access the knowledge, people, tools, and support needed to thrive in today's world.
                     </p>
                     <p>
                       At TLR, we believe growth precedes transformation, and some levels of growth depend on transformation. That is why our programmes are designed to foster structured learning, mindset shifts, and actionable practice that create lasting impact across personal and professional spheres.
@@ -93,7 +113,7 @@ const AboutPage = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <ScrollReveal delay={0.1}>
                 <div className="bg-background rounded-2xl p-8 border border-border h-full">
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-4">Brand Promise</h3>
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-4">Our Commitment</h3>
                   <ul className="space-y-3 text-muted-foreground">
                     <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Clarity for emerging leaders.</li>
                     <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-accent mt-1 shrink-0" /> Momentum for personal, professional, and corporate growth.</li>
@@ -134,7 +154,7 @@ const AboutPage = () => {
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-3">Vision</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    To build a world where leaders and organisations rise with clarity, character, and competence to shape transformative impact across societies.
+                    To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
                 </div>
               </ScrollReveal>
@@ -145,7 +165,7 @@ const AboutPage = () => {
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-3">Mission</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    To illuminate pathways for strategic transformational growth for leaders and organisations through guided learning, structured mentorship, and actionable practice that drives lasting impact.
+                    To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital to advance societies and create enduring economic value.
                   </p>
                 </div>
               </ScrollReveal>
@@ -177,8 +197,40 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Who It's For */}
+        {/* Strategic Pillars */}
         <section className="py-20 bg-background">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <ScrollReveal>
+              <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
+                The <span className="text-gradient-gold">Strategic Pillars</span>
+              </h2>
+              <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-12">
+                The Luminary Rise operates through three integrated pillars designed to move leaders and organisations forward. Together, they form a complete ecosystem for strategic growth, institutional excellence, and generational impact.
+              </p>
+            </ScrollReveal>
+            <div className="grid md:grid-cols-3 gap-6">
+              {strategicPillars.map((p, i) => (
+                <ScrollReveal key={p.title} delay={i * 0.1}>
+                  <div className="bg-secondary rounded-2xl p-8 border border-border h-full group hover:border-accent/30 transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <p.icon className="w-6 h-6 text-accent" />
+                    </div>
+                    <h3 className="font-heading text-lg font-bold text-foreground mb-3">{p.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
+                    {p.link && (
+                      <Button asChild variant="outline" size="sm" className="font-heading font-semibold">
+                        <Link to={p.link}>{p.linkLabel} <ArrowRight className="w-3 h-3 ml-1" /></Link>
+                      </Button>
+                    )}
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Who It's For */}
+        <section className="py-20 bg-muted">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <ScrollReveal>
               <h2 className="font-heading text-3xl font-bold text-foreground mb-8">Who TLR Is For</h2>
@@ -189,7 +241,7 @@ const AboutPage = () => {
                   "Senior executives refining leadership capacity",
                   "Organisations pursuing sustainable growth",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 bg-secondary rounded-xl p-4 border border-border text-left">
+                  <div key={item} className="flex items-center gap-3 bg-background rounded-xl p-4 border border-border text-left">
                     <ArrowRight className="w-4 h-4 text-accent shrink-0" />
                     <span className="text-sm font-medium text-foreground">{item}</span>
                   </div>
@@ -200,7 +252,7 @@ const AboutPage = () => {
         </section>
 
         {/* Leadership */}
-        <section className="py-20 bg-muted">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-4xl">
             <ScrollReveal>
               <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
@@ -209,7 +261,7 @@ const AboutPage = () => {
             </ScrollReveal>
             {team.map((member) => (
               <ScrollReveal key={member.name}>
-                <div className="bg-background rounded-2xl p-8 border border-border max-w-2xl mx-auto text-center">
+                <div className="bg-secondary rounded-2xl p-8 border border-border max-w-2xl mx-auto text-center">
                   <div className="w-24 h-24 rounded-full bg-muted mx-auto mb-5 overflow-hidden border-2 border-accent/20">
                     <img
                       src="/placeholder.svg"
@@ -227,11 +279,11 @@ const AboutPage = () => {
         </section>
 
         {/* Tagline */}
-        <section className="py-12 bg-background">
+        <section className="py-12 bg-muted">
           <div className="container mx-auto px-4 max-w-3xl text-center">
             <ScrollReveal>
               <p className="font-heading text-xl md:text-2xl font-semibold text-foreground italic">
-                "We don't just adapt to change — we lead it, inspire it, and rise with it."
+                "At Luminary Rise, we don't just adapt to change — we lead it, inspire it, and rise with it."
               </p>
             </ScrollReveal>
           </div>
