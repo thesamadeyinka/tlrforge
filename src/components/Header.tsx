@@ -21,32 +21,32 @@ const Header = () => {
   const { user } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(224,76%,17%)] backdrop-blur-md border-b border-white/10">
-      <div className="container mx-auto flex items-center justify-between h-20 px-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(224,76%,15%)] backdrop-blur-xl border-b border-white/[0.06]">
+      <div className="container mx-auto flex items-center justify-between h-18 px-4">
         <Link to="/" className="flex items-center">
-          <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-14 md:h-16 hidden dark:block" />
-          <img src={tlrLogo} alt="The Luminary Rise" className="h-14 md:h-16 brightness-0 invert dark:hidden" />
+          <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-12 md:h-14 hidden dark:block" />
+          <img src={tlrLogo} alt="The Luminary Rise" className="h-12 md:h-14 brightness-0 invert dark:hidden" />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) =>
-            link.isRoute ? (
-              <Link key={link.href} to={link.href} className="text-sm font-medium text-white/80 hover:text-accent transition-colors">
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.href} href={link.href} className="text-sm font-medium text-white/80 hover:text-accent transition-colors">
-                {link.label}
-              </a>
-            )
-          )}
-          <ThemeToggle />
+        <nav className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className="text-xs font-medium text-white/60 hover:text-white px-3 py-2 rounded-lg hover:bg-white/[0.06] transition-all duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div className="ml-2">
+            <ThemeToggle />
+          </div>
           {user ? (
-            <Button asChild size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold">
+            <Button asChild size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-xs ml-2 rounded-lg">
               <Link to="/dashboard">Dashboard</Link>
             </Button>
           ) : (
-            <Button asChild size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold">
+            <Button asChild size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-xs ml-2 rounded-lg">
               <Link to="/auth">Sign In</Link>
             </Button>
           )}
@@ -54,31 +54,30 @@ const Header = () => {
 
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
-          <button className="text-white" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          <button className="text-white/80 hover:text-white transition-colors" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden bg-[hsl(224,76%,17%)] border-t border-white/10 px-4 pb-6 pt-2 space-y-4">
-          {navLinks.map((link) =>
-            link.isRoute ? (
-              <Link key={link.href} to={link.href} onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-white/80 hover:text-accent transition-colors py-2">
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-white/80 hover:text-accent transition-colors py-2">
-                {link.label}
-              </a>
-            )
-          )}
+        <nav className="md:hidden bg-[hsl(224,76%,13%)] border-t border-white/[0.06] px-4 pb-6 pt-2 space-y-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="block text-sm font-medium text-white/60 hover:text-white hover:bg-white/[0.06] rounded-lg px-3 py-2.5 transition-all duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
           {user ? (
-            <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold">
+            <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold mt-2 rounded-lg">
               <Link to="/dashboard" onClick={() => setMobileOpen(false)}>Dashboard</Link>
             </Button>
           ) : (
-            <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold">
+            <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold mt-2 rounded-lg">
               <Link to="/auth" onClick={() => setMobileOpen(false)}>Sign In</Link>
             </Button>
           )}

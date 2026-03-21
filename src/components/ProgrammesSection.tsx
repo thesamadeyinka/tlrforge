@@ -14,15 +14,16 @@ const modules = [
 
 const ProgrammesSection = () => {
   return (
-    <section id="programmes" className="py-24 bg-background">
+    <section id="programmes" className="py-28 bg-background relative">
       <div className="container mx-auto px-4 max-w-6xl">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
+            <p className="text-accent font-heading font-semibold text-sm tracking-wider uppercase mb-4">Our Flagship Programme</p>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight tracking-tight">
               Structured Learning.{" "}
               <span className="text-gradient-gold">Lasting Impact.</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base max-w-xl mx-auto">
               Transformation is a process, not an event.
             </p>
           </div>
@@ -30,40 +31,42 @@ const ProgrammesSection = () => {
 
         <ScrollReveal delay={0.15}>
           <div className="gradient-radiant rounded-3xl p-8 md:p-12 text-primary-foreground max-w-4xl mx-auto relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-accent/10 blur-[80px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-sky/10 blur-[60px] pointer-events-none" />
+            {/* Ambient effects */}
+            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent/8 blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-60 h-60 rounded-full bg-sky/8 blur-[80px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-block bg-accent/20 rounded-full px-4 py-1 text-sm font-semibold text-accent mb-6 border border-accent/30">
+              <div className="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-semibold text-accent mb-6 border border-white/10">
                 Flagship Programme
               </div>
 
               <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
-              <h3 className="font-heading text-xl md:text-2xl font-semibold mb-6 text-primary-foreground/80">
+              <h3 className="font-heading text-lg md:text-xl font-semibold mb-8 text-primary-foreground/70">
                 Growth Mentorship Programme
               </h3>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
                 {modules.map((m) => (
-                  <div key={m.title} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                    <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center shrink-0">
-                      <m.icon className="w-5 h-5 text-accent" />
+                  <div key={m.title} className="flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm rounded-xl p-4 border border-white/[0.06] hover:bg-white/[0.1] transition-colors duration-300">
+                    <div className="w-9 h-9 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
+                      <m.icon className="w-4 h-4 text-accent" />
                     </div>
                     <div>
-                      <span className="text-sm font-medium block">{m.title}</span>
-                      <span className="text-xs text-white/60 block mt-0.5">{m.desc}</span>
+                      <span className="text-xs font-semibold block">{m.title}</span>
+                      <span className="text-[10px] text-white/50 block mt-0.5 leading-tight">{m.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-base px-8 shadow-lg shadow-accent/25">
+                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-sm px-8 shadow-lg shadow-accent/20 rounded-xl">
                   <Link to="/apply">
                     Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-1" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/30 text-primary-foreground hover:bg-white/10 font-heading font-semibold">
+                <Button asChild size="lg" variant="outline" className="border-white/20 text-primary-foreground hover:bg-white/10 font-heading font-semibold text-sm rounded-xl">
                   <Link to="/programmes">View Full Programme</Link>
                 </Button>
               </div>
