@@ -14,59 +14,57 @@ const modules = [
 
 const ProgrammesSection = () => {
   return (
-    <section id="programmes" className="py-28 bg-background relative">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="programmes" className="py-32 md:py-40 bg-background relative">
+      <div className="container mx-auto px-6 max-w-5xl">
         <ScrollReveal>
-          <div className="text-center mb-16">
-            <p className="text-accent font-heading font-semibold text-sm tracking-wider uppercase mb-4">Our Flagship Programme</p>
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight tracking-tight">
+          <div className="text-center mb-20">
+            <p className="editorial-label text-accent mb-6">Our Flagship Programme</p>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-5 leading-[1.15]">
               Structured Learning.{" "}
-              <span className="text-gradient-gold">Lasting Impact.</span>
+              <span className="text-gradient-gold italic">Lasting Impact.</span>
             </h2>
-            <p className="text-muted-foreground text-base max-w-xl mx-auto">
+            <div className="editorial-line mx-auto mb-6" />
+            <p className="text-muted-foreground text-base max-w-md mx-auto leading-[1.8]">
               Transformation is a process, not an event.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <div className="gradient-radiant rounded-3xl p-8 md:p-12 text-primary-foreground max-w-4xl mx-auto relative overflow-hidden">
-            {/* Ambient effects */}
-            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent/8 blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-60 h-60 rounded-full bg-sky/8 blur-[80px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
+          <div className="bg-[hsl(224,50%,12%)] rounded-lg p-8 md:p-14 text-white max-w-4xl mx-auto relative overflow-hidden">
+            {/* Subtle ambient */}
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-accent/5 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-sky/5 blur-[100px] pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-semibold text-accent mb-6 border border-white/10">
-                Flagship Programme
-              </div>
+              <p className="editorial-label text-accent mb-8">Flagship Programme</p>
 
               <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
-              <h3 className="font-heading text-lg md:text-xl font-semibold mb-8 text-primary-foreground/70">
+              <h3 className="font-heading text-lg md:text-xl font-medium mb-10 text-white/50">
                 Growth Mentorship Programme
               </h3>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-12">
                 {modules.map((m) => (
-                  <div key={m.title} className="flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm rounded-xl p-4 border border-white/[0.06] hover:bg-white/[0.1] transition-colors duration-300">
-                    <div className="w-9 h-9 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
-                      <m.icon className="w-4 h-4 text-accent" />
+                  <div key={m.title} className="flex items-start gap-3 bg-white/[0.04] rounded-md p-4 border border-white/[0.06] hover:bg-white/[0.07] transition-colors duration-400">
+                    <div className="w-8 h-8 rounded-md bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <m.icon className="w-3.5 h-3.5 text-accent" />
                     </div>
                     <div>
-                      <span className="text-xs font-semibold block">{m.title}</span>
-                      <span className="text-[10px] text-white/50 block mt-0.5 leading-tight">{m.desc}</span>
+                      <span className="text-[13px] font-semibold font-sans block text-white/80">{m.title}</span>
+                      <span className="text-[11px] text-white/35 block mt-1 leading-relaxed">{m.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-heading font-semibold text-sm px-8 shadow-lg shadow-accent/20 rounded-xl">
+                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold text-sm px-8 rounded-md tracking-wide">
                   <Link to="/apply">
-                    Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-1" />
+                    Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/20 text-primary-foreground hover:bg-white/10 font-heading font-semibold text-sm rounded-xl">
+                <Button asChild size="lg" variant="outline" className="border-white/15 text-white/60 hover:text-white hover:bg-white/5 font-sans font-semibold text-sm rounded-md tracking-wide">
                   <Link to="/programmes">View Full Programme</Link>
                 </Button>
               </div>

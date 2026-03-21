@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        heading: ["Montserrat", "sans-serif"],
+        heading: ["Playfair Display", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -87,19 +87,19 @@ export default {
           to: { height: "0" },
         },
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "glow-pulse": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.8" },
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "0.6" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.8s ease-out forwards",
-        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        "fade-up": "fade-up 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards",
+        "glow-pulse": "glow-pulse 4s ease-in-out infinite",
       },
     },
   },
