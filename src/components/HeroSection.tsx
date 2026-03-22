@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const slides = [
@@ -27,22 +27,72 @@ const slides = [
   },
 ];
 
+const SLIDE_INTERVAL = 8000;
+const SWIPE_THRESHOLD = 50;
+
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  const goTo = useCallback((index: number) => {
+    setDirection(index > current ? 1 : -1);
+    setCurrent(index);
+  }, [current]);
 
   const next = useCallback(() => {
+    setDirection(1);
     setCurrent((prev) => (prev + 1) % slides.length);
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(next, 7000);
-    return () => clearInterval(timer);
+  const prev = useCallback(() => {
+    setDirection(-1);
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  // Auto-advance timer, resets on manual interaction
+  const resetTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(next, SLIDE_INTERVAL);
   }, [next]);
+
+  useEffect(() => {
+    resetTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [resetTimer]);
+
+  // Touch/swipe handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+    // Only trigger if horizontal swipe is dominant
+    if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) next(); else prev();
+      resetTimer();
+    }
+    touchStart.current = null;
+  }, [next, prev, resetTimer]);
 
   const slide = slides[current];
 
+  const variants = {
+    enter: (dir: number) => ({ opacity: 0, x: dir * 40 }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir: number) => ({ opacity: 0, x: dir * -40 }),
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Background image with slow zoom */}
       <div className="absolute inset-0">
         <motion.img
@@ -61,13 +111,15 @@ const HeroSection = () => {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[180px] pointer-events-none" />
 
       <div className="container mx-auto px-6 py-24 relative z-10 max-w-3xl">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
           >
             <h1 className="font-heading text-4xl md:text-6xl lg:text-[5rem] font-bold text-white mb-8 leading-[1.1]">
               {slide.heading}
@@ -81,17 +133,26 @@ const HeroSection = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Slide indicators */}
+        {/* Slide indicators with progress animation */}
         <div className="flex gap-2 mt-8">
           {slides.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrent(i)}
-              className={`h-[3px] rounded-full transition-all duration-500 ${
-                i === current ? "w-10 bg-accent" : "w-6 bg-white/20 hover:bg-white/30"
-              }`}
+              onClick={() => { goTo(i); resetTimer(); }}
+              className="relative h-[3px] rounded-full overflow-hidden transition-all duration-500"
+              style={{ width: i === current ? 40 : 24 }}
               aria-label={`Go to slide ${i + 1}`}
-            />
+            >
+              <div className="absolute inset-0 bg-white/20" />
+              {i === current && (
+                <motion.div
+                  className="absolute inset-0 bg-accent rounded-full origin-left"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: SLIDE_INTERVAL / 1000, ease: "linear" }}
+                />
+              )}
+            </button>
           ))}
         </div>
       </div>
