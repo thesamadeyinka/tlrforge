@@ -18,10 +18,10 @@ const slides = [
   {
     label: null,
     heading: (
-      <>
+      <span className="whitespace-nowrap">
         Illuminate Transform{" "}
         <span className="text-gradient-gold">Rise</span>
-      </>
+      </span>
     ),
     description:
       "A premier platform for transformational growth where emerging leaders, professionals, and organisations access the knowledge, tools, and support needed to rise with clarity, competence, and character.",
@@ -122,7 +122,7 @@ const HeroSection = () => {
             exit="exit"
             transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
           >
-            <h1 className="font-heading text-4xl md:text-6xl lg:text-[5rem] font-bold text-white mb-8 leading-[1.1]">
+            <h1 className="font-heading text-3xl md:text-5xl lg:text-[4.5rem] font-bold text-white mb-8 leading-[1.1]">
               {slide.heading}
             </h1>
 
