@@ -51,19 +51,8 @@ const AboutSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* CTAs moved from hero */}
-        <ScrollReveal delay={0.05}>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold text-sm px-8 py-6 rounded-md tracking-wide">
-              <Link to="/apply">
-                Begin Your Transformation <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="font-sans font-semibold text-sm px-8 py-6 rounded-md tracking-wide">
-              <a href="#programmes">Explore EVOLVE</a>
-            </Button>
-          </div>
-        </ScrollReveal>
+
+
 
         {/* Vision & Mission */}
         <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden mb-16">
