@@ -12,7 +12,7 @@ const ValuePropSection = () => {
             Stop Aspiring. Start Becoming.
           </h2>
           <div className="editorial-line mx-auto mb-6 !bg-accent-foreground/20" />
-          <p className="text-accent-foreground/70 text-[16px] md:text-lg mb-10 max-w-lg mx-auto leading-[1.8]">
+          <p className="text-accent-foreground/80 text-[17px] md:text-lg mb-10 max-w-lg mx-auto leading-[1.8]">
             Guided learning, customized change frameworks, structured mentorship, and transformational accountability so you can rise with clarity, competence, and character.
           </p>
           <Button

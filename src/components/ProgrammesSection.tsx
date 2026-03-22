@@ -24,7 +24,7 @@ const ProgrammesSection = () => {
               <span className="text-gradient-gold">Lasting Impact</span>
             </h2>
             <div className="editorial-line mx-auto mb-5" />
-            <p className="text-muted-foreground text-[16px] max-w-md mx-auto leading-[1.8]">
+            <p className="text-muted-foreground text-[17px] max-w-md mx-auto leading-[1.8]">
               Transformation is a process, not an event.
             </p>
           </div>

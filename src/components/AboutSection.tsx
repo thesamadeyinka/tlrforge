@@ -45,7 +45,7 @@ const AboutSection = () => {
               More Than a School, We Are An Ecosystem
             </h2>
             <div className="editorial-line mx-auto mb-5" />
-            <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg mx-auto">
+            <p className="text-muted-foreground text-[17px] leading-[1.8] max-w-lg mx-auto">
               A dynamic ecosystem where emerging leaders, professionals, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
             </p>
           </div>
