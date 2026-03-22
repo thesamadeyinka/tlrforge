@@ -18,20 +18,20 @@ const PhilosophySection = () => {
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <ScrollReveal>
           <div className="max-w-2xl mx-auto text-center mb-14">
-            <p className="editorial-label text-accent mb-4">Our Philosophy</p>
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-4">Our Philosophy</h3>
             <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-5 leading-[1.15]">
               Growth Precedes{" "}
-              <span className="text-gradient-gold italic">Transformation</span>
+              <span className="text-gradient-gold">Transformation</span>
             </h2>
             <div className="editorial-line mx-auto mb-5" />
             <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg mx-auto">
-              Real change is designed — built around structure, frameworks, and accountability systems.
+              Real change is designed, built around structure, frameworks, and accountability systems.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal>
-          <p className="editorial-label text-center text-foreground mb-8">The Whole Person Integration</p>
+          <h4 className="font-heading text-lg font-bold text-center text-foreground mb-8">The Whole Person Integration</h4>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden max-w-4xl mx-auto mb-10">
