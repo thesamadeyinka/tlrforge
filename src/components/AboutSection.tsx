@@ -1,4 +1,4 @@
-import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign, Eye, Flag } from "lucide-react";
+import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign, Eye, CircleDot } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -58,26 +58,26 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden mb-16">
           <ScrollReveal delay={0.1}>
             <div className="bg-card p-8 md:p-10 h-full">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
                   <Eye className="w-5 h-5 text-accent" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-accent">Vision</h3>
               </div>
-              <p className="text-foreground/80 leading-[1.8] text-[17px]">
+              <p className="text-foreground/80 leading-[1.8] text-[17px] pl-[52px]">
                 To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
               </p>
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <div className="bg-card p-8 md:p-10 h-full">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center">
-                  <Target className="w-5 h-5 text-accent" />
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                  <CircleDot className="w-5 h-5 text-accent" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-accent">Mission</h3>
               </div>
-              <p className="text-foreground/80 leading-[1.8] text-[17px]">
+              <p className="text-foreground/80 leading-[1.8] text-[17px] pl-[52px]">
                 To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital.
               </p>
             </div>
