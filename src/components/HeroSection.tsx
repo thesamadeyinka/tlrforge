@@ -7,7 +7,8 @@ const slides = [
     label: null,
     heading: (
       <>
-        Welcome to{" "}
+        Welcome to
+        <br />
         <span className="text-gradient-gold">The Luminary Rise</span>
       </>
     ),
