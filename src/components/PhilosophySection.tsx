@@ -24,7 +24,7 @@ const PhilosophySection = () => {
               <span className="text-gradient-gold">Transformation</span>
             </h2>
             <div className="editorial-line mx-auto mb-5" />
-            <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg mx-auto">
+            <p className="text-muted-foreground text-[17px] leading-[1.8] max-w-lg mx-auto">
               Real change is designed, built around structure, frameworks, and accountability systems.
             </p>
           </div>

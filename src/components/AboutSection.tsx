@@ -1,4 +1,4 @@
-import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign } from "lucide-react";
+import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign, Eye, Flag } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -45,7 +45,7 @@ const AboutSection = () => {
               More Than a School, We Are An Ecosystem
             </h2>
             <div className="editorial-line mx-auto mb-5" />
-            <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg mx-auto">
+            <p className="text-muted-foreground text-[17px] leading-[1.8] max-w-lg mx-auto">
               A dynamic ecosystem where emerging leaders, professionals, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
             </p>
           </div>
@@ -69,16 +69,26 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden mb-16">
           <ScrollReveal delay={0.1}>
             <div className="bg-card p-8 md:p-10 h-full">
-              <h3 className="font-heading text-xl font-bold text-accent mb-3">Vision</h3>
-              <p className="text-foreground leading-[1.8] text-[16px]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center">
+                  <Eye className="w-5 h-5 text-accent" />
+                </div>
+                <h3 className="font-heading text-xl font-bold text-accent">Vision</h3>
+              </div>
+              <p className="text-foreground/80 leading-[1.8] text-[17px]">
                 To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
               </p>
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <div className="bg-card p-8 md:p-10 h-full">
-              <h3 className="font-heading text-xl font-bold text-accent mb-3">Mission</h3>
-              <p className="text-foreground leading-[1.8] text-[16px]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center">
+                  <Flag className="w-5 h-5 text-accent" />
+                </div>
+                <h3 className="font-heading text-xl font-bold text-accent">Mission</h3>
+              </div>
+              <p className="text-foreground/80 leading-[1.8] text-[17px]">
                 To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital.
               </p>
             </div>
