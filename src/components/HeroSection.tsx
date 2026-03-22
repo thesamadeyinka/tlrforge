@@ -13,7 +13,7 @@ const slides = [
       </>
     ),
     description:
-      "Your platform for Transformational Growth. Where emerging leaders, professionals, and organisations access the knowledge, tools, and support needed to rise.",
+      "Your home for Transformational Growth.",
   },
   {
     label: null,
