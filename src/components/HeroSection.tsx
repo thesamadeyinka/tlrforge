@@ -18,10 +18,10 @@ const slides = [
   {
     label: null,
     heading: (
-      <>
+      <span className="whitespace-nowrap">
         Illuminate Transform{" "}
         <span className="text-gradient-gold">Rise</span>
-      </>
+      </span>
     ),
     description:
       "A premier platform for transformational growth where emerging leaders, professionals, and organisations access the knowledge, tools, and support needed to rise with clarity, competence, and character.",
