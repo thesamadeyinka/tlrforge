@@ -19,8 +19,7 @@ const slides = [
     label: null,
     heading: (
       <span className="whitespace-nowrap">
-        Illuminate Transform{" "}
-        <span className="text-gradient-gold">Rise</span>
+        Illuminate <span className="text-gradient-gold">Transform</span> Rise
       </span>
     ),
     description:
