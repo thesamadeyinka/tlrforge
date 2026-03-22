@@ -1,4 +1,4 @@
-import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign, Eye, Goal } from "lucide-react";
+import { Target, Compass, Lightbulb, Shield, Users, Award, Gem, ArrowRight, Rocket, Network, BadgeDollarSign, Eye, Flag } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -73,7 +73,7 @@ const AboutSection = () => {
             <div className="bg-card p-8 md:p-10 h-full">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
-                  <Goal className="w-5 h-5 text-accent" />
+                  <Flag className="w-5 h-5 text-accent" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-accent">Mission</h3>
               </div>
