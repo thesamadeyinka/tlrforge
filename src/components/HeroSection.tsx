@@ -122,7 +122,7 @@ const HeroSection = () => {
             exit="exit"
             transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
           >
-            <h1 className="font-heading text-4xl md:text-6xl lg:text-[5rem] font-bold text-white mb-8 leading-[1.1]">
+            <h1 className="font-heading text-3xl md:text-5xl lg:text-[4.5rem] font-bold text-white mb-8 leading-[1.1]">
               {slide.heading}
             </h1>
 
