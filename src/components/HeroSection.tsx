@@ -126,7 +126,7 @@ const HeroSection = () => {
               {slide.heading}
             </h1>
 
-            <div className="editorial-line mb-8" />
+            
 
             <p className="text-base md:text-lg text-white/70 mb-6 max-w-xl leading-relaxed">
               {slide.description}
