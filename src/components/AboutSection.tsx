@@ -17,7 +17,7 @@ const pillars = [
   {
     title: "EVOLVE",
     icon: Rocket,
-    desc: "The structured development engine — a high-impact mentorship and learning platform built on the AKA-RB framework.",
+    desc: "The structured development engine, a high-impact mentorship and learning platform built on the AKA-RB framework.",
     link: "/programmes",
   },
   {
@@ -40,10 +40,9 @@ const AboutSection = () => {
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <ScrollReveal>
           <div className="max-w-2xl mx-auto text-center mb-16">
-            <p className="editorial-label text-accent mb-4">Who We Are</p>
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-4">Who We Are</h3>
             <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-5 leading-[1.15]">
-              More Than a School.{" "}
-              <span className="text-gradient-gold italic">An Ecosystem.</span>
+              More Than a School, We Are An Ecosystem
             </h2>
             <div className="editorial-line mx-auto mb-5" />
             <p className="text-muted-foreground text-[16px] leading-[1.8] max-w-lg mx-auto">
@@ -52,11 +51,25 @@ const AboutSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Vision & Mission — editorial two-column */}
+        {/* CTAs moved from hero */}
+        <ScrollReveal delay={0.05}>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold text-sm px-8 py-6 rounded-md tracking-wide">
+              <Link to="/apply">
+                Begin Your Transformation <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="font-sans font-semibold text-sm px-8 py-6 rounded-md tracking-wide">
+              <a href="#programmes">Explore EVOLVE</a>
+            </Button>
+          </div>
+        </ScrollReveal>
+
+        {/* Vision & Mission */}
         <div className="grid md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden mb-16">
           <ScrollReveal delay={0.1}>
             <div className="bg-card p-8 md:p-10 h-full">
-              <p className="editorial-label text-accent mb-3">Vision</p>
+              <h3 className="font-heading text-xl font-bold text-accent mb-3">Vision</h3>
               <p className="text-foreground leading-[1.8] text-[16px]">
                 To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
               </p>
@@ -64,7 +77,7 @@ const AboutSection = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <div className="bg-card p-8 md:p-10 h-full">
-              <p className="editorial-label text-accent mb-3">Mission</p>
+              <h3 className="font-heading text-xl font-bold text-accent mb-3">Mission</h3>
               <p className="text-foreground leading-[1.8] text-[16px]">
                 To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilizes strategic capital.
               </p>
@@ -75,10 +88,10 @@ const AboutSection = () => {
         {/* Strategic Pillars */}
         <ScrollReveal delay={0.1}>
           <div className="text-center mb-10">
-            <p className="editorial-label text-accent mb-3">Our Pillars</p>
-            <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground leading-[1.2]">
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-3">Our Pillars</h3>
+            <h4 className="font-heading text-xl md:text-2xl font-bold text-foreground leading-[1.2]">
               Three Integrated Pillars
-            </h3>
+            </h4>
           </div>
         </ScrollReveal>
 
@@ -99,8 +112,8 @@ const AboutSection = () => {
         {/* Core Values */}
         <ScrollReveal delay={0.15}>
           <div className="text-center">
-            <p className="editorial-label text-accent mb-3">Core Values</p>
-            <h3 className="font-heading text-2xl font-bold text-foreground mb-6">What Guides Us</h3>
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-3">Core Values</h3>
+            <h4 className="font-heading text-xl font-bold text-foreground mb-6">What Guides Us</h4>
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {values.map((v) => (
                 <div

@@ -18,10 +18,10 @@ const ProgrammesSection = () => {
       <div className="container mx-auto px-6 max-w-5xl">
         <ScrollReveal>
           <div className="text-center mb-14">
-            <p className="editorial-label text-accent mb-4">Our Flagship Programme</p>
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-4">Our Flagship Programme</h3>
             <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-4 leading-[1.15]">
-              Structured Learning.{" "}
-              <span className="text-gradient-gold italic">Lasting Impact.</span>
+              Structured Learning,{" "}
+              <span className="text-gradient-gold">Lasting Impact</span>
             </h2>
             <div className="editorial-line mx-auto mb-5" />
             <p className="text-muted-foreground text-[16px] max-w-md mx-auto leading-[1.8]">
@@ -37,7 +37,7 @@ const ProgrammesSection = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-sky/5 blur-[100px] pointer-events-none" />
 
             <div className="relative z-10">
-              <p className="editorial-label text-accent mb-6">Flagship Programme</p>
+              <h4 className="font-heading text-lg font-bold text-accent mb-6">Flagship Programme</h4>
 
               <img src={evolveLogo} alt="EVOLVE" className="h-10 md:h-12 mb-2 brightness-0 invert" />
               <h3 className="font-heading text-lg md:text-xl font-medium mb-8 text-white/60">
