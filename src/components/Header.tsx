@@ -137,6 +137,7 @@ const Header = () => {
 
           {/* Search Button */}
           <button
+            onClick={() => setSearchOpen(true)}
             className="text-white/40 hover:text-white/80 transition-colors duration-300 p-2 mr-1"
             aria-label="Search"
           >
