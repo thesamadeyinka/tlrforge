@@ -26,7 +26,7 @@ const slides = [
   {
     heading: (
       <>
-        Lead with <span className="text-gradient-gold">Purpose</span>
+        Rise with <span className="text-gradient-gold">Purpose</span>
       </>
     ),
     description:
