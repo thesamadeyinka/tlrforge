@@ -1,10 +1,10 @@
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const slides = [
   {
-    label: null,
     heading: (
       <>
         Welcome to
@@ -12,11 +12,9 @@ const slides = [
         <span className="text-gradient-gold">The Luminary Rise</span>
       </>
     ),
-    description:
-      "Your home for Transformational Growth.",
+    description: "Your home for Transformational Growth.",
   },
   {
-    label: null,
     heading: (
       <span className="whitespace-nowrap">
         Illuminate <span className="text-gradient-gold">Transform</span> Rise
@@ -24,6 +22,15 @@ const slides = [
     ),
     description:
       "A premier platform for transformational growth where emerging leaders, professionals, and organisations access the knowledge, tools, and support needed to rise with clarity, competence, and character.",
+  },
+  {
+    heading: (
+      <>
+        Lead with <span className="text-gradient-gold">Purpose</span>
+      </>
+    ),
+    description:
+      "Develop the clarity, competence, and character to thrive in every season of leadership.",
   },
 ];
 
@@ -154,6 +161,20 @@ const HeroSection = () => {
               )}
             </button>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-8">
+          <Link
+            to="/apply"
+            className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-accent hover:text-accent/80 transition-colors duration-300 tracking-wide group"
+          >
+            Ready to Rise?{" "}
+            <span className="underline underline-offset-4 group-hover:underline-offset-2 transition-all duration-300">
+              Start Now
+            </span>
+            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </Link>
         </div>
       </div>
 
