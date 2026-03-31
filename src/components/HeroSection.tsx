@@ -26,7 +26,7 @@ const slides = [
   {
     heading: (
       <>
-        Lead with <span className="text-gradient-gold">Purpose</span>
+        Rise with <span className="text-gradient-gold">Purpose</span>
       </>
     ),
     description:
@@ -164,16 +164,13 @@ const HeroSection = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-8">
+        <div className="mt-8 flex items-center gap-3">
+          <span className="text-sm font-sans font-medium text-white/60 tracking-wide">Ready to Rise?</span>
           <Link
             to="/apply"
-            className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-accent hover:text-accent/80 transition-colors duration-300 tracking-wide group"
+            className="inline-flex items-center gap-2 bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold text-[11px] px-4 py-2 rounded-md tracking-wide transition-colors duration-300"
           >
-            Ready to Rise?{" "}
-            <span className="underline underline-offset-4 group-hover:underline-offset-2 transition-all duration-300">
-              Start Now
-            </span>
-            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            Start Now
           </Link>
         </div>
       </div>
