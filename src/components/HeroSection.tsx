@@ -1,10 +1,10 @@
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const slides = [
   {
-    label: null,
     heading: (
       <>
         Welcome to
@@ -12,11 +12,9 @@ const slides = [
         <span className="text-gradient-gold">The Luminary Rise</span>
       </>
     ),
-    description:
-      "Your home for Transformational Growth.",
+    description: "Your home for Transformational Growth.",
   },
   {
-    label: null,
     heading: (
       <span className="whitespace-nowrap">
         Illuminate <span className="text-gradient-gold">Transform</span> Rise
@@ -24,6 +22,15 @@ const slides = [
     ),
     description:
       "A premier platform for transformational growth where emerging leaders, professionals, and organisations access the knowledge, tools, and support needed to rise with clarity, competence, and character.",
+  },
+  {
+    heading: (
+      <>
+        Lead with <span className="text-gradient-gold">Purpose</span>
+      </>
+    ),
+    description:
+      "Develop the clarity, competence, and character to thrive in every season of leadership.",
   },
 ];
 
