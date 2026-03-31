@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -9,11 +9,15 @@ import tlrLogoWhite from "@/assets/tlr-logo-white.png";
 
 const navLinks = [
   { label: "Home", href: "/", isRoute: true },
-  { label: "About", href: "/about", isRoute: true },
-  { label: "Philosophy", href: "/philosophy", isRoute: true },
   { label: "Programmes", href: "/programmes", isRoute: true },
   { label: "Resources", href: "/resources", isRoute: true },
   { label: "Contact", href: "/contact", isRoute: true },
+];
+
+const aboutDropdownLinks = [
+  { label: "Our Story", href: "/about" },
+  { label: "Team", href: "/about" },
+  { label: "Philosophy", href: "/philosophy" },
 ];
 
 const Header = () => {
