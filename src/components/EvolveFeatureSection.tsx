@@ -46,7 +46,7 @@ const EvolveFeatureSection = () => {
 
       <div className="container mx-auto px-6 py-24 relative z-10 max-w-3xl text-center">
         <ScrollReveal>
-          <img src={evolveLogo} alt="EVOLVE" className="h-16 md:h-20 mx-auto mb-6" />
+          <img src={evolveLogo} alt="EVOLVE" className="h-16 md:h-20 mx-auto mb-6 brightness-0 invert" />
           <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-8 leading-[1.15]">
             Master The Art of{" "}
             <span className="text-gradient-gold">Transformational Growth</span>
