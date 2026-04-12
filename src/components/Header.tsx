@@ -10,7 +10,7 @@ import tlrLogoWhite from "@/assets/tlr-logo-white.png";
 const aboutDropdownLinks = [
   { label: "Our Story", href: "/about" },
   { label: "Our Philosophy", href: "/philosophy" },
-  { label: "Our Approach", href: "/about" },
+  { label: "Our Approach", href: "/approach" },
   { label: "Our Team", href: "/about" },
 ];
 
@@ -33,12 +33,12 @@ const programmesDropdownLinks = [
 ];
 
 const eventsDropdownLinks = [
-  { label: "TLR Career Development", href: "/programmes" },
-  { label: "TLR Business Mastery", href: "/programmes" },
-  { label: "TLR Finance Academy", href: "/programmes" },
-  { label: "TLR Wealth Mastery", href: "/programmes" },
-  { label: "TLR Relationship Mastery", href: "/programmes" },
-  { label: "TLR Leadership Essentials", href: "/programmes" },
+  { label: "TLR Career Development", href: "/events/career-development" },
+  { label: "TLR Business Mastery", href: "/events/business-mastery" },
+  { label: "TLR Finance Academy", href: "/events/finance-academy" },
+  { label: "TLR Wealth Mastery", href: "/events/wealth-mastery" },
+  { label: "TLR Relationship Mastery", href: "/events/relationship-mastery" },
+  { label: "TLR Leadership Essentials", href: "/events/leadership-essentials" },
 ];
 
 const searchablePages = [
