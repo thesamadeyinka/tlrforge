@@ -1,8 +1,9 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import PhilosophySection from "@/components/PhilosophySection";
-import ProgrammesSection from "@/components/ProgrammesSection";
+import PillarsSection from "@/components/PillarsSection";
+import EventsSection from "@/components/EventsSection";
+import EvolveFeatureSection from "@/components/EvolveFeatureSection";
+import WholePersonSection from "@/components/WholePersonSection";
 import ValuePropSection from "@/components/ValuePropSection";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -13,9 +14,10 @@ const Index = () => {
       <div className="min-h-screen">
         <Header />
         <HeroSection />
-        <AboutSection />
-        <PhilosophySection />
-        <ProgrammesSection />
+        <PillarsSection />
+        <EventsSection />
+        <EvolveFeatureSection />
+        <WholePersonSection />
         <ValuePropSection />
         <Footer />
       </div>
