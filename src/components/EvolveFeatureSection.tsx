@@ -7,7 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import evolveBg1 from "@/assets/evolve-bg-1.jpg";
 import evolveBg2 from "@/assets/evolve-bg-2.jpg";
 import evolveBg3 from "@/assets/evolve-bg-3.jpg";
-import evolveLogo from "@/assets/evolve-logo.png";
+import evolveLogoWhite from "@/assets/evolve-logo-white.png";
 
 const backgrounds = [evolveBg1, evolveBg2, evolveBg3];
 
@@ -46,7 +46,7 @@ const EvolveFeatureSection = () => {
 
       <div className="container mx-auto px-6 py-24 relative z-10 max-w-3xl text-center">
         <ScrollReveal>
-          <img src={evolveLogo} alt="EVOLVE" className="h-16 md:h-20 mx-auto mb-6 brightness-0 invert" />
+          <img src={evolveLogoWhite} alt="EVOLVE" className="h-16 md:h-20 mx-auto mb-6" />
           <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-8 leading-[1.15]">
             Master The Art of{" "}
             <span className="text-gradient-gold">Transformational Growth</span>
