@@ -1,31 +1,45 @@
+import { lazy, Suspense } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import PillarsSection from "@/components/PillarsSection";
-import EventsSection from "@/components/EventsSection";
-import EvolveFeatureSection from "@/components/EvolveFeatureSection";
-import WholePersonSection from "@/components/WholePersonSection";
-import ValuePropSection from "@/components/ValuePropSection";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
-import AnimatedGradientBg from "@/components/AnimatedGradientBg";
-import ParallaxWrapper from "@/components/ParallaxWrapper";
+
+const PillarsSection = lazy(() => import("@/components/PillarsSection"));
+const EventsSection = lazy(() => import("@/components/EventsSection"));
+const EvolveFeatureSection = lazy(() => import("@/components/EvolveFeatureSection"));
+const WholePersonSection = lazy(() => import("@/components/WholePersonSection"));
+const ValuePropSection = lazy(() => import("@/components/ValuePropSection"));
+const AnimatedGradientBg = lazy(() => import("@/components/AnimatedGradientBg"));
+const ParallaxWrapper = lazy(() => import("@/components/ParallaxWrapper"));
 
 const Index = () => {
   return (
     <PageTransition>
       <div className="min-h-screen relative">
-        <AnimatedGradientBg />
+        <Suspense fallback={null}>
+          <AnimatedGradientBg />
+        </Suspense>
         <Header />
         <HeroSection />
-        <ParallaxWrapper speed={-0.1}>
-          <PillarsSection />
-        </ParallaxWrapper>
-        <EventsSection />
-        <EvolveFeatureSection />
-        <ParallaxWrapper speed={-0.08}>
-          <WholePersonSection />
-        </ParallaxWrapper>
-        <ValuePropSection />
+        <Suspense fallback={<div className="py-28" />}>
+          <ParallaxWrapper speed={-0.1}>
+            <PillarsSection />
+          </ParallaxWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="py-28" />}>
+          <EventsSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-28" />}>
+          <EvolveFeatureSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-28" />}>
+          <ParallaxWrapper speed={-0.08}>
+            <WholePersonSection />
+          </ParallaxWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="py-28" />}>
+          <ValuePropSection />
+        </Suspense>
         <Footer />
       </div>
     </PageTransition>

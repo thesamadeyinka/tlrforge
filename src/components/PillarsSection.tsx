@@ -1,5 +1,8 @@
 import { Rocket, Network, BadgeDollarSign, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import StaggeredText from "@/components/StaggeredText";
+import SlideIn from "@/components/SlideIn";
+import CountUp from "@/components/CountUp";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -24,19 +27,42 @@ const pillars = [
   },
 ];
 
+const stats = [
+  { value: 500, suffix: "+", label: "Leaders Transformed" },
+  { value: 12, suffix: "", label: "Countries Reached" },
+  { value: 95, suffix: "%", label: "Programme Satisfaction" },
+];
+
 const PillarsSection = () => {
   return (
     <section className="py-20 md:py-28 bg-background relative">
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        <ScrollReveal>
-          <div className="max-w-2xl mx-auto text-center mb-14">
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-5 leading-[1.15]">
-              More Than a School, We Are An Ecosystem
-            </h2>
+        <div className="max-w-2xl mx-auto text-center mb-14">
+          <StaggeredText
+            text="More Than a School, We Are An Ecosystem"
+            className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-5 leading-[1.15]"
+          />
+          <ScrollReveal delay={0.3}>
             <div className="editorial-line mx-auto mb-5" />
             <p className="text-muted-foreground text-[17px] leading-[1.8] max-w-lg mx-auto">
               A dynamic ecosystem where emerging leaders, professionals, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
             </p>
+          </ScrollReveal>
+        </div>
+
+        {/* Stats counter row */}
+        <ScrollReveal delay={0.15}>
+          <div className="grid grid-cols-3 gap-4 mb-14 max-w-md mx-auto">
+            {stats.map((s) => (
+              <div key={s.label} className="text-center">
+                <CountUp
+                  target={s.value}
+                  suffix={s.suffix}
+                  className="font-heading text-2xl md:text-3xl font-bold text-accent block"
+                />
+                <span className="text-[11px] text-muted-foreground tracking-wide uppercase mt-1 block">{s.label}</span>
+              </div>
+            ))}
           </div>
         </ScrollReveal>
 
@@ -51,7 +77,7 @@ const PillarsSection = () => {
 
         <div className="grid md:grid-cols-3 gap-6 mb-10">
           {pillars.map((p, i) => (
-            <ScrollReveal key={p.title} delay={i * 0.1}>
+            <SlideIn key={p.title} direction={i === 0 ? "left" : i === 2 ? "right" : "up"} delay={i * 0.12}>
               <Link to={p.link} className="block bg-card rounded-lg border border-border p-8 h-full group card-glow">
                 <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-500">
                   <p.icon className="w-4.5 h-4.5 text-accent" />
@@ -59,7 +85,7 @@ const PillarsSection = () => {
                 <h4 className="font-heading font-bold text-foreground mb-2 text-lg">{p.title}</h4>
                 <p className="text-[15px] text-muted-foreground leading-[1.8]">{p.desc}</p>
               </Link>
-            </ScrollReveal>
+            </SlideIn>
           ))}
         </div>
 
