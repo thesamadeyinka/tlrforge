@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import StaggeredText from "@/components/StaggeredText";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const ValuePropSection = () => {
@@ -8,9 +9,13 @@ const ValuePropSection = () => {
       <div className="container mx-auto px-6 max-w-2xl text-center relative z-10">
         <ScrollReveal>
           <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground/60 mb-6">Our Promise</h3>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-accent-foreground mb-6 leading-[1.2]">
-            Stop Aspiring. Start Becoming.
-          </h2>
+        </ScrollReveal>
+        <StaggeredText
+          text="Stop Aspiring. Start Becoming."
+          className="font-heading text-3xl md:text-4xl font-bold text-accent-foreground mb-6 leading-[1.2]"
+          delay={0.15}
+        />
+        <ScrollReveal delay={0.4}>
           <div className="editorial-line mx-auto mb-6 !bg-accent-foreground/20" />
           <p className="text-accent-foreground/80 text-[17px] md:text-lg mb-10 max-w-lg mx-auto leading-[1.8]">
             Guided learning, customized change frameworks, structured mentorship, and transformational accountability so you can rise with clarity, competence, and character.
