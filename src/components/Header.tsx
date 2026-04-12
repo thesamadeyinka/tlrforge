@@ -41,17 +41,7 @@ const eventsDropdownLinks = [
   { label: "TLR Leadership Essentials", href: "/events/leadership-essentials" },
 ];
 
-const searchablePages = [
-  { title: "Home", href: "/", description: "Main landing page" },
-  { title: "About – Our Story", href: "/about", description: "Learn about The Luminary Rise" },
-  { title: "Philosophy", href: "/philosophy", description: "Our guiding philosophy" },
-  { title: "Programmes", href: "/programmes", description: "Explore our programmes" },
-  { title: "Resources", href: "/resources", description: "Access learning resources" },
-  { title: "Contact", href: "/contact", description: "Get in touch with us" },
-  { title: "Luminaries Hub", href: "/luminaries-hub", description: "Join the Luminaries Hub" },
-  { title: "Amplify Fund", href: "/amplify-fund", description: "Learn about the Amplify Fund" },
-  { title: "Apply – Evolve", href: "/apply", description: "Apply to the Evolve programme" },
-];
+import { searchAll } from "@/lib/searchIndex";
 
 type DropdownName = "about" | "programmes" | "events" | null;
 
@@ -65,13 +55,7 @@ const Header = () => {
   const dropdownRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const filteredPages = searchQuery.trim()
-    ? searchablePages.filter(
-        (p) =>
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : searchablePages;
+  const filteredPages = searchAll(searchQuery);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
