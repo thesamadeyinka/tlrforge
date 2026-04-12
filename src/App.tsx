@@ -18,6 +18,8 @@ import ContactPage from "./pages/ContactPage";
 import AdminApplications from "./pages/AdminApplications";
 import LuminariesHubPage from "./pages/LuminariesHubPage";
 import AmplifyFundPage from "./pages/AmplifyFundPage";
+import ApproachPage from "./pages/ApproachPage";
+import EventPage from "./pages/EventPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +41,8 @@ const AnimatedRoutes = () => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin/applications" element={<AdminApplications />} />
+        <Route path="/approach" element={<ApproachPage />} />
+        <Route path="/events/:slug" element={<EventPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
