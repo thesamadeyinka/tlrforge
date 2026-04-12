@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import heroIntroAsset from "@/assets/hero-intro.mp4.asset.json";
-import AmbientParticles from "@/components/AmbientParticles";
+import heroAmbientAsset from "@/assets/hero-ambient.mp4.asset.json";
+
+const AmbientParticles = lazy(() => import("@/components/AmbientParticles"));
 
 const slides = [
   {
@@ -37,7 +39,7 @@ const slides = [
 
 const SLIDE_INTERVAL = 8000;
 const SWIPE_THRESHOLD = 50;
-const INTRO_DURATION = 5000; // 5 second video
+const INTRO_DURATION = 5000;
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
@@ -66,7 +68,6 @@ const HeroSection = () => {
     timerRef.current = setInterval(next, SLIDE_INTERVAL);
   }, [next]);
 
-  // End intro after video plays
   useEffect(() => {
     const timeout = setTimeout(() => setShowIntro(false), INTRO_DURATION);
     return () => clearTimeout(timeout);
@@ -127,11 +128,21 @@ const HeroSection = () => {
         )}
       </AnimatePresence>
 
-      {/* Background with particles */}
+      {/* Looping ambient background video */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[hsl(224,50%,10%)]" />
+        <video
+          src={heroAmbientAsset.url}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-[hsl(224,50%,8%)]/70" />
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
-        <AmbientParticles count={30} />
+        <Suspense fallback={null}>
+          <AmbientParticles count={20} />
+        </Suspense>
       </div>
 
       {/* Soft ambient glow */}
