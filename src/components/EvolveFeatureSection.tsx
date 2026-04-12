@@ -1,28 +1,46 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
-import heroBg from "@/assets/hero-bg.jpg";
+import evolveBg1 from "@/assets/evolve-bg-1.jpg";
+import evolveBg2 from "@/assets/evolve-bg-2.jpg";
+import evolveBg3 from "@/assets/evolve-bg-3.jpg";
+
+const backgrounds = [evolveBg1, evolveBg2, evolveBg3];
 
 const EvolveFeatureSection = () => {
+  const [currentBg, setCurrentBg] = useState(0);
+
+  const nextBg = useCallback(() => {
+    setCurrentBg((prev) => (prev + 1) % backgrounds.length);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(nextBg, 6000);
+    return () => clearInterval(interval);
+  }, [nextBg]);
+
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-      {/* Background with motion */}
-      <div className="absolute inset-0">
+      {/* Rotating backgrounds */}
+      <AnimatePresence mode="popLayout">
         <motion.img
-          src={heroBg}
+          key={currentBg}
+          src={backgrounds[currentBg]}
           alt=""
-          className="w-full h-full object-cover"
-          initial={{ scale: 1.05 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         />
-        <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-85" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
-      </div>
+      </AnimatePresence>
 
-      {/* Ambient glow */}
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-accent/5 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-6 py-24 relative z-10 max-w-3xl text-center">
