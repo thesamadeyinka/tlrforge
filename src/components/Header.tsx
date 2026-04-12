@@ -55,13 +55,7 @@ const Header = () => {
   const dropdownRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const filteredPages = searchQuery.trim()
-    ? searchablePages.filter(
-        (p) =>
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : searchablePages;
+  const filteredPages = searchAll(searchQuery);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
