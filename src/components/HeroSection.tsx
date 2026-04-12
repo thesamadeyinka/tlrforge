@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroIntroAsset from "@/assets/hero-intro.mp4.asset.json";
+import AmbientParticles from "@/components/AmbientParticles";
 
 const slides = [
   {
@@ -36,10 +37,12 @@ const slides = [
 
 const SLIDE_INTERVAL = 8000;
 const SWIPE_THRESHOLD = 50;
+const INTRO_DURATION = 5000; // 5 second video
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [showIntro, setShowIntro] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -58,18 +61,24 @@ const HeroSection = () => {
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   }, []);
 
-  // Auto-advance timer, resets on manual interaction
   const resetTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(next, SLIDE_INTERVAL);
   }, [next]);
 
+  // End intro after video plays
   useEffect(() => {
-    resetTimer();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [resetTimer]);
+    const timeout = setTimeout(() => setShowIntro(false), INTRO_DURATION);
+    return () => clearTimeout(timeout);
+  }, []);
 
-  // Touch/swipe handlers
+  useEffect(() => {
+    if (!showIntro) {
+      resetTimer();
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [resetTimer, showIntro]);
+
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, []);
@@ -78,7 +87,6 @@ const HeroSection = () => {
     if (!touchStart.current) return;
     const dx = e.changedTouches[0].clientX - touchStart.current.x;
     const dy = e.changedTouches[0].clientY - touchStart.current.y;
-    // Only trigger if horizontal swipe is dominant
     if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) next(); else prev();
       resetTimer();
@@ -100,18 +108,30 @@ const HeroSection = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background image with slow zoom */}
+      {/* Cinematic Intro Video */}
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            className="absolute inset-0 z-30 flex items-center justify-center bg-[hsl(224,50%,6%)]"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          >
+            <video
+              src={heroIntroAsset.url}
+              autoPlay
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Background with particles */}
       <div className="absolute inset-0">
-        <motion.img
-          src={heroBg}
-          alt=""
-          className="w-full h-full object-cover"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
-        />
-        <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-80" />
+        <div className="absolute inset-0 bg-[hsl(224,50%,10%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
+        <AmbientParticles count={30} />
       </div>
 
       {/* Soft ambient glow */}
@@ -132,15 +152,13 @@ const HeroSection = () => {
               {slide.heading}
             </h1>
 
-            
-
             <p className="text-base md:text-lg text-white/70 mb-6 max-w-xl leading-relaxed">
               {slide.description}
             </p>
           </motion.div>
         </AnimatePresence>
 
-        {/* Slide indicators with progress animation */}
+        {/* Slide indicators */}
         <div className="flex gap-2 mt-8">
           {slides.map((_, i) => (
             <button

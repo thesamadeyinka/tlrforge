@@ -7,17 +7,24 @@ import WholePersonSection from "@/components/WholePersonSection";
 import ValuePropSection from "@/components/ValuePropSection";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import AnimatedGradientBg from "@/components/AnimatedGradientBg";
+import ParallaxWrapper from "@/components/ParallaxWrapper";
 
 const Index = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen">
+      <div className="min-h-screen relative">
+        <AnimatedGradientBg />
         <Header />
         <HeroSection />
-        <PillarsSection />
+        <ParallaxWrapper speed={-0.1}>
+          <PillarsSection />
+        </ParallaxWrapper>
         <EventsSection />
         <EvolveFeatureSection />
-        <WholePersonSection />
+        <ParallaxWrapper speed={-0.08}>
+          <WholePersonSection />
+        </ParallaxWrapper>
         <ValuePropSection />
         <Footer />
       </div>
