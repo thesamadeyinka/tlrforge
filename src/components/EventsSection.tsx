@@ -62,7 +62,7 @@ const EventsSection = () => {
           {events.map((event, i) => (
             <ScrollReveal key={event.title} delay={i * 0.08}>
               <Link
-                to="/programmes"
+                to={`/events/${event.slug}`}
                 className="block bg-card rounded-lg border border-border p-7 h-full group card-glow"
               >
                 <div className={`w-10 h-10 rounded-md bg-gradient-to-br ${event.color} flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-500`}>
