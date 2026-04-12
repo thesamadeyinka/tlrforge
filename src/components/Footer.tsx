@@ -38,8 +38,6 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-16 mb-20">
           <div>
             <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-12 md:h-14 mb-5 opacity-80" />
-            <p className="text-white/30 text-[13px] leading-relaxed mb-1">Illuminate. Transform. Rise.</p>
-            <p className="text-white/20 text-[11px] leading-relaxed">Raising Luminaries with Structure and Intention.</p>
           </div>
 
           <div>
