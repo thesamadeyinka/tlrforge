@@ -37,12 +37,10 @@ const slides = [
 
 const SLIDE_INTERVAL = 8000;
 const SWIPE_THRESHOLD = 50;
-const INTRO_DURATION = 5000;
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [showIntro, setShowIntro] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
