@@ -1,8 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import heroIntroAsset from "@/assets/hero-intro.mp4.asset.json";
-import heroAmbientAsset from "@/assets/hero-ambient.mp4.asset.json";
 
 const AmbientParticles = lazy(() => import("@/components/AmbientParticles"));
 
