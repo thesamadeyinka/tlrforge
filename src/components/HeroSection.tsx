@@ -1,8 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import heroIntroAsset from "@/assets/hero-intro.mp4.asset.json";
-import heroAmbientAsset from "@/assets/hero-ambient.mp4.asset.json";
 
 const AmbientParticles = lazy(() => import("@/components/AmbientParticles"));
 
@@ -39,12 +37,10 @@ const slides = [
 
 const SLIDE_INTERVAL = 8000;
 const SWIPE_THRESHOLD = 50;
-const INTRO_DURATION = 5000;
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [showIntro, setShowIntro] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -69,16 +65,9 @@ const HeroSection = () => {
   }, [next]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowIntro(false), INTRO_DURATION);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    if (!showIntro) {
-      resetTimer();
-    }
+    resetTimer();
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [resetTimer, showIntro]);
+  }, [resetTimer]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -109,36 +98,9 @@ const HeroSection = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Cinematic Intro Video */}
-      <AnimatePresence>
-        {showIntro && (
-          <motion.div
-            className="absolute inset-0 z-30 flex items-center justify-center bg-[hsl(224,50%,6%)]"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-          >
-            <video
-              src={heroIntroAsset.url}
-              autoPlay
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Looping ambient background video */}
+      {/* Dark elegant background with ambient particles */}
+      <div className="absolute inset-0 bg-[hsl(224,50%,8%)]" />
       <div className="absolute inset-0">
-        <video
-          src={heroAmbientAsset.url}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-[hsl(224,50%,8%)]/70" />
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
         <Suspense fallback={null}>
           <AmbientParticles count={20} />
