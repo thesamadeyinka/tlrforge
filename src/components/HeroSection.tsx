@@ -65,16 +65,9 @@ const HeroSection = () => {
   }, [next]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowIntro(false), INTRO_DURATION);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    if (!showIntro) {
-      resetTimer();
-    }
+    resetTimer();
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [resetTimer, showIntro]);
+  }, [resetTimer]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
