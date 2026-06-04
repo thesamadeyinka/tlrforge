@@ -98,36 +98,9 @@ const HeroSection = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Cinematic Intro Video */}
-      <AnimatePresence>
-        {showIntro && (
-          <motion.div
-            className="absolute inset-0 z-30 flex items-center justify-center bg-[hsl(224,50%,6%)]"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-          >
-            <video
-              src={heroIntroAsset.url}
-              autoPlay
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Looping ambient background video */}
+      {/* Dark elegant background with ambient particles */}
+      <div className="absolute inset-0 bg-[hsl(224,50%,8%)]" />
       <div className="absolute inset-0">
-        <video
-          src={heroAmbientAsset.url}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-[hsl(224,50%,8%)]/70" />
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
         <Suspense fallback={null}>
           <AmbientParticles count={20} />
