@@ -1,7 +1,5 @@
-import { Rocket, Network, BadgeDollarSign, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Rocket, Network, BadgeDollarSign, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import StaggeredText from "@/components/StaggeredText";
 import CountUp from "@/components/CountUp";
@@ -36,24 +34,9 @@ const stats = [
 ];
 
 const PillarsSection = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
-  const [selected, setSelected] = useState(0);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", onSelect);
-    onSelect();
-    return () => { emblaApi.off("select", onSelect); };
-  }, [emblaApi]);
-
-  const scrollPrev = () => emblaApi?.scrollPrev();
-  const scrollNext = () => emblaApi?.scrollNext();
-  const scrollTo = (i: number) => emblaApi?.scrollTo(i);
-
   return (
     <section className="py-20 md:py-28 bg-background relative">
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="max-w-2xl mx-auto text-center mb-14">
           <StaggeredText
             text="More Than a School, We Are An Ecosystem"
@@ -67,7 +50,6 @@ const PillarsSection = () => {
           </ScrollReveal>
         </div>
 
-        {/* Stats counter row */}
         <ScrollReveal delay={0.15}>
           <div className="grid grid-cols-3 gap-4 mb-14 max-w-md mx-auto">
             {stats.map((s) => (
@@ -92,91 +74,43 @@ const PillarsSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Glassmorphism Carousel */}
+        {/* Three-up glassmorphism grid */}
         <ScrollReveal delay={0.15}>
-          <div className="relative max-w-2xl mx-auto mb-10">
-            {/* Ambient glow behind card */}
-            <div className="absolute inset-0 -z-10 blur-3xl opacity-40 pointer-events-none">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-primary/20 to-accent/10 rounded-full" />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-10">
+            {pillars.map((p, i) => (
+              <motion.div
+                key={p.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
+              >
+                <Link
+                  to={p.link}
+                  className="block relative h-full rounded-2xl p-7 md:p-8 min-h-[340px] group overflow-hidden
+                    bg-gradient-to-br from-card/60 via-card/40 to-card/20
+                    backdrop-blur-xl border border-accent/20
+                    shadow-[0_8px_40px_-12px_hsl(var(--accent)/0.25)]
+                    hover:border-accent/40 hover:shadow-[0_12px_60px_-12px_hsl(var(--accent)/0.4)]
+                    hover:-translate-y-1 transition-all duration-700"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-accent/[0.03] to-accent/[0.06] pointer-events-none" />
+                  <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
-            <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex">
-                {pillars.map((p, i) => (
-                  <div key={p.title} className="flex-[0_0_100%] min-w-0 px-2">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={selected === i ? `active-${i}` : `idle-${i}`}
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                      >
-                        <Link
-                          to={p.link}
-                          className="block relative rounded-2xl p-10 md:p-12 min-h-[320px] group overflow-hidden
-                            bg-gradient-to-br from-card/60 via-card/40 to-card/20
-                            backdrop-blur-xl border border-accent/20
-                            shadow-[0_8px_40px_-12px_hsl(var(--accent)/0.25)]
-                            hover:border-accent/40 hover:shadow-[0_12px_60px_-12px_hsl(var(--accent)/0.4)]
-                            transition-all duration-700"
-                        >
-                          {/* Inner glow */}
-                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-accent/[0.03] to-accent/[0.06] pointer-events-none" />
-                          {/* Top hairline */}
-                          <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
-
-                          <div className="relative z-10">
-                            <div className="w-14 h-14 rounded-xl bg-accent/10 backdrop-blur-sm border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-500">
-                              <p.icon className="w-6 h-6 text-accent" />
-                            </div>
-                            <div className="editorial-label mb-3">Pillar {String(i + 1).padStart(2, "0")}</div>
-                            <h4 className="font-heading font-bold text-foreground mb-4 text-2xl md:text-3xl">{p.title}</h4>
-                            <p className="text-[16px] text-muted-foreground leading-[1.8] max-w-md">{p.desc}</p>
-                            <div className="mt-6 inline-flex items-center gap-2 text-accent text-sm font-sans font-semibold tracking-wide">
-                              Explore <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    </AnimatePresence>
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="w-14 h-14 rounded-xl bg-accent/10 backdrop-blur-sm border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-500">
+                      <p.icon className="w-6 h-6 text-accent" />
+                    </div>
+                    <div className="editorial-label mb-3">Pillar {String(i + 1).padStart(2, "0")}</div>
+                    <h4 className="font-heading font-bold text-foreground mb-4 text-xl md:text-2xl">{p.title}</h4>
+                    <p className="text-[15px] text-muted-foreground leading-[1.75] flex-1">{p.desc}</p>
+                    <div className="mt-6 inline-flex items-center gap-2 text-accent text-sm font-sans font-semibold tracking-wide">
+                      Explore <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Arrows */}
-            <button
-              aria-label="Previous pillar"
-              onClick={scrollPrev}
-              className="absolute left-0 md:-left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
-                bg-card/70 backdrop-blur-md border border-accent/20 text-foreground
-                flex items-center justify-center hover:bg-accent/10 hover:border-accent/40 transition-all duration-300 z-20"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              aria-label="Next pillar"
-              onClick={scrollNext}
-              className="absolute right-0 md:-right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
-                bg-card/70 backdrop-blur-md border border-accent/20 text-foreground
-                flex items-center justify-center hover:bg-accent/10 hover:border-accent/40 transition-all duration-300 z-20"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-6">
-              {pillars.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Go to pillar ${i + 1}`}
-                  onClick={() => scrollTo(i)}
-                  className={`h-1.5 rounded-full transition-all duration-400 ${
-                    selected === i ? "w-8 bg-accent" : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
-                />
-              ))}
-            </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </ScrollReveal>
 
