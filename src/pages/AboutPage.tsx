@@ -807,10 +807,10 @@ const AboutPage = () => {
         </section>
 
         {/* HERO → WHO WE ARE transition */}
-        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
+        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
         {/* WHO WE ARE — pure white + gold particle shimmer */}
-        <section className="relative py-24 md:py-28 bg-white overflow-hidden">
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
           <AmbientParticles count={12} className="opacity-60" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
             <div className="grid md:grid-cols-5 gap-12 lg:gap-16 items-start">
@@ -870,10 +870,10 @@ const AboutPage = () => {
 
 
         {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
+        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
         {/* VISION & MISSION — stacked horizontal bands */}
-        <section className="relative bg-[#0a0e1a] py-20 md:py-28 overflow-hidden">
+        <section className="relative bg-[#0a0e1a] py-16 md:py-20 overflow-hidden">
           <AmbientParticles count={10} className="opacity-40" />
           <div className="container mx-auto px-6 max-w-6xl relative space-y-16 md:space-y-20">
             {/* MISSION band — slides from left */}
@@ -955,7 +955,7 @@ const AboutPage = () => {
         </section>
 
         {/* CORE VALUES — interactive circular wheel on deep navy */}
-        <section className="relative py-24 md:py-32 bg-[#0a0e1a] overflow-hidden">
+        <section className="relative py-16 md:py-20 bg-[#0a0e1a] overflow-hidden">
           <AmbientParticles count={18} className="opacity-50" />
           <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08),transparent_60%)] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-6xl relative">
@@ -1064,7 +1064,7 @@ const AboutPage = () => {
 
 
         {/* COMMITMENT & AKA-RB — redesigned columns */}
-        <section className={`relative ${NAVY} py-20 md:py-24 overflow-hidden border-t border-white/5`}>
+        <section className={`relative ${NAVY} py-14 md:py-20 overflow-hidden border-t border-white/5`}>
           <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.06] blur-[160px] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
             <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
@@ -1114,7 +1114,7 @@ const AboutPage = () => {
 
 
         {/* WHO IT'S FOR — staggered cards */}
-        <section className={`relative ${NAVY} py-20 md:py-24 border-t border-white/5`}>
+        <section className={`relative ${NAVY} py-14 md:py-20 border-t border-white/5`}>
           <div className="container mx-auto px-6 max-w-5xl">
             <ScrollReveal>
               <div className="text-center mb-12">
@@ -1145,7 +1145,7 @@ const AboutPage = () => {
         </section>
 
         {/* LEADERSHIP — gold halo + line-by-line bio */}
-        <section className="py-24 md:py-28 bg-white">
+        <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-6 max-w-5xl">
             <ScrollReveal>
               <p className="editorial-label text-accent text-center mb-5 tracking-[0.2em] text-sm font-semibold">LEADERSHIP</p>
@@ -1200,7 +1200,7 @@ const AboutPage = () => {
         </section>
 
         {/* PULL QUOTE — deep navy, scaled quote icon, word reveal, gold glow */}
-        <section className={`relative ${NAVY} py-24 md:py-28 overflow-hidden`}>
+        <section className={`relative ${NAVY} py-16 md:py-20 overflow-hidden`}>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-accent/[0.08] blur-[160px] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-4xl text-center relative z-10">
             <motion.div
@@ -1219,7 +1219,7 @@ const AboutPage = () => {
         </section>
 
         {/* CTA — deep navy with gold glow + pulsing button */}
-        <section className={`relative ${NAVY} py-24 md:py-28 overflow-hidden border-t border-white/5`}>
+        <section className={`relative ${NAVY} py-16 md:py-20 overflow-hidden border-t border-white/5`}>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.18] blur-[180px] pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-accent/[0.12] blur-[100px] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-3xl text-center relative z-10">
