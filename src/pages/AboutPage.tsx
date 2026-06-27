@@ -508,7 +508,7 @@ const ValuesWheel = ({
                   strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
                   style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
                   animate={{
-                    opacity: isActive ? 1 : 0.82,
+                    opacity: 1,
                     scale: isActive ? 1.03 : 1,
                     filter: isActive
                       ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
@@ -536,11 +536,18 @@ const ValuesWheel = ({
                   aria-pressed={i === active}
                 />
                 <text
-                  fill={seg.text}
-                  fontSize={11.5}
-                  fontWeight={700}
-                  className="font-heading pointer-events-none select-none"
-                  style={{ textTransform: "uppercase", letterSpacing: "0.28em" }}
+                  fill="#ffffff"
+                  fontSize={13.5}
+                  fontWeight={800}
+                  className="font-sans pointer-events-none select-none"
+                  style={{
+                    textTransform: "uppercase",
+                    letterSpacing: "0.22em",
+                    paintOrder: "stroke",
+                    stroke: "rgba(10,22,40,0.55)",
+                    strokeWidth: 2.5,
+                    strokeLinejoin: "round",
+                  }}
                 >
                   <textPath
                     href={`#values-arc-${i}`}
@@ -555,7 +562,7 @@ const ValuesWheel = ({
           })}
 
           {/* Thick gold outer ring */}
-          <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={5} />
+          <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={4} />
           {/* Inner disc */}
           <circle cx={cx} cy={cy} r={rI} fill="#0a1628" />
           <circle cx={cx} cy={cy} r={rI} fill="none" stroke="#C9A84C" strokeWidth={2.5} />
@@ -563,7 +570,7 @@ const ValuesWheel = ({
           <circle cx={cx} cy={cy - rO - 14} r={5} fill="#C9A84C" />
 
           {/* Center living lens — perfectly centered inside the inner disc */}
-          <foreignObject x={cx - (rI - 8)} y={cy - (rI - 8)} width={(rI - 8) * 2} height={(rI - 8) * 2}>
+          <foreignObject x={cx - (rI - 6)} y={cy - (rI - 6)} width={(rI - 6) * 2} height={(rI - 6) * 2}>
             <div className="w-full h-full flex items-center justify-center text-center pointer-events-none">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -572,15 +579,15 @@ const ValuesWheel = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="px-3"
+                  className="px-2"
                 >
-                  <p className="editorial-label mb-1.5 text-[9.5px] tracking-[0.3em]" style={{ color: "#C9A84C" }}>
+                  <p className="editorial-label mb-2 text-[10px] tracking-[0.32em] font-bold" style={{ color: "#C9A84C" }}>
                     VALUE {String(display + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="font-heading text-[17px] lg:text-[19px] text-white mb-1.5 leading-[1.1]">
+                  <h3 className="font-heading text-[22px] lg:text-[24px] font-bold text-white mb-2 leading-[1.1]">
                     {values[display].label}
                   </h3>
-                  <p className="text-[10.5px] text-white/65 leading-[1.45]">
+                  <p className="text-[13px] text-white/85 leading-[1.5]">
                     {values[display].desc}
                   </p>
                 </motion.div>
