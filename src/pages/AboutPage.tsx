@@ -534,6 +534,56 @@ const AboutPage = () => {
           </div>
         </section>
 
+        {/* COMMITMENT & AKA-RB — redesigned columns */}
+        <section className={`relative ${NAVY} py-20 md:py-24 overflow-hidden border-t border-white/5`}>
+          <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.06] blur-[160px] pointer-events-none" />
+          <div className="container mx-auto px-6 max-w-6xl relative z-10">
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+              {/* Left: Commitment numbered cards */}
+              <div>
+                <ScrollReveal>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">OUR COMMITMENT</p>
+                  <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-10 leading-[1.15]">
+                    Built for clarity, structure, and momentum.
+                  </h3>
+                </ScrollReveal>
+                <div className="space-y-5">
+                  {commitments.map((c, i) => (
+                    <motion.div
+                      key={c.num}
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.7, delay: i * 0.15, ease: [0.23, 1, 0.32, 1] }}
+                      className="relative rounded-xl p-7 bg-white/[0.04] border border-white/10 hover:border-accent/40 hover:bg-white/[0.07] transition-all duration-500 overflow-hidden"
+                    >
+                      <div className="flex items-start gap-6">
+                        <span className="font-heading text-5xl md:text-6xl font-bold text-accent leading-none shrink-0">{c.num}</span>
+                        <div>
+                          <h4 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">{c.title}</h4>
+                          <p className="text-white/70 text-[15px] leading-[1.7]">{c.desc}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: AKA-RB vertical timeline */}
+              <div>
+                <ScrollReveal>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">THE AKA-RB METHOD</p>
+                  <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-10 leading-[1.15]">
+                    A framework that turn insights into desired outcomes
+                  </h3>
+                </ScrollReveal>
+                <AkaTimeline steps={akaSteps} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+
         {/* WHO IT'S FOR — staggered cards */}
         <section className={`relative ${NAVY} py-20 md:py-24 border-t border-white/5`}>
           <div className="container mx-auto px-6 max-w-5xl">
