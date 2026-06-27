@@ -458,29 +458,13 @@ const ValuesWheel = ({
       {/* Desktop: SVG wheel */}
       <div className="hidden md:flex relative items-center justify-center mx-auto" style={{ maxWidth: 640 }}>
         {/* gold ambience */}
-        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.18),transparent_65%)] blur-2xl pointer-events-none" />
+        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.14),transparent_65%)] blur-2xl pointer-events-none" />
         <motion.svg
           viewBox="0 0 600 600"
           width="100%"
-          className="relative drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+          className="relative drop-shadow-[0_30px_60px_rgba(10,14,26,0.25)]"
           style={{ maxWidth: 600 }}
         >
-          <defs>
-            {values.map((_, i) => {
-              const a1 = i * step - step / 2;
-              const a2 = i * step + step / 2;
-              const mid = ((a1 + a2) / 2 + 360) % 360;
-              const reverse = mid > 90 && mid < 270;
-              return (
-                <path
-                  key={`p-${i}`}
-                  id={`wheel-label-${i}`}
-                  d={labelArc(cx, cy, rLabel, a1, a2, reverse)}
-                  fill="none"
-                />
-              );
-            })}
-          </defs>
           <motion.g
             animate={{ rotate: rotation }}
             transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
@@ -490,20 +474,21 @@ const ValuesWheel = ({
               const a1 = i * step - step / 2;
               const a2 = i * step + step / 2;
               const isActive = i === display;
-              const fill = WHEEL_GOLDS[i % WHEEL_GOLDS.length];
+              const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
+              const labelPos = polar(cx, cy, rLabel, i * step);
               return (
                 <g key={v.label}>
                   <motion.path
                     d={sectorPath(cx, cy, rO, rI, a1, a2)}
-                    fill={fill}
-                    stroke="#0a0e1a"
-                    strokeWidth={2}
+                    fill={seg.fill}
+                    stroke={seg.stroke}
+                    strokeWidth={seg.stroke === "#d4af37" ? 3 : 2}
                     style={{ cursor: "pointer", transformOrigin: "300px 300px" }}
                     animate={{
-                      opacity: isActive ? 1 : 0.7,
+                      opacity: isActive ? 1 : 0.78,
                       scale: isActive ? 1.035 : 1,
                       filter: isActive
-                        ? "drop-shadow(0 0 18px rgba(212,175,55,0.85)) brightness(1.15)"
+                        ? "drop-shadow(0 0 18px rgba(212,175,55,0.7)) brightness(1.1)"
                         : "drop-shadow(0 0 0 rgba(0,0,0,0))",
                     }}
                     transition={{ duration: 0.45, ease: "easeOut" }}
@@ -511,29 +496,39 @@ const ValuesWheel = ({
                     onMouseLeave={() => setHover(null)}
                     onClick={() => lockTo(i)}
                   />
-                  <text
-                    className="font-heading tracking-[0.28em]"
-                    fill="#0a0e1a"
+                  {/* Counter-rotated upright label — always reads correctly */}
+                  <motion.text
+                    x={labelPos.x}
+                    y={labelPos.y}
+                    fill={seg.text}
                     fontSize={13}
                     fontWeight={700}
-                    style={{ pointerEvents: "none", textTransform: "uppercase" }}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="font-heading"
+                    animate={{ rotate: -rotation }}
+                    transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      transformOrigin: `${labelPos.x}px ${labelPos.y}px`,
+                      pointerEvents: "none",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.22em",
+                    }}
                   >
-                    <textPath href={`#wheel-label-${i}`} startOffset="50%" textAnchor="middle">
-                      {v.label}
-                    </textPath>
-                  </text>
+                    {v.label}
+                  </motion.text>
                 </g>
               );
             })}
             {/* outer hairline */}
-            <circle cx={cx} cy={cy} r={rO + 4} fill="none" stroke="rgba(212,175,55,0.35)" strokeWidth={1} />
-            <circle cx={cx} cy={cy} r={rI - 4} fill="none" stroke="rgba(212,175,55,0.35)" strokeWidth={1} />
+            <circle cx={cx} cy={cy} r={rO + 4} fill="none" stroke="rgba(212,175,55,0.45)" strokeWidth={1} />
+            <circle cx={cx} cy={cy} r={rI - 4} fill="none" stroke="rgba(212,175,55,0.45)" strokeWidth={1} />
             {/* tick marker at top to signal locked segment */}
             <circle cx={cx} cy={cy - rO - 16} r={5} fill="#d4af37" />
           </motion.g>
           {/* inner disc (does not rotate) */}
           <circle cx={cx} cy={cy} r={rI - 8} fill="#0a0e1a" />
-          <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.4)" strokeWidth={1} />
+          <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.5)" strokeWidth={1} />
         </motion.svg>
         {/* Center living lens — absolutely positioned over inner disc */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -548,7 +543,7 @@ const ValuesWheel = ({
               <h3 className="font-heading text-2xl lg:text-[28px] text-white mb-3 leading-[1.1]">
                 {values[display].label}
               </h3>
-              <p className="text-[12.5px] text-white/65 leading-[1.55]">
+              <p className="text-[12.5px] text-white/70 leading-[1.55]">
                 {values[display].desc}
               </p>
             </motion.div>
@@ -560,7 +555,9 @@ const ValuesWheel = ({
       <div className="md:hidden space-y-2.5">
         {values.map((v, i) => {
           const isActive = i === active;
-          const bg = WHEEL_GOLDS[i % WHEEL_GOLDS.length];
+          const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
+          const bg = seg.fill;
+          const accentBar = seg.fill === "#ffffff" ? "#d4af37" : seg.fill;
           return (
             <motion.button
               key={v.label}
@@ -569,29 +566,29 @@ const ValuesWheel = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="w-full text-left rounded-xl overflow-hidden border border-white/10"
-              style={{ backgroundColor: isActive ? `${bg}22` : "rgba(255,255,255,0.02)" }}
+              className="w-full text-left rounded-xl overflow-hidden border border-primary/10 bg-white"
+              style={{ boxShadow: isActive ? `0 12px 32px -14px ${accentBar}66` : undefined }}
             >
               <div className="flex items-stretch">
                 <div
                   className="w-1.5 shrink-0"
-                  style={{ background: bg, boxShadow: isActive ? `0 0 14px ${bg}` : undefined }}
+                  style={{ background: accentBar, boxShadow: isActive ? `0 0 14px ${accentBar}` : undefined }}
                 />
                 <div className="flex-1 px-5 py-4">
                   <p
                     className="editorial-label text-[10px] tracking-[0.3em] mb-1"
-                    style={{ color: bg }}
+                    style={{ color: accentBar }}
                   >
                     VALUE {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h4 className="font-heading text-white text-lg leading-tight">{v.label}</h4>
+                  <h4 className="font-heading text-primary text-lg leading-tight font-bold">{v.label}</h4>
                   <motion.div
                     initial={false}
                     animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
                     transition={{ duration: 0.35 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-[13px] text-white/70 leading-[1.6] pt-2">{v.desc}</p>
+                    <p className="text-[13px] text-primary/70 leading-[1.6] pt-2">{v.desc}</p>
                   </motion.div>
                 </div>
               </div>
