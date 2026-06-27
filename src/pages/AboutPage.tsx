@@ -610,6 +610,158 @@ const ValuesWheel = ({
   );
 };
 
+// ============= Architectural Pillar — 3D column with tooltip on hover =============
+type StrategicPillar = (typeof strategicPillars)[number];
+const ArchPillar = ({
+  pillar,
+  index,
+  height,
+}: {
+  pillar: StrategicPillar;
+  index: number;
+  height: number;
+}) => {
+  const [hover, setHover] = useState(false);
+  const Icon = pillar.icon;
+  const shaftHeight = height - 90; // capital + base reserved
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 120 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 1.1, delay: index * 0.25, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="relative flex flex-col items-center"
+      style={{ width: 200 }}
+    >
+      {/* Floating tooltip card on hover */}
+      <motion.div
+        initial={false}
+        animate={{
+          opacity: hover ? 1 : 0,
+          y: hover ? 0 : 10,
+          pointerEvents: hover ? "auto" : "none",
+        }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full w-[280px] z-30 rounded-xl bg-[#0a0e1a]/95 backdrop-blur border border-accent/40 shadow-[0_24px_60px_-20px_rgba(212,175,55,0.6)] p-5"
+      >
+        <p className="text-[13px] text-white/80 leading-[1.65] mb-3">{pillar.desc}</p>
+        <Link
+          to={pillar.link}
+          className="inline-flex items-center gap-1.5 text-accent text-[13px] font-bold tracking-wide hover:text-accent/80 transition-colors"
+        >
+          {pillar.linkLabel} <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+        <span aria-hidden className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-3 h-3 rotate-45 bg-[#0a0e1a]/95 border-r border-b border-accent/40" />
+      </motion.div>
+
+      {/* Floating icon */}
+      <motion.div
+        animate={{ y: hover ? -4 : 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-12 h-12 rounded-full bg-accent/15 border border-accent/50 flex items-center justify-center mb-4 shadow-[0_0_18px_rgba(212,175,55,0.35)]"
+      >
+        <Icon className="w-5 h-5 text-accent" />
+      </motion.div>
+
+      {/* Pillar name — inscription above capital */}
+      <h3 className="font-heading font-bold text-accent text-[13px] lg:text-[14px] tracking-[0.32em] uppercase text-center mb-3 whitespace-nowrap drop-shadow-[0_0_10px_rgba(212,175,55,0.35)]">
+        {pillar.title}
+      </h3>
+
+      {/* Column structure */}
+      <div
+        className="relative cursor-pointer"
+        style={{ height, width: 160 }}
+      >
+        {/* Inner glow on hover */}
+        <motion.div
+          aria-hidden
+          initial={false}
+          animate={{ opacity: hover ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+          className="absolute inset-x-2 inset-y-6 bg-[radial-gradient(ellipse_at_center,rgba(255,225,150,0.55),transparent_70%)] blur-2xl pointer-events-none"
+        />
+
+        {/* Capital (top) */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[170px] h-[42px]">
+          {/* abacus slab */}
+          <div className="absolute top-0 left-0 right-0 h-3 rounded-sm bg-gradient-to-b from-[#f1e2b6] via-[#d4af37] to-[#a07d1f] shadow-[0_2px_0_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.4)]" />
+          {/* echinus — decorative ornament */}
+          <div className="absolute top-3 left-2 right-2 h-7 rounded-b-md bg-gradient-to-b from-[#d4b878] via-[#b89a3d] to-[#7a5a18] shadow-[inset_0_2px_4px_rgba(255,255,255,0.25),inset_0_-3px_6px_rgba(0,0,0,0.35)]">
+            {/* fluting hint */}
+            <div className="absolute inset-x-3 top-1 bottom-1 flex items-center justify-around">
+              {Array.from({ length: 5 }).map((_, k) => (
+                <span key={k} className="w-px h-full bg-black/25" />
+              ))}
+            </div>
+          </div>
+          {/* echinus to shaft taper */}
+          <div className="absolute top-10 left-4 right-4 h-1.5 bg-gradient-to-b from-[#8a6a18] to-[#5a4012]" />
+        </div>
+
+        {/* Shaft */}
+        <motion.div
+          animate={{
+            filter: hover
+              ? "brightness(1.18) drop-shadow(0 0 24px rgba(212,175,55,0.55))"
+              : "brightness(1) drop-shadow(0 0 0 rgba(0,0,0,0))",
+          }}
+          transition={{ duration: 0.5 }}
+          className="absolute left-1/2 -translate-x-1/2 rounded-sm overflow-hidden"
+          style={{
+            top: 42,
+            width: 130,
+            height: shaftHeight,
+            background:
+              "linear-gradient(90deg, #5a4012 0%, #8a6a18 18%, #c9a961 38%, #ecd9a0 50%, #c9a961 62%, #8a6a18 82%, #4a3410 100%)",
+            boxShadow:
+              "inset 0 0 30px rgba(0,0,0,0.5), 0 30px 60px -25px rgba(0,0,0,0.7)",
+          }}
+        >
+          {/* Vertical fluting */}
+          <div className="absolute inset-y-0 inset-x-3 flex items-stretch justify-around">
+            {Array.from({ length: 9 }).map((_, k) => (
+              <span
+                key={k}
+                className="w-px"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.45) 8%, rgba(0,0,0,0.55) 92%, transparent)",
+                }}
+              />
+            ))}
+          </div>
+          {/* Subtle highlight stripe */}
+          <div
+            aria-hidden
+            className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[3px]"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, rgba(255,245,210,0.55), transparent)",
+            }}
+          />
+        </motion.div>
+
+        {/* Base/plinth */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180px]">
+          {/* torus */}
+          <div className="absolute bottom-6 left-3 right-3 h-3 rounded-md bg-gradient-to-b from-[#d4b878] via-[#b89a3d] to-[#7a5a18] shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_4px_rgba(0,0,0,0.5)]" />
+          {/* plinth slab */}
+          <div className="relative h-8 rounded-sm bg-gradient-to-b from-[#c9a961] via-[#a07d1f] to-[#5a4012] shadow-[0_8px_16px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.35)] flex items-center justify-center">
+            <span className="text-[9px] tracking-[0.25em] uppercase font-bold text-[#1a1206] truncate px-3">
+              {pillar.linkLabel.replace("Explore ", "")}
+            </span>
+          </div>
+          {/* contact shadow on ground */}
+          <div aria-hidden className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[200px] h-3 bg-black/60 blur-md rounded-full" />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 
 const AboutPage = () => {
   const [bioVisible, setBioVisible] = useState(false);
