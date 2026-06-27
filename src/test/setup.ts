@@ -33,5 +33,4 @@ class MockResizeObserver {
   unobserve() {}
   disconnect() {}
 }
-// @ts-expect-error - jsdom polyfill
 globalThis.ResizeObserver = MockResizeObserver;
