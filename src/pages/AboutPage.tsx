@@ -382,8 +382,8 @@ const AboutPage = () => {
                 className="md:pr-16"
               >
                 <div className="bg-white/[0.04] backdrop-blur-md border border-white/10 border-t-2 border-t-accent rounded-lg p-8 md:p-10 h-full">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-sm font-bold">VISION</p>
-                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-medium">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-base md:text-lg font-extrabold">VISION</p>
+                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-bold">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
                 </div>
