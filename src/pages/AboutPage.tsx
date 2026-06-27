@@ -91,8 +91,8 @@ const akaSteps = [
 
 const commitments = [
   { num: "01", title: "Clarity", desc: "Clarity for emerging leaders — see the path before walking it." },
-  { num: "02", title: "Momentum", desc: "Momentum for personal, professional, and corporate growth." },
-  { num: "03", title: "Structure", desc: "Structure for sustainable, repeatable transformation." },
+  { num: "02", title: "Structure", desc: "Structure for sustainable, repeatable transformation." },
+  { num: "03", title: "Momentum", desc: "Momentum for personal, professional, and corporate growth." },
 ];
 
 const audiences = [
@@ -394,8 +394,8 @@ const AboutPage = () => {
                     transition={{ duration: 0.9, delay: i * 0.18, ease: [0.23, 1, 0.32, 1] }}
                     className="relative bg-white rounded-lg p-8 border border-primary/10 border-l-4 border-l-accent shadow-[0_10px_40px_-12px_rgba(10,14,26,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(10,14,26,0.18)] transition-shadow duration-500"
                   >
-                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-base font-bold">{c.label}</p>
-                    <p className="text-primary/85 text-[18px] leading-[1.8]">{c.body}</p>
+                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-base font-extrabold">{c.label}</p>
+                    <p className="text-primary/75 text-[17px] leading-[1.85]">{c.body}</p>
                   </motion.div>
                 ))}
               </div>
@@ -413,7 +413,7 @@ const AboutPage = () => {
                 <ScrollReveal>
                   <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">OUR COMMITMENT</p>
                   <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-10 leading-[1.15]">
-                    Built for clarity, momentum, and structure.
+                    Built for clarity, structure, and momentum.
                   </h3>
                 </ScrollReveal>
                 <div className="space-y-5">
