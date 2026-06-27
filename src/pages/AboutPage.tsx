@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue, animate, AnimatePresence, type MotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import type { CarouselApi } from "@/components/ui/carousel";
@@ -417,21 +417,53 @@ const sectorPath = (
 };
 
 
-// Build an arc path for SVG <textPath>. When `flip` is true, the arc is
-// drawn from a2 → a1 with sweep=0 so text rendered along it reads upright
-// on the bottom half of the wheel (curving downward, never upside-down).
-const labelArcPath = (
-  cx: number,
-  cy: number,
-  r: number,
-  a1: number,
-  a2: number,
-  flip: boolean
-) => {
-  const start = polar(cx, cy, r, flip ? a2 : a1);
-  const end = polar(cx, cy, r, flip ? a1 : a2);
-  const sweep = flip ? 0 : 1;
-  return `M${start.x} ${start.y} A${r} ${r} 0 0 ${sweep} ${end.x} ${end.y}`;
+
+// Single wheel label that orbits with the spinning wheel but stays upright.
+const WheelLabel = ({
+  rot,
+  baseAngle,
+  cx,
+  cy,
+  r,
+  text,
+}: {
+  rot: MotionValue<number>;
+  baseAngle: number;
+  cx: number;
+  cy: number;
+  r: number;
+  text: string;
+}) => {
+  const x = useTransform(rot, (deg) => {
+    const a = ((baseAngle + deg - 90) * Math.PI) / 180;
+    return cx + r * Math.cos(a);
+  });
+  const y = useTransform(rot, (deg) => {
+    const a = ((baseAngle + deg - 90) * Math.PI) / 180;
+    return cy + r * Math.sin(a);
+  });
+  return (
+    <motion.text
+      x={x}
+      y={y}
+      fill="#ffffff"
+      fontSize={12.5}
+      fontWeight={800}
+      textAnchor="middle"
+      dominantBaseline="middle"
+      className="font-sans pointer-events-none select-none"
+      style={{
+        textTransform: "uppercase",
+        letterSpacing: "0.18em",
+        paintOrder: "stroke",
+        stroke: "rgba(10,22,40,0.7)",
+        strokeWidth: 2.5,
+        strokeLinejoin: "round",
+      }}
+    >
+      {text}
+    </motion.text>
+  );
 };
 
 const ValuesWheel = ({
@@ -443,6 +475,19 @@ const ValuesWheel = ({
   const step = 360 / n;
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
+
+  // Continuous wheel rotation (deg). Pauses on hover.
+  const rot = useMotionValue(0);
+  useEffect(() => {
+    if (hover !== null) return;
+    const start = rot.get();
+    const controls = animate(rot, start + 360, {
+      duration: 60,
+      ease: "linear",
+      repeat: Infinity,
+    });
+    return () => controls.stop();
+  }, [hover, rot]);
 
   // Auto-advance every 3s; pause on hover
   useEffect(() => {
@@ -458,7 +503,7 @@ const ValuesWheel = ({
   const cy = 300;
   const rO = 270;       // outer radius
   const rI = 125;       // inner disc ≈ 45% of total diameter (250 / 540)
-  const rLabel = rI + 0.75 * (rO - rI); // 75% of segment radial depth
+  const rLabel = rI + 0.62 * (rO - rI); // mid-segment radial depth
 
   return (
     <div className="relative w-full">
@@ -474,107 +519,72 @@ const ValuesWheel = ({
           role="group"
           aria-label="Core Values wheel"
         >
-          {/* Hidden defs: per-segment label arc paths */}
-          <defs>
-            {values.map((v, i) => {
-              const a1 = i * step - step / 2;
-              const a2 = i * step + step / 2;
-              const centerAngle = ((i * step) % 360 + 360) % 360;
-              // Bottom half = center angle between 90° and 270° (0° = top)
-              const flip = centerAngle > 90 && centerAngle < 270;
-              return (
-                <path
-                  key={`arc-${i}`}
-                  id={`values-arc-${i}`}
-                  d={labelArcPath(cx, cy, rLabel, a1, a2, flip)}
-                  fill="none"
-                />
-              );
-            })}
-          </defs>
-
-          {/* Rotating wheel group — segments + labels + outer ring spin together */}
-          <motion.g
-            style={{ transformOrigin: "300px 300px", transformBox: "fill-box" }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 60, ease: "linear", repeat: Infinity }}
-          >
-            {/* Segments + labels */}
+          {/* Rotating segments + outer ring */}
+          <motion.g style={{ rotate: rot, transformOrigin: "300px 300px", transformBox: "fill-box" }}>
             {values.map((v, i) => {
               const a1 = i * step - step / 2;
               const a2 = i * step + step / 2;
               const isActive = i === display;
               const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
               return (
-                <g key={v.label}>
-                  <motion.path
-                    d={sectorPath(cx, cy, rO, rI, a1, a2)}
-                    fill={seg.fill}
-                    stroke={seg.stroke}
-                    strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
-                    style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
-                    animate={{
-                      opacity: 1,
-                      scale: isActive ? 1.03 : 1,
-                      filter: isActive
-                        ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
-                        : "drop-shadow(0 0 0 rgba(0,0,0,0))",
-                    }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    onMouseEnter={() => setHover(i)}
-                    onMouseLeave={() => setHover(null)}
-                    onClick={() => setActive(i)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setActive(i);
-                      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-                        e.preventDefault();
-                        setActive((i + 1) % n);
-                      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-                        e.preventDefault();
-                        setActive((i - 1 + n) % n);
-                      }
-                    }}
-                    tabIndex={0}
-                    role="button"
-                    aria-label={`${v.label}. ${v.desc}`}
-                    aria-pressed={i === active}
-                  />
-                  <text
-                    fill="#ffffff"
-                    fontSize={13.5}
-                    fontWeight={800}
-                    className="font-sans pointer-events-none select-none"
-                    style={{
-                      textTransform: "uppercase",
-                      letterSpacing: "0.22em",
-                      paintOrder: "stroke",
-                      stroke: "rgba(10,22,40,0.55)",
-                      strokeWidth: 2.5,
-                      strokeLinejoin: "round",
-                    }}
-                  >
-                    <textPath
-                      href={`#values-arc-${i}`}
-                      startOffset="50%"
-                      textAnchor="middle"
-                    >
-                      {v.label.toUpperCase()}
-                    </textPath>
-                  </text>
-                </g>
+                <motion.path
+                  key={v.label}
+                  d={sectorPath(cx, cy, rO, rI, a1, a2)}
+                  fill={seg.fill}
+                  stroke={seg.stroke}
+                  strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
+                  style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
+                  animate={{
+                    opacity: 1,
+                    scale: isActive ? 1.03 : 1,
+                    filter: isActive
+                      ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
+                      : "drop-shadow(0 0 0 rgba(0,0,0,0))",
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  onMouseEnter={() => setHover(i)}
+                  onMouseLeave={() => setHover(null)}
+                  onClick={() => setActive(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(i);
+                    } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      setActive((i + 1) % n);
+                    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                      e.preventDefault();
+                      setActive((i - 1 + n) % n);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${v.label}. ${v.desc}`}
+                  aria-pressed={i === active}
+                />
               );
             })}
-
-            {/* Thick gold outer ring (spins with wheel) */}
             <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={4} />
           </motion.g>
+
+          {/* Upright orbiting labels — position rotates with wheel, text stays readable */}
+          {values.map((v, i) => (
+            <WheelLabel
+              key={`label-${i}`}
+              rot={rot}
+              baseAngle={i * step}
+              cx={cx}
+              cy={cy}
+              r={rLabel}
+              text={v.label.toUpperCase()}
+            />
+          ))}
 
           {/* Static inner disc + top tick (do not rotate) */}
           <circle cx={cx} cy={cy} r={rI} fill="#0a1628" />
           <circle cx={cx} cy={cy} r={rI} fill="none" stroke="#C9A84C" strokeWidth={2.5} />
           <circle cx={cx} cy={cy - rO - 14} r={5} fill="#C9A84C" />
+
 
 
           {/* Center living lens — perfectly centered inside the inner disc */}
@@ -1011,7 +1021,7 @@ const AboutPage = () => {
             <ScrollReveal>
               <div className="text-center mb-14 md:mb-16">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">WHAT GUIDES US</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary leading-[1.1]">
                   Our <span className="text-gradient-gold">Core Values</span>
                 </h2>
               </div>
@@ -1020,22 +1030,17 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
-
-
-
-        {/* STRATEGIC PILLARS — accordion-style expandable layout */}
-        <section className={`relative ${NAVY} py-16 md:py-20 overflow-hidden`}>
-          <div aria-hidden className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.06] blur-[160px] pointer-events-none" />
+        {/* STRATEGIC PILLARS — accordion-style expandable layout (white) */}
+        <section className="relative bg-white py-16 md:py-20 overflow-hidden">
+          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05),transparent_65%)] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
               <div className="text-center mb-12 md:mb-14">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">OUR ARCHITECTURE</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-gold leading-[1.05] tracking-[0.02em]">
-                  The Strategic Pillars
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary leading-[1.05] tracking-[0.02em]">
+                  The <span className="text-gradient-gold">Strategic Pillars</span>
                 </h2>
-                <p className="text-white/65 text-[16px] max-w-2xl mx-auto leading-[1.7] mt-5">
+                <p className="text-primary/60 text-[15.5px] max-w-2xl mx-auto leading-[1.7] mt-5">
                   Three integrated pillars, a complete ecosystem for strategic growth.
                 </p>
               </div>
@@ -1048,33 +1053,33 @@ const AboutPage = () => {
                   <AccordionItem
                     key={p.title}
                     value={`pillar-${i}`}
-                    className="group relative rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] data-[state=open]:bg-white/[0.06] data-[state=open]:border-accent/40 transition-all duration-500 overflow-hidden"
+                    className="group relative rounded-xl border border-primary/10 bg-white hover:bg-primary/[0.02] data-[state=open]:bg-primary/[0.03] data-[state=open]:border-accent/50 shadow-[0_8px_30px_-18px_rgba(10,14,26,0.18)] transition-all duration-500 overflow-hidden"
                   >
                     {/* Gold left accent bar — only when expanded */}
                     <span
                       aria-hidden
-                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-data-[state=open]:scale-y-100 transition-transform duration-500 shadow-[0_0_18px_rgba(212,175,55,0.6)]"
+                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-data-[state=open]:scale-y-100 transition-transform duration-500 shadow-[0_0_18px_rgba(212,175,55,0.5)]"
                     />
                     <AccordionTrigger className="px-6 md:px-8 py-5 hover:no-underline">
                       <div className="flex items-center gap-5 text-left">
-                        <div className="w-12 h-12 rounded-lg bg-accent/15 border border-accent/40 flex items-center justify-center shrink-0 group-data-[state=open]:bg-accent/25 transition-colors">
+                        <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/40 flex items-center justify-center shrink-0 group-data-[state=open]:bg-accent/20 transition-colors">
                           <Icon className="w-5 h-5 text-accent" />
                         </div>
-                        <h3 className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">
+                        <h3 className="font-heading text-lg md:text-xl font-bold text-primary tracking-tight">
                           {p.title}
                         </h3>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 md:px-8 pb-7">
                       <div className="md:pl-[68px]">
-                        <p className="text-white/75 text-[15.5px] md:text-[16px] leading-[1.8] mb-6">
+                        <p className="text-primary/70 text-[15px] md:text-[15.5px] leading-[1.8] mb-6">
                           {p.desc}
                         </p>
                         <Button
                           asChild
                           variant="outline"
                           size="sm"
-                          className="bg-transparent border-accent/50 text-accent hover:bg-accent hover:text-[#0a0e1a] hover:border-accent"
+                          className="bg-transparent border-accent/60 text-accent hover:bg-accent hover:text-white hover:border-accent"
                         >
                           <Link to={p.link}>
                             {p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
@@ -1088,6 +1093,9 @@ const AboutPage = () => {
             </Accordion>
           </div>
         </section>
+
+        {/* WHITE → DARK transition into Commitment/AKA */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
 
 
@@ -1140,14 +1148,16 @@ const AboutPage = () => {
           </div>
         </section>
 
+        {/* DARK → WHITE transition into Who It's For */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
-        {/* WHO IT'S FOR — staggered cards */}
-        <section className={`relative ${NAVY} py-14 md:py-20 border-t border-white/5`}>
+        {/* WHO IT'S FOR — staggered cards (white) */}
+        <section className="relative bg-white py-14 md:py-20">
           <div className="container mx-auto px-6 max-w-5xl">
             <ScrollReveal>
               <div className="text-center mb-12">
                 <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">OUR AUDIENCE</p>
-                <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-[1.1]">
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary leading-[1.1]">
                   Who TLR Is <span className="text-gradient-gold">For</span>
                 </h2>
               </div>
@@ -1160,17 +1170,18 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.6, delay: i * 0.15, ease: [0.23, 1, 0.32, 1] }}
-                  className="group flex items-center gap-4 bg-white/[0.04] rounded-lg p-6 border border-white/10 hover:border-accent/40 hover:bg-white/[0.07] hover:-translate-y-1 hover:shadow-[0_10px_30px_-12px_rgba(212,175,55,0.3)] transition-all duration-500"
+                  className="group flex items-center gap-4 bg-white rounded-lg p-6 border border-primary/10 hover:border-accent/50 hover:-translate-y-1 shadow-[0_8px_24px_-16px_rgba(10,14,26,0.18)] hover:shadow-[0_14px_36px_-14px_rgba(212,175,55,0.4)] transition-all duration-500"
                 >
-                  <div className="w-10 h-10 rounded-md bg-accent/15 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-500">
-                    <ArrowRight className="w-4 h-4 text-accent group-hover:text-[#0a0e1a] group-hover:translate-x-0.5 transition-all duration-500" />
+                  <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-500">
+                    <ArrowRight className="w-4 h-4 text-accent group-hover:text-white group-hover:translate-x-0.5 transition-all duration-500" />
                   </div>
-                  <span className="text-[17px] font-medium text-white">{item}</span>
+                  <span className="text-[16px] font-medium text-primary">{item}</span>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
+
 
         {/* LEADERSHIP — gold halo + line-by-line bio */}
         <section className="py-16 md:py-20 bg-white">
