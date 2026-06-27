@@ -62,7 +62,7 @@ const strategicPillars = [
     title: "EVOLVE",
     icon: Rocket,
     bg: evolveBg1,
-    desc: "EVOLVE is the structured development engine of The Luminary Rise — a high-impact mentorship and learning platform designed to cultivate clarity, discipline, resilience, and strategic competence in emerging leaders, executives, entrepreneurs, and organisations. Built on the proprietary Awareness–Knowledge–Action–Repeat Better (AKA-RB) framework, EVOLVE transforms potential into measurable progress through guided learning, accountability systems, and practical execution.",
+    desc: "EVOLVE is the structured development engine of The Luminary Rise, a high-impact mentorship and learning platform designed to cultivate clarity, discipline, resilience, and strategic competence in emerging leaders, executives, entrepreneurs, and organisations. Built on the proprietary Awareness–Knowledge–Action–Repeat Better (AKA-RB) framework, EVOLVE transforms potential into measurable progress through guided learning, accountability systems, and practical execution.",
     link: "/programmes",
     linkLabel: "Explore EVOLVE",
   },
@@ -70,7 +70,7 @@ const strategicPillars = [
     title: "The Luminaries Network",
     icon: Network,
     bg: evolveBg2,
-    desc: "The Luminaries Network is the relational and influence ecosystem of TLR — an invitation-only community of high-capacity leaders, professionals, founders, executives, policy influencers, and value-driven organisations committed to growth with integrity and excellence. The Network fosters strategic collaboration, curated partnerships, executive roundtables, thought leadership forums, and peer-to-peer accountability.",
+    desc: "The Luminaries Network is the relational and influence ecosystem of TLR, an invitation-only community of high-capacity leaders, professionals, founders, executives, policy influencers, and value-driven organisations committed to growth with integrity and excellence. The Network fosters strategic collaboration, curated partnerships, executive roundtables, thought leadership forums, and peer-to-peer accountability.",
     link: "/luminaries-hub",
     linkLabel: "Explore The Network",
   },
@@ -92,7 +92,7 @@ const akaSteps = [
 ];
 
 const commitments = [
-  { num: "01", title: "Clarity", desc: "Clarity for emerging leaders — see the path before walking it." },
+  { num: "01", title: "Clarity", desc: "Clarity for emerging leaders, see the path before walking it." },
   { num: "02", title: "Structure", desc: "Structure for sustainable, repeatable transformation." },
   { num: "03", title: "Momentum", desc: "Momentum for personal, professional, and corporate growth." },
 ];
@@ -808,7 +808,7 @@ const AboutPage = () => {
     "Dr Samuel Omenka is a senior economist, trusted advisor, visionary leader, and kingdom strategist whose life and work are defined by the dual call to transform economies and amplify Jesus Christ.",
     "He brings together deep technical expertise in macroeconomic frameworks, public financial management systems, fiscal reforms, and development policy analysis with a mission-driven commitment to advancing kingdom values.",
     "As a trusted policy advisor, Samuel has successfully provided incisive economic strategies and secured consensus for critical fiscal and governance reforms.",
-    "Beyond economics, Samuel is a visionary investor, entrepreneur, and mentor who builds businesses, strategic investment platforms, and growth mentorship programmes — all rooted in integrity, excellence, and stewardship.",
+    "Beyond economics, Samuel is a visionary investor, entrepreneur, and mentor who builds businesses, strategic investment platforms, and growth mentorship programmes, all rooted in integrity, excellence, and stewardship.",
     "Through initiatives such as The Luminary Rise, he empowers leaders through transformational growth and creates opportunities that inspire hope, foster growth, and enable abundant living.",
   ];
 
