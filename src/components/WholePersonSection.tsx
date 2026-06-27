@@ -15,7 +15,7 @@ const pillars = [
 
 const WholePersonSection = () => {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-[hsl(224,55%,6%)]">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[hsl(220,45%,14%)]">
       {/* Radial gradient atmosphere */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -136,11 +136,11 @@ const WholePersonSection = () => {
             >
               <div
                 className="relative h-full rounded-2xl p-7 overflow-hidden
-                  bg-gradient-to-br from-white/[0.07] via-white/[0.04] to-white/[0.02]
-                  backdrop-blur-xl border border-white/10
+                  bg-gradient-to-br from-white/[0.12] via-white/[0.07] to-white/[0.03]
+                  backdrop-blur-xl border border-white/20
                   transition-all duration-500
-                  group-hover:border-accent/40
-                  group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.35)]"
+                  group-hover:border-accent/60
+                  group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.5)]"
               >
                 {/* Hover glow sweep */}
                 <div
@@ -158,16 +158,16 @@ const WholePersonSection = () => {
                   <div className="relative w-12 h-12 mb-5">
                     <div
                       aria-hidden
-                      className="absolute inset-0 rounded-xl blur-xl opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.6), transparent 70%)" }}
+                      className="absolute inset-0 rounded-xl blur-xl opacity-100 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.9), transparent 70%)" }}
                     />
-                    <div className="relative w-12 h-12 rounded-xl bg-accent/15 backdrop-blur-sm border border-accent/30 flex items-center justify-center group-hover:bg-accent/25 transition-colors duration-500">
+                    <div className="relative w-12 h-12 rounded-xl bg-accent/25 backdrop-blur-sm border border-accent/50 flex items-center justify-center group-hover:bg-accent/35 transition-colors duration-500">
                       <p.icon className="w-5 h-5 text-accent" />
                     </div>
                   </div>
 
                   <h4 className="text-[17px] font-bold text-white font-heading mb-2">{p.label}</h4>
-                  <p className="text-[14px] text-white/65 leading-[1.7]">{p.desc}</p>
+                  <p className="text-[14px] text-white/85 leading-[1.7]">{p.desc}</p>
                 </div>
               </div>
             </motion.div>

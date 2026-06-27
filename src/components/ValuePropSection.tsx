@@ -6,9 +6,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const ValuePropSection = () => {
   return (
-    <section className="py-28 md:py-36 relative overflow-hidden bg-[hsl(224,55%,5%)]">
-      {/* Seamless top fade */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(224,55%,6%)] to-transparent pointer-events-none z-10" />
+    <section className="py-28 md:py-36 relative overflow-hidden bg-[hsl(28,40%,12%)]">
+      {/* Seamless top fade from navy */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[hsl(220,45%,14%)] to-transparent pointer-events-none z-10" />
 
       {/* Massive ambient gold glow — lit from within */}
       <motion.div
