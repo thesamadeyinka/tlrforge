@@ -86,7 +86,7 @@ const akaSteps = [
   { label: "Awareness", desc: "Recognise the gap between where you are and where you're called to be." },
   { label: "Knowledge", desc: "Gain the frameworks, insight, and wisdom that close that gap." },
   { label: "Action", desc: "Translate knowledge into decisive, structured execution." },
-  { label: "Repeat Better", desc: "Refine, iterate and compound — every action better than the last." },
+  { label: "Repeat Better", desc: "Refine, iterate, and compound, every action better than the last." },
 ];
 
 const commitments = [
