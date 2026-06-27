@@ -838,7 +838,7 @@ const AboutPage = () => {
                 </h1>
                 <div className="editorial-line mx-auto mb-8" />
                 <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto leading-[1.7]">
-                  More than a school — a dynamic ecosystem for strategic growth and intentional transformation.
+                  More than a school, a dynamic ecosystem for strategic growth and intentional transformation.
                 </p>
               </ScrollReveal>
             </div>
@@ -865,7 +865,7 @@ const AboutPage = () => {
                   {[
                     "The Luminary Rise (TLR) is a premier platform for transformational growth. More than a school, TLR is a dynamic ecosystem where emerging leaders, mid- to senior professionals, businesses, and corporate organisations access the knowledge, people, tools, and support needed to thrive in today's world.",
                     "At TLR, we believe growth precedes transformation, and some levels of growth depend on transformation. Our programmes are designed to foster structured learning, mindset shifts, and actionable practice that create lasting impact across personal and professional spheres.",
-                    "Led by Dr Samuel Omenka alongside a faculty of seasoned experts, TLR functions as both a training hub and mentorship community — equipping leaders and enterprises to rise with clarity, character, and competence.",
+                    "Led by Dr Samuel Omenka alongside a faculty of seasoned experts, TLR functions as both a training hub and mentorship community, equipping leaders and enterprises to rise with clarity, character, and competence.",
                   ].map((p, i) => (
                     <motion.p
                       key={i}
@@ -1028,7 +1028,7 @@ const AboutPage = () => {
                   The Strategic Pillars
                 </h2>
                 <p className="text-white/65 text-[16px] max-w-2xl mx-auto leading-[1.7] mt-5">
-                  Three integrated pillars — a complete ecosystem for strategic growth.
+                  Three integrated pillars, a complete ecosystem for strategic growth.
                 </p>
               </div>
             </ScrollReveal>
