@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import type { CarouselApi } from "@/components/ui/carousel";
@@ -386,13 +386,13 @@ const ValuesGrid = ({
 // ============= Core Values Wheel — interactive circular dial =============
 // Order matches `values` array: Intentionality, Innovation, Integrity, Excellence, Mentorship, Community, Legacy
 const WHEEL_SEGMENTS = [
-  { fill: "#0a1e3f", stroke: "#0a0e1a", text: "#ffffff" }, // Intentionality — deep navy
-  { fill: "#0aa5b8", stroke: "#0a0e1a", text: "#ffffff" }, // Innovation — electric teal
-  { fill: "#ffffff", stroke: "#d4af37", text: "#0a0e1a" }, // Integrity — white w/ gold border
-  { fill: "#d4a017", stroke: "#0a0e1a", text: "#0a0e1a" }, // Excellence — rich gold/amber
-  { fill: "#a0612c", stroke: "#0a0e1a", text: "#ffffff" }, // Mentorship — warm copper
-  { fill: "#3a7d5c", stroke: "#0a0e1a", text: "#ffffff" }, // Community — soft forest green
-  { fill: "#5b1a3a", stroke: "#0a0e1a", text: "#ffffff" }, // Legacy — deep burgundy
+  { fill: "#0a1628", stroke: "#C9A84C", text: "#ffffff" }, // Intentionality — deep navy
+  { fill: "#4ECDC4", stroke: "#0a1628", text: "#0a1628" }, // Innovation — electric teal
+  { fill: "#FFFFFF", stroke: "#C9A84C", text: "#0a1628" }, // Integrity — white w/ gold border
+  { fill: "#C9A84C", stroke: "#0a1628", text: "#0a1628" }, // Excellence — rich gold
+  { fill: "#A0785A", stroke: "#0a1628", text: "#ffffff" }, // Mentorship — warm bronze
+  { fill: "#4A7C59", stroke: "#0a1628", text: "#ffffff" }, // Community — forest green
+  { fill: "#6B2D3E", stroke: "#0a1628", text: "#ffffff" }, // Legacy — deep burgundy
 ];
 
 const polar = (cx: number, cy: number, r: number, deg: number) => {
@@ -417,6 +417,23 @@ const sectorPath = (
 };
 
 
+// Build an arc path for SVG <textPath>. When `flip` is true, the arc is
+// drawn from a2 → a1 with sweep=0 so text rendered along it reads upright
+// on the bottom half of the wheel (curving downward, never upside-down).
+const labelArcPath = (
+  cx: number,
+  cy: number,
+  r: number,
+  a1: number,
+  a2: number,
+  flip: boolean
+) => {
+  const start = polar(cx, cy, r, flip ? a2 : a1);
+  const end = polar(cx, cy, r, flip ? a1 : a2);
+  const sweep = flip ? 0 : 1;
+  return `M${start.x} ${start.y} A${r} ${r} 0 0 ${sweep} ${end.x} ${end.y}`;
+};
+
 const ValuesWheel = ({
   values,
 }: {
@@ -424,152 +441,156 @@ const ValuesWheel = ({
 }) => {
   const n = values.length;
   const step = 360 / n;
-  const [rotation, setRotation] = useState(0);
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
-  const introDone = useRef(false);
 
-  // Dramatic intro: one full rotation, then settle
+  // Auto-advance every 3s; pause on hover
   useEffect(() => {
-    if (introDone.current) return;
-    introDone.current = true;
-    const id = window.setTimeout(() => setRotation(360), 50);
-    return () => window.clearTimeout(id);
-  }, []);
-
-  const lockTo = (i: number) => {
-    setActive(i);
-    const targetBase = -i * step; // bring segment i center to top
-    // pick nearest equivalent to current rotation
-    const cur = rotation;
-    const diff = ((((targetBase - cur) % 360) + 540) % 360) - 180;
-    setRotation(cur + diff);
-  };
+    if (hover !== null) return;
+    const id = window.setInterval(() => {
+      setActive((a) => (a + 1) % n);
+    }, 3000);
+    return () => window.clearInterval(id);
+  }, [hover, n]);
 
   const display = hover !== null ? hover : active;
   const cx = 300;
   const cy = 300;
-  const rO = 270;
-  const rI = 160;
-  const rLabel = 232;
+  const rO = 270;       // outer radius
+  const rI = 125;       // inner disc ≈ 45% of total diameter (250 / 540)
+  const rLabel = rI + 0.75 * (rO - rI); // 75% of segment radial depth
 
   return (
     <div className="relative w-full">
-      {/* Desktop: SVG wheel */}
-      <div className="hidden md:flex relative items-center justify-center mx-auto w-full px-6" style={{ maxWidth: 620 }}>
-        {/* gold ambience */}
-        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.14),transparent_65%)] blur-2xl pointer-events-none" />
-        <motion.svg
+      {/* Desktop / tablet: SVG wheel */}
+      <div className="hidden md:block relative mx-auto w-full px-6 py-6" style={{ maxWidth: 620 }}>
+        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(201,168,76,0.16),transparent_65%)] blur-2xl pointer-events-none" />
+        <svg
           viewBox="0 0 600 600"
           width="100%"
           preserveAspectRatio="xMidYMid meet"
-          className="relative drop-shadow-[0_30px_60px_rgba(10,14,26,0.25)] block mx-auto"
+          className="relative block mx-auto drop-shadow-[0_30px_60px_rgba(10,22,40,0.25)]"
           style={{ maxWidth: 560, aspectRatio: "1 / 1", overflow: "visible" }}
           role="group"
           aria-label="Core Values wheel"
         >
-          <motion.g
-            animate={{ rotate: rotation }}
-            transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{ transformOrigin: "300px 300px" }}
-          >
+          {/* Hidden defs: per-segment label arc paths */}
+          <defs>
             {values.map((v, i) => {
               const a1 = i * step - step / 2;
               const a2 = i * step + step / 2;
-              const isActive = i === display;
-              const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
-              const labelPos = polar(cx, cy, rLabel, i * step);
+              const centerAngle = ((i * step) % 360 + 360) % 360;
+              // Bottom half = center angle between 90° and 270° (0° = top)
+              const flip = centerAngle > 90 && centerAngle < 270;
               return (
-                <g key={v.label}>
-                  <motion.path
-                    d={sectorPath(cx, cy, rO, rI, a1, a2)}
-                    fill={seg.fill}
-                    stroke={seg.stroke}
-                    strokeWidth={seg.stroke === "#d4af37" ? 3 : 2}
-                    style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
-                    animate={{
-                      opacity: isActive ? 1 : 0.78,
-                      scale: isActive ? 1.035 : 1,
-                      filter: isActive
-                        ? "drop-shadow(0 0 18px rgba(212,175,55,0.7)) brightness(1.1)"
-                        : "drop-shadow(0 0 0 rgba(0,0,0,0))",
-                    }}
-                    transition={{ duration: 0.45, ease: "easeOut" }}
-                    onMouseEnter={() => setHover(i)}
-                    onMouseLeave={() => setHover(null)}
-                    onClick={() => lockTo(i)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        lockTo(i);
-                      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-                        e.preventDefault();
-                        lockTo((i + 1) % n);
-                      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-                        e.preventDefault();
-                        lockTo((i - 1 + n) % n);
-                      }
-                    }}
-                    tabIndex={0}
-                    role="button"
-                    aria-label={`${v.label}. ${v.desc}`}
-                    aria-pressed={i === active}
-                  />
-                  {/* Upright label — always reads correctly, consistent radius/size */}
-                  <motion.text
-                    x={labelPos.x}
-                    y={labelPos.y}
-                    fill={seg.text}
-                    fontSize={12.5}
-                    fontWeight={700}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    className="font-heading"
-                    animate={{ rotate: -rotation }}
-                    transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
-                    style={{
-                      transformOrigin: `${labelPos.x}px ${labelPos.y}px`,
-                      pointerEvents: "none",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.22em",
-                    }}
-                  >
-                    {v.label}
-                  </motion.text>
-                </g>
+                <path
+                  key={`arc-${i}`}
+                  id={`values-arc-${i}`}
+                  d={labelArcPath(cx, cy, rLabel, a1, a2, flip)}
+                  fill="none"
+                />
               );
             })}
-            {/* outer hairline */}
-            <circle cx={cx} cy={cy} r={rO + 4} fill="none" stroke="rgba(212,175,55,0.45)" strokeWidth={1} />
-            <circle cx={cx} cy={cy} r={rI - 4} fill="none" stroke="rgba(212,175,55,0.45)" strokeWidth={1} />
-            {/* tick marker at top to signal locked segment */}
-            <circle cx={cx} cy={cy - rO - 16} r={5} fill="#d4af37" />
-          </motion.g>
-          {/* inner disc (does not rotate) */}
-          <circle cx={cx} cy={cy} r={rI - 8} fill="#0a0e1a" />
-          <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.5)" strokeWidth={1} />
-          {/* Center living lens — rendered inside SVG for perfect centering */}
-          <foreignObject x={cx - (rI - 16)} y={cy - (rI - 16)} width={(rI - 16) * 2} height={(rI - 16) * 2}>
+          </defs>
+
+          {/* Segments + labels */}
+          {values.map((v, i) => {
+            const a1 = i * step - step / 2;
+            const a2 = i * step + step / 2;
+            const isActive = i === display;
+            const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
+            return (
+              <g key={v.label}>
+                <motion.path
+                  d={sectorPath(cx, cy, rO, rI, a1, a2)}
+                  fill={seg.fill}
+                  stroke={seg.stroke}
+                  strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
+                  style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
+                  animate={{
+                    opacity: isActive ? 1 : 0.82,
+                    scale: isActive ? 1.03 : 1,
+                    filter: isActive
+                      ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
+                      : "drop-shadow(0 0 0 rgba(0,0,0,0))",
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  onMouseEnter={() => setHover(i)}
+                  onMouseLeave={() => setHover(null)}
+                  onClick={() => setActive(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(i);
+                    } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      setActive((i + 1) % n);
+                    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                      e.preventDefault();
+                      setActive((i - 1 + n) % n);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${v.label}. ${v.desc}`}
+                  aria-pressed={i === active}
+                />
+                <text
+                  fill={seg.text}
+                  fontSize={11.5}
+                  fontWeight={700}
+                  className="font-heading pointer-events-none select-none"
+                  style={{ textTransform: "uppercase", letterSpacing: "0.28em" }}
+                >
+                  <textPath
+                    href={`#values-arc-${i}`}
+                    startOffset="50%"
+                    textAnchor="middle"
+                  >
+                    {v.label.toUpperCase()}
+                  </textPath>
+                </text>
+              </g>
+            );
+          })}
+
+          {/* Thick gold outer ring */}
+          <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={5} />
+          {/* Inner disc */}
+          <circle cx={cx} cy={cy} r={rI} fill="#0a1628" />
+          <circle cx={cx} cy={cy} r={rI} fill="none" stroke="#C9A84C" strokeWidth={2.5} />
+          {/* Top tick marker */}
+          <circle cx={cx} cy={cy - rO - 14} r={5} fill="#C9A84C" />
+
+          {/* Center living lens — perfectly centered inside the inner disc */}
+          <foreignObject x={cx - (rI - 8)} y={cy - (rI - 8)} width={(rI - 8) * 2} height={(rI - 8) * 2}>
             <div className="w-full h-full flex items-center justify-center text-center pointer-events-none">
-              <motion.div
-                key={display}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
-                className="px-2"
-              >
-                <p className="editorial-label text-accent mb-2 text-[10px] tracking-[0.3em]">VALUE {String(display + 1).padStart(2, "0")}</p>
-                <h3 className="font-heading text-[20px] lg:text-[22px] text-white mb-2 leading-[1.1]">
-                  {values[display].label}
-                </h3>
-                <p className="text-[11.5px] text-white/70 leading-[1.5]">
-                  {values[display].desc}
-                </p>
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={display}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="px-3"
+                >
+                  <p className="editorial-label mb-1.5 text-[9.5px] tracking-[0.3em]" style={{ color: "#C9A84C" }}>
+                    VALUE {String(display + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="font-heading text-[17px] lg:text-[19px] text-white mb-1.5 leading-[1.1]">
+                    {values[display].label}
+                  </h3>
+                  <p className="text-[10.5px] text-white/65 leading-[1.45]">
+                    {values[display].desc}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </foreignObject>
-        </motion.svg>
+        </svg>
       </div>
+
+
 
 
       {/* Mobile: stacked interactive list */}
