@@ -413,7 +413,7 @@ const AboutPage = () => {
                 <ScrollReveal>
                   <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">OUR COMMITMENT</p>
                   <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-10 leading-[1.15]">
-                    Built for clarity, momentum, and structure.
+                    Built for clarity, structure, and momentum.
                   </h3>
                 </ScrollReveal>
                 <div className="space-y-5">
