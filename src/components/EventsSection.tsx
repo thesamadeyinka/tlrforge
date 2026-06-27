@@ -90,13 +90,13 @@ const EventsSection = () => {
       <div className="relative z-20">
         <div className="container mx-auto px-6 max-w-5xl">
           <ScrollReveal>
-            <div className="text-center mb-14">
-              <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-4">Events</h3>
-              <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-5 leading-[1.15]">
+            <div className="text-center mb-10 sticky top-16 md:top-20 z-30 py-4 bg-[hsl(224,55%,6%)]/85 backdrop-blur-md rounded-2xl">
+              <h3 className="font-heading text-xl md:text-2xl font-bold text-accent mb-2">Events</h3>
+              <h2 className="font-heading text-2xl md:text-4xl font-bold text-white mb-3 leading-[1.15]">
                 Explore the Lineup
               </h2>
-              <div className="editorial-line mx-auto mb-5" />
-              <p className="text-white/55 text-[17px] leading-[1.8]">Events for Transformational Growth</p>
+              <div className="editorial-line mx-auto mb-3" />
+              <p className="text-white/55 text-[15px] md:text-[17px] leading-[1.7]">Events for Transformational Growth</p>
             </div>
           </ScrollReveal>
 
