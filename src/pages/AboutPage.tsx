@@ -155,7 +155,7 @@ const AboutPage = () => {
 
             <div className="relative z-10 max-w-4xl px-6 text-center">
               <ScrollReveal>
-                <h1 className="font-heading text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white mb-8 leading-[1.05] tracking-tight">
+                <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight md:whitespace-nowrap">
                   About <span className="text-gradient-gold">The Luminary Rise</span>
                 </h1>
                 <div className="editorial-line mx-auto mb-8" />
