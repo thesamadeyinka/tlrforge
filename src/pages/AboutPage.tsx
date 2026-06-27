@@ -643,7 +643,7 @@ const AboutPage = () => {
                     className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-accent via-accent/40 to-accent"
                   >
                     <div className="w-full h-full rounded-full overflow-hidden bg-primary/5 border-4 border-white">
-                      <img src="/placeholder.svg" alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                      <img src={samuelPortrait.url} alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
                     </div>
                   </motion.div>
                 </div>
