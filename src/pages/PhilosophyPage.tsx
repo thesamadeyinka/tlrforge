@@ -44,7 +44,7 @@ const PhilosophyPage = () => {
         </section>
 
         {/* Core Belief */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
               <div className="text-center">
@@ -67,7 +67,7 @@ const PhilosophyPage = () => {
         </section>
 
         {/* Whole Person Integration */}
-        <section className="py-32 bg-secondary grain relative">
+        <section className="py-20 md:py-24 bg-white grain relative">
           <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
               <div className="text-center mb-16">
@@ -94,7 +94,7 @@ const PhilosophyPage = () => {
         </section>
 
         {/* AKA-RB Method */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <ScrollReveal>
               <div className="text-center mb-16">

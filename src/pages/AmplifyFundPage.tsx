@@ -43,7 +43,7 @@ const AmplifyFundPage = () => {
         </section>
 
         {/* Overview */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
               <p className="editorial-label text-accent mb-6">Overview</p>
@@ -67,7 +67,7 @@ const AmplifyFundPage = () => {
         </section>
 
         {/* Focus Areas */}
-        <section className="py-32 bg-secondary grain relative">
+        <section className="py-20 md:py-24 bg-white grain relative">
           <div className="container mx-auto px-6 max-w-4xl relative z-10">
             <ScrollReveal>
               <div className="text-center mb-16">
@@ -93,7 +93,7 @@ const AmplifyFundPage = () => {
         </section>
 
         {/* Governance */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
               <div className="bg-card rounded-lg border border-border p-10 md:p-14 text-center">

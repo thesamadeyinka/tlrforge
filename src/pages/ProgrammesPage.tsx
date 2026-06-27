@@ -113,7 +113,7 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Programme Overview */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <ScrollReveal>
               <div className="text-center mb-20">
@@ -145,7 +145,7 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Programme Highlights */}
-        <section className="py-32 bg-secondary grain relative">
+        <section className="py-20 md:py-24 bg-white grain relative">
           <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
               <div className="text-center mb-16">
@@ -174,7 +174,7 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Module Breakdown */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <ScrollReveal>
               <div className="text-center mb-16">
@@ -216,7 +216,7 @@ const ProgrammesPage = () => {
         </section>
 
         {/* Who It's For */}
-        <section className="py-32 bg-secondary">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-3xl text-center">
             <ScrollReveal>
               <p className="editorial-label text-accent mb-6">Audience</p>

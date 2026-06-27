@@ -85,7 +85,7 @@ const ContactPage = () => {
         </section>
 
         {/* Contact Content */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-5xl">
             <div className="grid md:grid-cols-5 gap-16">
               {/* Info */}
