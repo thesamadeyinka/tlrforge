@@ -384,14 +384,15 @@ const ValuesGrid = ({
 };
 
 // ============= Core Values Wheel — interactive circular dial =============
-const WHEEL_GOLDS = [
-  "#7a5a18", // deep amber
-  "#946f1f",
-  "#b08930",
-  "#c9a961",
-  "#d8bd7c",
-  "#e6cf97",
-  "#f1e2b6", // soft champagne
+// Order matches `values` array: Intentionality, Innovation, Integrity, Excellence, Mentorship, Community, Legacy
+const WHEEL_SEGMENTS = [
+  { fill: "#0a1e3f", stroke: "#0a0e1a", text: "#ffffff" }, // Intentionality — deep navy
+  { fill: "#0aa5b8", stroke: "#0a0e1a", text: "#ffffff" }, // Innovation — electric teal
+  { fill: "#ffffff", stroke: "#d4af37", text: "#0a0e1a" }, // Integrity — white w/ gold border
+  { fill: "#d4a017", stroke: "#0a0e1a", text: "#0a0e1a" }, // Excellence — rich gold/amber
+  { fill: "#a0612c", stroke: "#0a0e1a", text: "#ffffff" }, // Mentorship — warm copper
+  { fill: "#3a7d5c", stroke: "#0a0e1a", text: "#ffffff" }, // Community — soft forest green
+  { fill: "#5b1a3a", stroke: "#0a0e1a", text: "#ffffff" }, // Legacy — deep burgundy
 ];
 
 const polar = (cx: number, cy: number, r: number, deg: number) => {
@@ -415,14 +416,6 @@ const sectorPath = (
   return `M${p1.x} ${p1.y} A${rO} ${rO} 0 ${large} 1 ${p2.x} ${p2.y} L${p3.x} ${p3.y} A${rI} ${rI} 0 ${large} 0 ${p4.x} ${p4.y} Z`;
 };
 
-const labelArc = (cx: number, cy: number, r: number, a1: number, a2: number, reverse: boolean) => {
-  const A1 = reverse ? a2 : a1;
-  const A2 = reverse ? a1 : a2;
-  const p1 = polar(cx, cy, r, A1);
-  const p2 = polar(cx, cy, r, A2);
-  const sweep = reverse ? 0 : 1;
-  return `M${p1.x} ${p1.y} A${r} ${r} 0 0 ${sweep} ${p2.x} ${p2.y}`;
-};
 
 const ValuesWheel = ({
   values,
@@ -465,29 +458,13 @@ const ValuesWheel = ({
       {/* Desktop: SVG wheel */}
       <div className="hidden md:flex relative items-center justify-center mx-auto" style={{ maxWidth: 640 }}>
         {/* gold ambience */}
-        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.18),transparent_65%)] blur-2xl pointer-events-none" />
+        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.14),transparent_65%)] blur-2xl pointer-events-none" />
         <motion.svg
           viewBox="0 0 600 600"
           width="100%"
-          className="relative drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+          className="relative drop-shadow-[0_30px_60px_rgba(10,14,26,0.25)]"
           style={{ maxWidth: 600 }}
         >
-          <defs>
-            {values.map((_, i) => {
-              const a1 = i * step - step / 2;
-              const a2 = i * step + step / 2;
-              const mid = ((a1 + a2) / 2 + 360) % 360;
-              const reverse = mid > 90 && mid < 270;
-              return (
-                <path
-                  key={`p-${i}`}
-                  id={`wheel-label-${i}`}
-                  d={labelArc(cx, cy, rLabel, a1, a2, reverse)}
-                  fill="none"
-                />
-              );
-            })}
-          </defs>
           <motion.g
             animate={{ rotate: rotation }}
             transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
@@ -497,20 +474,21 @@ const ValuesWheel = ({
               const a1 = i * step - step / 2;
               const a2 = i * step + step / 2;
               const isActive = i === display;
-              const fill = WHEEL_GOLDS[i % WHEEL_GOLDS.length];
+              const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
+              const labelPos = polar(cx, cy, rLabel, i * step);
               return (
                 <g key={v.label}>
                   <motion.path
                     d={sectorPath(cx, cy, rO, rI, a1, a2)}
-                    fill={fill}
-                    stroke="#0a0e1a"
-                    strokeWidth={2}
+                    fill={seg.fill}
+                    stroke={seg.stroke}
+                    strokeWidth={seg.stroke === "#d4af37" ? 3 : 2}
                     style={{ cursor: "pointer", transformOrigin: "300px 300px" }}
                     animate={{
-                      opacity: isActive ? 1 : 0.7,
+                      opacity: isActive ? 1 : 0.78,
                       scale: isActive ? 1.035 : 1,
                       filter: isActive
-                        ? "drop-shadow(0 0 18px rgba(212,175,55,0.85)) brightness(1.15)"
+                        ? "drop-shadow(0 0 18px rgba(212,175,55,0.7)) brightness(1.1)"
                         : "drop-shadow(0 0 0 rgba(0,0,0,0))",
                     }}
                     transition={{ duration: 0.45, ease: "easeOut" }}
@@ -518,29 +496,39 @@ const ValuesWheel = ({
                     onMouseLeave={() => setHover(null)}
                     onClick={() => lockTo(i)}
                   />
-                  <text
-                    className="font-heading tracking-[0.28em]"
-                    fill="#0a0e1a"
+                  {/* Counter-rotated upright label — always reads correctly */}
+                  <motion.text
+                    x={labelPos.x}
+                    y={labelPos.y}
+                    fill={seg.text}
                     fontSize={13}
                     fontWeight={700}
-                    style={{ pointerEvents: "none", textTransform: "uppercase" }}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="font-heading"
+                    animate={{ rotate: -rotation }}
+                    transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      transformOrigin: `${labelPos.x}px ${labelPos.y}px`,
+                      pointerEvents: "none",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.22em",
+                    }}
                   >
-                    <textPath href={`#wheel-label-${i}`} startOffset="50%" textAnchor="middle">
-                      {v.label}
-                    </textPath>
-                  </text>
+                    {v.label}
+                  </motion.text>
                 </g>
               );
             })}
             {/* outer hairline */}
-            <circle cx={cx} cy={cy} r={rO + 4} fill="none" stroke="rgba(212,175,55,0.35)" strokeWidth={1} />
-            <circle cx={cx} cy={cy} r={rI - 4} fill="none" stroke="rgba(212,175,55,0.35)" strokeWidth={1} />
+            <circle cx={cx} cy={cy} r={rO + 4} fill="none" stroke="rgba(212,175,55,0.45)" strokeWidth={1} />
+            <circle cx={cx} cy={cy} r={rI - 4} fill="none" stroke="rgba(212,175,55,0.45)" strokeWidth={1} />
             {/* tick marker at top to signal locked segment */}
             <circle cx={cx} cy={cy - rO - 16} r={5} fill="#d4af37" />
           </motion.g>
           {/* inner disc (does not rotate) */}
           <circle cx={cx} cy={cy} r={rI - 8} fill="#0a0e1a" />
-          <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.4)" strokeWidth={1} />
+          <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.5)" strokeWidth={1} />
         </motion.svg>
         {/* Center living lens — absolutely positioned over inner disc */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -555,7 +543,7 @@ const ValuesWheel = ({
               <h3 className="font-heading text-2xl lg:text-[28px] text-white mb-3 leading-[1.1]">
                 {values[display].label}
               </h3>
-              <p className="text-[12.5px] text-white/65 leading-[1.55]">
+              <p className="text-[12.5px] text-white/70 leading-[1.55]">
                 {values[display].desc}
               </p>
             </motion.div>
@@ -567,7 +555,9 @@ const ValuesWheel = ({
       <div className="md:hidden space-y-2.5">
         {values.map((v, i) => {
           const isActive = i === active;
-          const bg = WHEEL_GOLDS[i % WHEEL_GOLDS.length];
+          const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
+          const bg = seg.fill;
+          const accentBar = seg.fill === "#ffffff" ? "#d4af37" : seg.fill;
           return (
             <motion.button
               key={v.label}
@@ -576,29 +566,29 @@ const ValuesWheel = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="w-full text-left rounded-xl overflow-hidden border border-white/10"
-              style={{ backgroundColor: isActive ? `${bg}22` : "rgba(255,255,255,0.02)" }}
+              className="w-full text-left rounded-xl overflow-hidden border border-primary/10 bg-white"
+              style={{ boxShadow: isActive ? `0 12px 32px -14px ${accentBar}66` : undefined }}
             >
               <div className="flex items-stretch">
                 <div
                   className="w-1.5 shrink-0"
-                  style={{ background: bg, boxShadow: isActive ? `0 0 14px ${bg}` : undefined }}
+                  style={{ background: accentBar, boxShadow: isActive ? `0 0 14px ${accentBar}` : undefined }}
                 />
                 <div className="flex-1 px-5 py-4">
                   <p
                     className="editorial-label text-[10px] tracking-[0.3em] mb-1"
-                    style={{ color: bg }}
+                    style={{ color: accentBar }}
                   >
                     VALUE {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h4 className="font-heading text-white text-lg leading-tight">{v.label}</h4>
+                  <h4 className="font-heading text-primary text-lg leading-tight font-bold">{v.label}</h4>
                   <motion.div
                     initial={false}
                     animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
                     transition={{ duration: 0.35 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-[13px] text-white/70 leading-[1.6] pt-2">{v.desc}</p>
+                    <p className="text-[13px] text-primary/70 leading-[1.6] pt-2">{v.desc}</p>
                   </motion.div>
                 </div>
               </div>
@@ -859,8 +849,8 @@ const AboutPage = () => {
                     transition={{ duration: 0.9, delay: i * 0.18, ease: [0.23, 1, 0.32, 1] }}
                     className="relative bg-white rounded-lg p-8 border border-primary/10 border-l-4 border-l-accent shadow-[0_10px_40px_-12px_rgba(10,14,26,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(10,14,26,0.18)] transition-shadow duration-500"
                   >
-                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-base font-extrabold">{c.label}</p>
-                    <p className="text-primary/75 text-[17px] leading-[1.85]">{c.body}</p>
+                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-base font-black">{c.label}</p>
+                    <p className="text-primary/75 text-[15px] leading-[1.8]">{c.body}</p>
                   </motion.div>
                 ))}
               </div>
@@ -886,8 +876,8 @@ const AboutPage = () => {
             >
               <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
                 <div className="max-w-2xl">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold">MISSION</p>
-                  <p className="font-heading text-2xl md:text-[28px] lg:text-[32px] text-white leading-[1.4] font-medium">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold relative -top-0.5">MISSION</p>
+                  <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
                   </p>
                 </div>
@@ -944,8 +934,8 @@ const AboutPage = () => {
                   <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
                 </div>
                 <div className="max-w-2xl order-1 md:order-2 md:text-right">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold">VISION</p>
-                  <p className="font-heading text-2xl md:text-[28px] lg:text-[32px] text-white leading-[1.4] font-medium">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold relative -top-0.5">VISION</p>
+                  <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
                 </div>
@@ -954,57 +944,38 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* CORE VALUES — interactive circular wheel on deep navy */}
-        <section className="relative py-16 md:py-20 bg-[#0a0e1a] overflow-hidden">
-          <AmbientParticles count={18} className="opacity-50" />
-          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08),transparent_60%)] pointer-events-none" />
+        {/* DARK → WHITE transition into Core Values */}
+        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
+
+        {/* CORE VALUES — interactive circular wheel on white */}
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
+          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06),transparent_65%)] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-6xl relative">
             <ScrollReveal>
               <div className="text-center mb-14 md:mb-16">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">WHAT GUIDES US</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
                   Our <span className="text-gradient-gold">Core Values</span>
                 </h2>
-                <p className="text-white/60 mt-5 max-w-xl mx-auto text-[15px]">
-                  Hover or tap a segment to focus a value. Click to lock it at the top of the wheel.
-                </p>
               </div>
             </ScrollReveal>
             <ValuesWheel values={values} />
           </div>
         </section>
 
+        {/* WHITE → DARK transition */}
+        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
 
-        {/* STRATEGIC PILLARS — architectural columns */}
-        <section className={`relative ${NAVY} py-20 overflow-hidden`}>
-          {/* Subtle stone/marble texture */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.78  0 0 0 0 0.48  0 0 0 0.55 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>\")",
-            }}
-          />
-          {/* Ground/floor glow */}
-          <div
-            aria-hidden
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-40 bg-[radial-gradient(ellipse_at_bottom,rgba(212,175,55,0.22),transparent_70%)] pointer-events-none"
-          />
-          {/* Faint inscription word behind heading */}
-          <div
-            aria-hidden
-            className="absolute top-20 left-0 right-0 text-center font-heading font-bold tracking-[0.25em] text-[110px] md:text-[180px] leading-none text-white/[0.025] select-none pointer-events-none"
-          >
-            PILLARS
-          </div>
 
-          <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        {/* STRATEGIC PILLARS — accordion-style expandable layout */}
+        <section className={`relative ${NAVY} py-16 md:py-20 overflow-hidden`}>
+          <div aria-hidden className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.06] blur-[160px] pointer-events-none" />
+          <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
-              <div className="text-center mb-16">
+              <div className="text-center mb-12 md:mb-14">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">OUR ARCHITECTURE</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-gold leading-[1.05] tracking-[0.04em]">
+                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-gold leading-[1.05] tracking-[0.02em]">
                   The Strategic Pillars
                 </h2>
                 <p className="text-white/65 text-[16px] max-w-2xl mx-auto leading-[1.7] mt-5">
@@ -1013,54 +984,54 @@ const AboutPage = () => {
               </div>
             </ScrollReveal>
 
-            {/* Pillars row */}
-            <div className="relative">
-              {/* Ground line */}
-              <div aria-hidden className="absolute bottom-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent shadow-[0_0_18px_rgba(212,175,55,0.4)]" />
-              <div className="hidden md:flex items-end justify-center gap-10 lg:gap-16 pt-24">
-                {strategicPillars.map((p, i) => {
-                  const isCenter = i === 1;
-                  const height = isCenter ? 460 : 400;
-                  return (
-                    <ArchPillar
-                      key={p.title}
-                      pillar={p}
-                      index={i}
-                      height={height}
-                    />
-                  );
-                })}
-              </div>
-
-              {/* Mobile stacked variant */}
-              <div className="md:hidden space-y-5 mt-6">
-                {strategicPillars.map((p, i) => (
-                  <motion.div
+            <Accordion type="single" collapsible defaultValue="pillar-0" className="space-y-4">
+              {strategicPillars.map((p, i) => {
+                const Icon = p.icon;
+                return (
+                  <AccordionItem
                     key={p.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.6, delay: i * 0.1 }}
-                    className="relative rounded-xl overflow-hidden border border-accent/20 bg-gradient-to-b from-white/[0.04] to-transparent p-6"
+                    value={`pillar-${i}`}
+                    className="group relative rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] data-[state=open]:bg-white/[0.06] data-[state=open]:border-accent/40 transition-all duration-500 overflow-hidden"
                   >
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-11 h-11 rounded-md bg-accent/15 border border-accent/40 flex items-center justify-center">
-                        <p.icon className="w-5 h-5 text-accent" />
+                    {/* Gold left accent bar — only when expanded */}
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-data-[state=open]:scale-y-100 transition-transform duration-500 shadow-[0_0_18px_rgba(212,175,55,0.6)]"
+                    />
+                    <AccordionTrigger className="px-6 md:px-8 py-5 hover:no-underline">
+                      <div className="flex items-center gap-5 text-left">
+                        <div className="w-12 h-12 rounded-lg bg-accent/15 border border-accent/40 flex items-center justify-center shrink-0 group-data-[state=open]:bg-accent/25 transition-colors">
+                          <Icon className="w-5 h-5 text-accent" />
+                        </div>
+                        <h3 className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">
+                          {p.title}
+                        </h3>
                       </div>
-                      <h3 className="font-heading text-lg font-bold text-accent tracking-[0.12em] uppercase">{p.title}</h3>
-                    </div>
-                    <p className="text-[14px] text-white/70 leading-[1.65] mb-4">{p.desc}</p>
-                    <Button asChild variant="outline" size="sm" className="bg-transparent border-accent/50 text-accent hover:bg-accent hover:text-[#0a0e1a]">
-                      <Link to={p.link}>
-                        {p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 md:px-8 pb-7">
+                      <div className="md:pl-[68px]">
+                        <p className="text-white/75 text-[15.5px] md:text-[16px] leading-[1.8] mb-6">
+                          {p.desc}
+                        </p>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="bg-transparent border-accent/50 text-accent hover:bg-accent hover:text-[#0a0e1a] hover:border-accent"
+                        >
+                          <Link to={p.link}>
+                            {p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
           </div>
         </section>
+
 
 
         {/* COMMITMENT & AKA-RB — redesigned columns */}
