@@ -124,7 +124,83 @@ const WordReveal = ({ text, className = "" }: { text: string; className?: string
   );
 };
 
-const AboutPage = () => {
+// AKA-RB animated scroll-tied timeline
+const AkaTimeline = ({ steps }: { steps: { label: string; desc: string }[] }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 75%", "end 55%"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const [active, setActive] = useState<boolean[]>(() => steps.map(() => false));
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setActive((prev) => {
+      const next = steps.map((_, i) => v >= (i + 0.5) / steps.length);
+      return prev.every((p, i) => p === next[i]) ? prev : next;
+    });
+  });
+
+  return (
+    <div ref={ref} className="relative pl-14">
+      {/* Track */}
+      <div className="absolute left-[18px] top-2 bottom-2 w-[2px] bg-white/10 rounded-full" />
+      {/* Animated draw */}
+      <motion.div
+        style={{ height: lineHeight }}
+        className="absolute left-[18px] top-2 w-[2px] bg-gradient-to-b from-accent via-accent to-accent/40 rounded-full shadow-[0_0_12px_rgba(212,175,55,0.6)]"
+      />
+      <div className="space-y-10">
+        {steps.map((step, i) => {
+          const on = active[i];
+          return (
+            <div key={step.label} className="relative min-h-[60px]">
+              {/* Node */}
+              <motion.div
+                animate={
+                  on
+                    ? {
+                        scale: [0.7, 1.25, 1],
+                        boxShadow: [
+                          "0 0 0px rgba(212,175,55,0)",
+                          "0 0 32px rgba(212,175,55,0.9)",
+                          "0 0 14px rgba(212,175,55,0.5)",
+                        ],
+                      }
+                    : { scale: 0.7, boxShadow: "0 0 0px rgba(212,175,55,0)" }
+                }
+                transition={{ duration: 0.9, ease: "easeOut" }}
+                className="absolute -left-14 top-1 w-9 h-9 rounded-full bg-accent flex items-center justify-center"
+              >
+                <span className="block w-3 h-3 rounded-full bg-[#0a0e1a] ring-2 ring-accent/80" />
+              </motion.div>
+              {/* Title */}
+              <motion.h4
+                initial={false}
+                animate={on ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+                transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+                className="font-heading text-xl md:text-2xl font-bold text-white mb-2"
+              >
+                {step.label}
+              </motion.h4>
+              {/* Desc */}
+              <motion.p
+                initial={false}
+                animate={on ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+                transition={{ duration: 0.55, delay: 0.18, ease: [0.23, 1, 0.32, 1] }}
+                className="text-white/65 text-[15.5px] leading-[1.75] max-w-md"
+              >
+                {step.desc}
+              </motion.p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+
   const [bioVisible, setBioVisible] = useState(false);
   const bioLines = [
     "Dr Samuel Omenka is a senior economist, trusted advisor, visionary leader, and kingdom strategist whose life and work are defined by the dual call to transform economies and amplify Jesus Christ.",
