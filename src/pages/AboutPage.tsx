@@ -316,9 +316,13 @@ const AboutPage = () => {
         <section className="relative py-24 md:py-32 overflow-hidden">
           <img
             src={aboutHero}
-            alt="Aerial cityscape"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
           />
+
           <div className="absolute inset-0 bg-[#0a0e1a]/[0.78]" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/40 via-transparent to-[#0a0e1a]/60" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
