@@ -493,81 +493,89 @@ const ValuesWheel = ({
             })}
           </defs>
 
-          {/* Segments + labels */}
-          {values.map((v, i) => {
-            const a1 = i * step - step / 2;
-            const a2 = i * step + step / 2;
-            const isActive = i === display;
-            const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
-            return (
-              <g key={v.label}>
-                <motion.path
-                  d={sectorPath(cx, cy, rO, rI, a1, a2)}
-                  fill={seg.fill}
-                  stroke={seg.stroke}
-                  strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
-                  style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
-                  animate={{
-                    opacity: 1,
-                    scale: isActive ? 1.03 : 1,
-                    filter: isActive
-                      ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
-                      : "drop-shadow(0 0 0 rgba(0,0,0,0))",
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  onMouseEnter={() => setHover(i)}
-                  onMouseLeave={() => setHover(null)}
-                  onClick={() => setActive(i)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setActive(i);
-                    } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-                      e.preventDefault();
-                      setActive((i + 1) % n);
-                    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-                      e.preventDefault();
-                      setActive((i - 1 + n) % n);
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${v.label}. ${v.desc}`}
-                  aria-pressed={i === active}
-                />
-                <text
-                  fill="#ffffff"
-                  fontSize={13.5}
-                  fontWeight={800}
-                  className="font-sans pointer-events-none select-none"
-                  style={{
-                    textTransform: "uppercase",
-                    letterSpacing: "0.22em",
-                    paintOrder: "stroke",
-                    stroke: "rgba(10,22,40,0.55)",
-                    strokeWidth: 2.5,
-                    strokeLinejoin: "round",
-                  }}
-                >
-                  <textPath
-                    href={`#values-arc-${i}`}
-                    startOffset="50%"
-                    textAnchor="middle"
+          {/* Rotating wheel group — segments + labels + outer ring spin together */}
+          <motion.g
+            style={{ transformOrigin: "300px 300px", transformBox: "fill-box" }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 60, ease: "linear", repeat: Infinity }}
+          >
+            {/* Segments + labels */}
+            {values.map((v, i) => {
+              const a1 = i * step - step / 2;
+              const a2 = i * step + step / 2;
+              const isActive = i === display;
+              const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
+              return (
+                <g key={v.label}>
+                  <motion.path
+                    d={sectorPath(cx, cy, rO, rI, a1, a2)}
+                    fill={seg.fill}
+                    stroke={seg.stroke}
+                    strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
+                    style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
+                    animate={{
+                      opacity: 1,
+                      scale: isActive ? 1.03 : 1,
+                      filter: isActive
+                        ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
+                        : "drop-shadow(0 0 0 rgba(0,0,0,0))",
+                    }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    onMouseEnter={() => setHover(i)}
+                    onMouseLeave={() => setHover(null)}
+                    onClick={() => setActive(i)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActive(i);
+                      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                        e.preventDefault();
+                        setActive((i + 1) % n);
+                      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                        e.preventDefault();
+                        setActive((i - 1 + n) % n);
+                      }
+                    }}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`${v.label}. ${v.desc}`}
+                    aria-pressed={i === active}
+                  />
+                  <text
+                    fill="#ffffff"
+                    fontSize={13.5}
+                    fontWeight={800}
+                    className="font-sans pointer-events-none select-none"
+                    style={{
+                      textTransform: "uppercase",
+                      letterSpacing: "0.22em",
+                      paintOrder: "stroke",
+                      stroke: "rgba(10,22,40,0.55)",
+                      strokeWidth: 2.5,
+                      strokeLinejoin: "round",
+                    }}
                   >
-                    {v.label.toUpperCase()}
-                  </textPath>
-                </text>
-              </g>
-            );
-          })}
+                    <textPath
+                      href={`#values-arc-${i}`}
+                      startOffset="50%"
+                      textAnchor="middle"
+                    >
+                      {v.label.toUpperCase()}
+                    </textPath>
+                  </text>
+                </g>
+              );
+            })}
 
-          {/* Thick gold outer ring */}
-          <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={4} />
-          {/* Inner disc */}
+            {/* Thick gold outer ring (spins with wheel) */}
+            <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={4} />
+          </motion.g>
+
+          {/* Static inner disc + top tick (do not rotate) */}
           <circle cx={cx} cy={cy} r={rI} fill="#0a1628" />
           <circle cx={cx} cy={cy} r={rI} fill="none" stroke="#C9A84C" strokeWidth={2.5} />
-          {/* Top tick marker */}
           <circle cx={cx} cy={cy - rO - 14} r={5} fill="#C9A84C" />
+
 
           {/* Center living lens — perfectly centered inside the inner disc */}
           <foreignObject x={cx - (rI - 6)} y={cy - (rI - 6)} width={(rI - 6) * 2} height={(rI - 6) * 2}>
