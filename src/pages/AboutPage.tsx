@@ -303,6 +303,86 @@ const ValuesCarousel = ({
     </div>
   );
 };
+
+// Auto-rotating highlight grid for Core Values — premium TLR card system
+const ValuesGrid = ({
+  values,
+}: {
+  values: { label: string; icon: typeof Target; desc: string }[];
+}) => {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const hoverIdx = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      setActive((a) => (a + 1) % values.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, [paused, values.length]);
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      {values.map((v, i) => {
+        const isActive = i === active;
+        return (
+          <motion.div
+            key={v.label}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
+            onMouseEnter={() => {
+              hoverIdx.current = i;
+              setActive(i);
+              setPaused(true);
+            }}
+            onMouseLeave={() => {
+              hoverIdx.current = null;
+              setPaused(false);
+            }}
+            animate={{
+              y: isActive ? -6 : 0,
+              boxShadow: isActive
+                ? "0 24px 50px -18px rgba(212,175,55,0.45), 0 0 0 1px rgba(212,175,55,0.6)"
+                : "0 8px 24px -16px rgba(10,14,26,0.12)",
+              backgroundColor: isActive ? "rgba(212,175,55,0.06)" : "rgba(255,255,255,1)",
+            }}
+            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+            className="relative overflow-hidden rounded-2xl p-7 md:p-8 border border-primary/10 cursor-pointer"
+          >
+            {/* Gold top border */}
+            <span
+              className={`absolute top-0 left-0 right-0 h-[2px] transition-all duration-500 ${
+                isActive ? "bg-accent shadow-[0_0_12px_rgba(212,175,55,0.7)]" : "bg-accent/40"
+              }`}
+            />
+            {/* Faint corner number */}
+            <span
+              className={`absolute top-4 right-5 font-heading font-bold leading-none text-5xl md:text-6xl transition-all duration-500 ${
+                isActive ? "text-accent/90" : "text-accent/15"
+              }`}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div
+              className={`w-11 h-11 rounded-lg border flex items-center justify-center mb-5 transition-all duration-500 ${
+                isActive
+                  ? "bg-accent/20 border-accent/60 shadow-[0_0_18px_rgba(212,175,55,0.45)]"
+                  : "bg-accent/10 border-accent/25"
+              }`}
+            >
+              <v.icon className="w-5 h-5 text-accent" />
+            </div>
+            <h4 className="font-heading font-bold text-primary mb-2.5 text-lg md:text-xl">{v.label}</h4>
+            <p className="text-[14.5px] text-primary/65 leading-[1.7] pr-10">{v.desc}</p>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+};
 const AboutPage = () => {
   const [bioVisible, setBioVisible] = useState(false);
   const bioLines = [
