@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const AmbientParticles = lazy(() => import("@/components/AmbientParticles"));
 
@@ -98,14 +99,22 @@ const HeroSection = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Dark elegant background with ambient particles */}
-      <div className="absolute inset-0 bg-[hsl(224,50%,8%)]" />
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
-        <Suspense fallback={null}>
-          <AmbientParticles count={20} />
-        </Suspense>
-      </div>
+      {/* Cinematic full-bleed background */}
+      <div className="absolute inset-0 bg-[hsl(224,55%,5%)]" />
+      <motion.img
+        src={heroBg}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        initial={{ scale: 1.08, opacity: 0 }}
+        animate={{ scale: 1, opacity: 0.7 }}
+        transition={{ duration: 2.4, ease: [0.23, 1, 0.32, 1] }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,55%,5%)]/70 via-[hsl(224,55%,5%)]/40 to-[hsl(224,55%,6%)]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(224,55%,5%)]/80 via-transparent to-[hsl(224,55%,5%)]/40" />
+      <Suspense fallback={null}>
+        <AmbientParticles count={28} />
+      </Suspense>
 
       {/* Soft ambient glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[180px] pointer-events-none" />
@@ -166,8 +175,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent" />
+      {/* Seamless fade into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[hsl(224,55%,6%)] to-transparent z-20" />
     </section>
   );
 };

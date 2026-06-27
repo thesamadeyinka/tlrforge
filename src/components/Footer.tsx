@@ -47,7 +47,7 @@ const Footer = () => {
                 { label: "About", href: "/about" },
                 { label: "Philosophy", href: "/philosophy" },
                 { label: "Programmes", href: "/programmes" },
-                { label: "Luminaries Hub", href: "/luminaries-hub" },
+                { label: "The Luminaries Network", href: "/luminaries-hub" },
                 { label: "Amplify Impact Fund", href: "/amplify-fund" },
                 { label: "Resources", href: "/resources" },
                 { label: "Apply to EVOLVE", href: "/apply" },
