@@ -1234,7 +1234,7 @@ const AboutPage = () => {
               <Quote aria-hidden="true" className="w-16 h-16 md:w-20 md:h-20 text-accent/70 mx-auto mb-10" />
             </motion.div>
             <WordReveal
-              text={'"At Luminary Rise, we don\'t just adapt to change — we lead it, inspire it, and rise with it."'}
+              text={'"At Luminary Rise, we don\'t just adapt to change, we lead it, inspire it, and rise with it."'}
               className="font-heading text-2xl md:text-4xl text-white italic leading-[1.5] font-medium"
             />
           </div>
