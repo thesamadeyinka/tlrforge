@@ -379,7 +379,7 @@ const AboutPage = () => {
                 </h2>
               </div>
             </ScrollReveal>
-            <Carousel opts={{ align: "start", loop: true }} className="w-full">
+            <Carousel opts={{ align: "start", loop: true }} className="w-full" aria-label="Core values carousel">
               <CarouselContent className="-ml-4">
                 {values.map((v, i) => (
                   <CarouselItem key={v.label} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
