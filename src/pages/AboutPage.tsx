@@ -425,6 +425,9 @@ const AboutPage = () => {
           </div>
         </section>
 
+        {/* HERO → WHO WE ARE transition */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
+
         {/* WHO WE ARE — pure white + gold particle shimmer */}
         <section className="relative py-24 md:py-28 bg-white overflow-hidden">
           <AmbientParticles count={12} className="opacity-60" />
