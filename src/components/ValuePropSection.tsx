@@ -6,55 +6,73 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const ValuePropSection = () => {
   return (
-    <section className="py-28 md:py-36 relative overflow-hidden bg-[hsl(28,40%,12%)]">
-      {/* Seamless top fade from navy */}
+    <section className="py-28 md:py-36 relative overflow-hidden bg-[#0a0e1a]">
+      {/* Seamless top fade from prior navy */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[hsl(220,45%,14%)] to-transparent pointer-events-none z-10" />
 
-      {/* Massive ambient gold glow — lit from within */}
+      {/* Concentrated warm gold glow behind headline */}
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[700px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, hsl(40 65% 50% / 0.22) 0%, hsl(40 65% 50% / 0.08) 35%, transparent 70%)",
-          filter: "blur(60px)",
+          background:
+            "radial-gradient(ellipse at center, rgba(201,168,76,0.40) 0%, rgba(201,168,76,0.22) 25%, rgba(201,168,76,0.08) 50%, transparent 75%)",
+          filter: "blur(40px)",
         }}
-        animate={{ scale: [1, 1.08, 1], opacity: [0.85, 1, 0.85] }}
+        animate={{ scale: [1, 1.06, 1], opacity: [0.9, 1, 0.9] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Inner brighter core */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
+      {/* Tight inner core */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(201,168,76,0.35) 0%, transparent 70%)",
+          filter: "blur(80px)",
+        }}
+      />
 
-      {/* Floating ember particles */}
-      {Array.from({ length: 12 }).map((_, i) => (
+      {/* Slow drifting light particles */}
+      {Array.from({ length: 16 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full bg-accent/60 pointer-events-none"
-          style={{ left: `${15 + Math.random() * 70}%`, top: `${20 + Math.random() * 60}%` }}
-          animate={{ y: [0, -40, 0], opacity: [0, 0.8, 0] }}
-          transition={{ duration: 4 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 4, ease: "easeInOut" }}
+          className="absolute w-[3px] h-[3px] rounded-full pointer-events-none"
+          style={{
+            left: `${(i * 53) % 95 + 2}%`,
+            top: `${(i * 37) % 90 + 5}%`,
+            background: "rgba(201,168,76,0.7)",
+            boxShadow: "0 0 8px rgba(201,168,76,0.6)",
+          }}
+          animate={{ y: [0, -50, 0], opacity: [0, 0.9, 0] }}
+          transition={{
+            duration: 7 + (i % 4),
+            repeat: Infinity,
+            delay: (i % 6) * 0.8,
+            ease: "easeInOut",
+          }}
         />
       ))}
 
       <div className="container mx-auto px-6 max-w-2xl text-center relative z-10">
         <ScrollReveal>
-          <h3 className="editorial-label text-accent/70 mb-6">Our Promise</h3>
+          <h3 className="editorial-label text-accent mb-6">Our Promise</h3>
         </ScrollReveal>
         <StaggeredText
           text="Stop Aspiring. Start Becoming."
-          className="font-heading text-4xl md:text-6xl font-bold text-white mb-8 leading-[1.1] drop-shadow-[0_0_40px_hsl(40_65%_50%_/_0.35)]"
+          className="font-heading text-4xl md:text-6xl font-bold text-white mb-8 leading-[1.1] drop-shadow-[0_0_50px_rgba(201,168,76,0.45)]"
           delay={0.15}
         />
         <ScrollReveal delay={0.4}>
           <div className="w-16 h-px mx-auto mb-8 bg-accent" />
-          <p className="text-white/70 text-[17px] md:text-lg mb-12 max-w-lg mx-auto leading-[1.8]">
+          <p className="text-[#CBD5E1] text-[17px] md:text-lg mb-12 max-w-lg mx-auto leading-[1.8]">
             Guided learning, customized change frameworks, structured mentorship, and transformational accountability so you can rise with clarity, competence, and character.
           </p>
           <Button
             asChild
             size="lg"
-            className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold text-sm px-10 py-7 rounded-md tracking-wide transition-all duration-500 shadow-[0_0_40px_hsl(40_65%_50%_/_0.4)] hover:shadow-[0_0_60px_hsl(40_65%_50%_/_0.7)] hover:scale-[1.03]"
+            className="bg-[#C9A84C] text-[#0a0e1a] hover:bg-[#d9b85c] font-sans font-bold text-base px-12 py-8 rounded-md tracking-wide transition-all duration-500 shadow-[0_0_50px_rgba(201,168,76,0.45)] hover:shadow-[0_0_80px_rgba(201,168,76,0.85)] hover:scale-[1.04]"
           >
             <a href="/contact">
-              Schedule a Discovery Call <ArrowRight className="w-4 h-4 ml-2" />
+              Schedule a Discovery Call <ArrowRight className="w-5 h-5 ml-2" />
             </a>
           </Button>
         </ScrollReveal>
