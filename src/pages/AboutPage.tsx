@@ -508,7 +508,7 @@ const ValuesWheel = ({
                   strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
                   style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
                   animate={{
-                    opacity: isActive ? 1 : 0.82,
+                    opacity: 1,
                     scale: isActive ? 1.03 : 1,
                     filter: isActive
                       ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
@@ -536,11 +536,18 @@ const ValuesWheel = ({
                   aria-pressed={i === active}
                 />
                 <text
-                  fill={seg.text}
-                  fontSize={11.5}
-                  fontWeight={700}
-                  className="font-heading pointer-events-none select-none"
-                  style={{ textTransform: "uppercase", letterSpacing: "0.28em" }}
+                  fill="#ffffff"
+                  fontSize={13.5}
+                  fontWeight={800}
+                  className="font-sans pointer-events-none select-none"
+                  style={{
+                    textTransform: "uppercase",
+                    letterSpacing: "0.22em",
+                    paintOrder: "stroke",
+                    stroke: "rgba(10,22,40,0.55)",
+                    strokeWidth: 2.5,
+                    strokeLinejoin: "round",
+                  }}
                 >
                   <textPath
                     href={`#values-arc-${i}`}
@@ -555,7 +562,7 @@ const ValuesWheel = ({
           })}
 
           {/* Thick gold outer ring */}
-          <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={5} />
+          <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={4} />
           {/* Inner disc */}
           <circle cx={cx} cy={cy} r={rI} fill="#0a1628" />
           <circle cx={cx} cy={cy} r={rI} fill="none" stroke="#C9A84C" strokeWidth={2.5} />
@@ -563,7 +570,7 @@ const ValuesWheel = ({
           <circle cx={cx} cy={cy - rO - 14} r={5} fill="#C9A84C" />
 
           {/* Center living lens — perfectly centered inside the inner disc */}
-          <foreignObject x={cx - (rI - 8)} y={cy - (rI - 8)} width={(rI - 8) * 2} height={(rI - 8) * 2}>
+          <foreignObject x={cx - (rI - 6)} y={cy - (rI - 6)} width={(rI - 6) * 2} height={(rI - 6) * 2}>
             <div className="w-full h-full flex items-center justify-center text-center pointer-events-none">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -572,15 +579,15 @@ const ValuesWheel = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="px-3"
+                  className="px-2"
                 >
-                  <p className="editorial-label mb-1.5 text-[9.5px] tracking-[0.3em]" style={{ color: "#C9A84C" }}>
+                  <p className="editorial-label mb-2 text-[10px] tracking-[0.32em] font-bold" style={{ color: "#C9A84C" }}>
                     VALUE {String(display + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="font-heading text-[17px] lg:text-[19px] text-white mb-1.5 leading-[1.1]">
+                  <h3 className="font-heading text-[22px] lg:text-[24px] font-bold text-white mb-2 leading-[1.1]">
                     {values[display].label}
                   </h3>
-                  <p className="text-[10.5px] text-white/65 leading-[1.45]">
+                  <p className="text-[13px] text-white/85 leading-[1.5]">
                     {values[display].desc}
                   </p>
                 </motion.div>
@@ -839,7 +846,7 @@ const AboutPage = () => {
         </section>
 
         {/* HERO → WHO WE ARE transition */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
         {/* WHO WE ARE — pure white + gold particle shimmer */}
         <section className="relative py-16 md:py-20 bg-white overflow-hidden">
@@ -891,7 +898,7 @@ const AboutPage = () => {
                     transition={{ duration: 0.9, delay: i * 0.18, ease: [0.23, 1, 0.32, 1] }}
                     className="relative bg-white rounded-lg p-8 border border-primary/10 border-l-4 border-l-accent shadow-[0_10px_40px_-12px_rgba(10,14,26,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(10,14,26,0.18)] transition-shadow duration-500"
                   >
-                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-[17px] font-black">{c.label}</p>
+                    <p className="editorial-label text-accent mb-5 tracking-[0.14em] text-[20px] font-black">{c.label}</p>
                     <p className="text-primary/75 text-[15px] leading-[1.8]">{c.body}</p>
                   </motion.div>
                 ))}
@@ -902,7 +909,7 @@ const AboutPage = () => {
 
 
         {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
         {/* VISION & MISSION — stacked horizontal bands */}
         <section className="relative bg-[#0a0e1a] py-16 md:py-20 overflow-hidden">
@@ -918,7 +925,7 @@ const AboutPage = () => {
             >
               <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
                 <div className="max-w-2xl">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[17px] font-black relative -top-0.5">MISSION</p>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.14em] text-[20px] font-black relative -top-0.5">MISSION</p>
                   <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
                   </p>
@@ -976,7 +983,7 @@ const AboutPage = () => {
                   <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
                 </div>
                 <div className="max-w-2xl order-1 md:order-2 md:text-right">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[17px] font-black relative -top-0.5">VISION</p>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.14em] text-[20px] font-black relative -top-0.5">VISION</p>
                   <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
@@ -987,7 +994,7 @@ const AboutPage = () => {
         </section>
 
         {/* DARK → WHITE transition into Core Values */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
         {/* CORE VALUES — interactive circular wheel on white */}
         <section className="relative py-16 md:py-20 bg-white overflow-hidden">
@@ -1006,7 +1013,7 @@ const AboutPage = () => {
         </section>
 
         {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
 
 
