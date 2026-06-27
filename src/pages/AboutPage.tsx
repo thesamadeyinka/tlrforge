@@ -217,8 +217,8 @@ const AboutPage = () => {
                     transition={{ duration: 0.9, delay: i * 0.18, ease: [0.23, 1, 0.32, 1] }}
                     className="relative bg-white rounded-lg p-8 border border-primary/10 border-l-4 border-l-accent shadow-[0_10px_40px_-12px_rgba(10,14,26,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(10,14,26,0.18)] transition-shadow duration-500"
                   >
-                    <p className="editorial-label text-accent mb-3 tracking-[0.2em] text-xs font-semibold">{c.label}</p>
-                    <p className="text-primary/80 text-[16px] leading-[1.8]">{c.body}</p>
+                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-base font-bold">{c.label}</p>
+                    <p className="text-primary/85 text-[18px] leading-[1.8]">{c.body}</p>
                   </motion.div>
                 ))}
               </div>
