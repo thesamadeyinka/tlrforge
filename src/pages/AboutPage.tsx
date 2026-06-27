@@ -386,13 +386,13 @@ const ValuesGrid = ({
 // ============= Core Values Wheel — interactive circular dial =============
 // Order matches `values` array: Intentionality, Innovation, Integrity, Excellence, Mentorship, Community, Legacy
 const WHEEL_SEGMENTS = [
-  { fill: "#0a1e3f", stroke: "#0a0e1a", text: "#ffffff" }, // Intentionality — deep navy
-  { fill: "#0aa5b8", stroke: "#0a0e1a", text: "#ffffff" }, // Innovation — electric teal
-  { fill: "#ffffff", stroke: "#d4af37", text: "#0a0e1a" }, // Integrity — white w/ gold border
-  { fill: "#d4a017", stroke: "#0a0e1a", text: "#0a0e1a" }, // Excellence — rich gold/amber
-  { fill: "#a0612c", stroke: "#0a0e1a", text: "#ffffff" }, // Mentorship — warm copper
-  { fill: "#3a7d5c", stroke: "#0a0e1a", text: "#ffffff" }, // Community — soft forest green
-  { fill: "#5b1a3a", stroke: "#0a0e1a", text: "#ffffff" }, // Legacy — deep burgundy
+  { fill: "#0a1628", stroke: "#C9A84C", text: "#ffffff" }, // Intentionality — deep navy
+  { fill: "#4ECDC4", stroke: "#0a1628", text: "#0a1628" }, // Innovation — electric teal
+  { fill: "#FFFFFF", stroke: "#C9A84C", text: "#0a1628" }, // Integrity — white w/ gold border
+  { fill: "#C9A84C", stroke: "#0a1628", text: "#0a1628" }, // Excellence — rich gold
+  { fill: "#A0785A", stroke: "#0a1628", text: "#ffffff" }, // Mentorship — warm bronze
+  { fill: "#4A7C59", stroke: "#0a1628", text: "#ffffff" }, // Community — forest green
+  { fill: "#6B2D3E", stroke: "#0a1628", text: "#ffffff" }, // Legacy — deep burgundy
 ];
 
 const polar = (cx: number, cy: number, r: number, deg: number) => {
