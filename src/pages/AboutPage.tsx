@@ -944,8 +944,8 @@ const AboutPage = () => {
                   <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
                 </div>
                 <div className="max-w-2xl order-1 md:order-2 md:text-right">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold">VISION</p>
-                  <p className="font-heading text-2xl md:text-[28px] lg:text-[32px] text-white leading-[1.4] font-medium">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold relative -top-0.5">VISION</p>
+                  <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
                 </div>
