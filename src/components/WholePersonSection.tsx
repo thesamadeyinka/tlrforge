@@ -15,7 +15,7 @@ const pillars = [
 
 const WholePersonSection = () => {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-[hsl(224,55%,6%)]">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[hsl(220,45%,14%)]">
       {/* Radial gradient atmosphere */}
       <div
         className="absolute inset-0 pointer-events-none"
