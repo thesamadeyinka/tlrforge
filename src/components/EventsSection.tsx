@@ -74,10 +74,10 @@ const EventsSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-[hsl(224,55%,6%)]">
+    <section className="pt-10 pb-14 md:pt-12 md:pb-20 relative overflow-hidden bg-[hsl(224,55%,6%)]">
       {/* Seamless fades */}
-      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[hsl(224,55%,5%)] to-transparent z-10 pointer-events-none" />
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[hsl(224,55%,5%)] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-12 bg-gradient-to-b from-[hsl(224,55%,5%)] to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[hsl(224,55%,5%)] to-transparent z-10 pointer-events-none" />
       {/* Gold spotlight from below */}
       <div
         className="absolute inset-x-0 bottom-0 h-[60%] pointer-events-none"
