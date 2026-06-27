@@ -27,6 +27,7 @@ import { useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import type { CarouselApi } from "@/components/ui/carousel";
 import aboutHero from "@/assets/about-hero.jpg";
+import samuelPortrait from "@/assets/samuel-omenka.jpg.asset.json";
 import evolveBg1 from "@/assets/evolve-bg-1.jpg";
 import evolveBg2 from "@/assets/evolve-bg-2.jpg";
 import evolveBg3 from "@/assets/evolve-bg-3.jpg";
@@ -642,7 +643,7 @@ const AboutPage = () => {
                     className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-accent via-accent/40 to-accent"
                   >
                     <div className="w-full h-full rounded-full overflow-hidden bg-primary/5 border-4 border-white">
-                      <img src="/placeholder.svg" alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                      <img src={samuelPortrait.url} alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
                     </div>
                   </motion.div>
                 </div>
