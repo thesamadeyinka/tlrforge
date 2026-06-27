@@ -569,7 +569,7 @@ const AboutPage = () => {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
             >
-              <Quote className="w-16 h-16 md:w-20 md:h-20 text-accent/70 mx-auto mb-10" />
+              <Quote aria-hidden="true" className="w-16 h-16 md:w-20 md:h-20 text-accent/70 mx-auto mb-10" />
             </motion.div>
             <WordReveal
               text={'"At Luminary Rise, we don\'t just adapt to change — we lead it, inspire it, and rise with it."'}
