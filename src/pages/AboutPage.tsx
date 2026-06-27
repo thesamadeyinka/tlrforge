@@ -27,6 +27,8 @@ import { useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import type { CarouselApi } from "@/components/ui/carousel";
 import aboutHero from "@/assets/about-hero.jpg";
+import visionBg from "@/assets/vision-bg.jpg";
+import missionBg from "@/assets/mission-bg.jpg";
 import samuelPortrait from "@/assets/samuel-omenka.jpg.asset.json";
 import evolveBg1 from "@/assets/evolve-bg-1.jpg";
 import evolveBg2 from "@/assets/evolve-bg-2.jpg";
