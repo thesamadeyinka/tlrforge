@@ -883,11 +883,11 @@ const AboutPage = () => {
                 {[
                   {
                     label: "THE PROBLEM",
-                    body: "People desire and aspire to live a better life, often accompanied by great expectations — yet are disappointed by realities that deviate from those dreams, due to the absence of balanced, purpose-driven action for a life of fulfilment.",
+                    body: "People desire and aspire to live a better life, often accompanied by great expectations, yet are disappointed by realities that deviate from those dreams, due to the absence of balanced, purpose-driven action for a life of fulfilment.",
                   },
                   {
                     label: "OUR BELIEF",
-                    body: "Anyone can be great and live a fulfilling life if they engage early the things they would otherwise learn later — and if they have and utilise opportunities for learning and growth on time.",
+                    body: "Anyone can be great and live a fulfilling life if they engage early the things they would otherwise learn later, and if they have and utilise opportunities for learning and growth on time.",
                   },
                 ].map((c, i) => (
                   <motion.div
