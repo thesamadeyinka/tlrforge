@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const PillarsSection = lazy(() => import("@/components/PillarsSection"));
 const EventsSection = lazy(() => import("@/components/EventsSection"));
@@ -15,10 +16,11 @@ const ParallaxWrapper = lazy(() => import("@/components/ParallaxWrapper"));
 const Index = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen relative">
+      <div className="min-h-screen relative bg-[hsl(224,55%,6%)]">
         <Suspense fallback={null}>
           <AnimatedGradientBg />
         </Suspense>
+        <ScrollProgress />
         <Header />
         <HeroSection />
         <Suspense fallback={<div className="py-28" />}>
