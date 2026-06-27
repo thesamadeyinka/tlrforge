@@ -13,3 +13,25 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
+
+class MockIntersectionObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() { return []; }
+  root = null;
+  rootMargin = "";
+  thresholds = [];
+}
+// @ts-expect-error - jsdom polyfill
+globalThis.IntersectionObserver = MockIntersectionObserver;
+// @ts-expect-error - jsdom polyfill
+window.IntersectionObserver = MockIntersectionObserver;
+
+class MockResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+// @ts-expect-error - jsdom polyfill
+globalThis.ResizeObserver = MockResizeObserver;
