@@ -199,8 +199,7 @@ const AkaTimeline = ({ steps }: { steps: { label: string; desc: string }[] }) =>
     </div>
   );
 };
-
-
+const AboutPage = () => {
   const [bioVisible, setBioVisible] = useState(false);
   const bioLines = [
     "Dr Samuel Omenka is a senior economist, trusted advisor, visionary leader, and kingdom strategist whose life and work are defined by the dual call to transform economies and amplify Jesus Christ.",
