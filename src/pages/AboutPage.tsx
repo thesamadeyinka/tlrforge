@@ -485,65 +485,91 @@ const AboutPage = () => {
         </section>
 
 
-        {/* VISION & MISSION — full-bleed cinematic */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
-          <img
-            src={aboutHero}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        {/* WHITE → DARK transition */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
-          <div className="absolute inset-0 bg-[#0a0e1a]/[0.78]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/40 via-transparent to-[#0a0e1a]/60" />
-          <div className="container mx-auto px-6 max-w-6xl relative z-10">
-            <div className="grid md:grid-cols-2 gap-12 md:gap-0 relative items-stretch">
-              {/* Vertical gold divider drawing down */}
-              <motion.div
-                initial={{ scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
-                style={{ transformOrigin: "top" }}
-                className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent to-transparent"
+        {/* VISION & MISSION — full-bleed split-screen */}
+        <section className="relative overflow-hidden bg-[#0a0e1a]">
+          <div className="grid md:grid-cols-2 min-h-[78vh] md:min-h-[88vh] relative">
+            {/* Vertical gold seam */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
+              style={{ transformOrigin: "top" }}
+              className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent to-transparent z-20 shadow-[0_0_18px_rgba(212,175,55,0.4)]"
+            />
+
+            {/* VISION half */}
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+              className="relative group overflow-hidden flex items-center justify-center px-8 py-20 md:py-24 min-h-[60vh]"
+            >
+              <motion.img
+                src={visionBg}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                width={1600}
+                height={1600}
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ scale: 1.05 }}
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 8, ease: "easeOut" }}
               />
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
-                className="md:pr-16"
-              >
-                <div className="bg-white/[0.04] backdrop-blur-md border border-white/10 border-t-2 border-t-accent rounded-lg p-8 md:p-10 h-full">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-base md:text-lg font-extrabold">VISION</p>
-                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-bold">
-                    To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.9, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
-                className="md:pl-16"
-              >
-                <div className="bg-white/[0.04] backdrop-blur-md border border-white/10 border-t-2 border-t-accent rounded-lg p-8 md:p-10 h-full">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-base md:text-lg font-extrabold">MISSION</p>
-                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-bold">
-                    To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
-                  </p>
-                </div>
-              </motion.div>
-            </div>
+              <div className="absolute inset-0 bg-[#0a0e1a]/[0.55]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/30 via-transparent to-[#0a0e1a]/50" />
+              <div className="relative z-10 max-w-xl text-center">
+                <p className="editorial-label text-accent mb-6 tracking-[0.3em] text-sm font-bold">VISION</p>
+                <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-white leading-[1.45] font-medium">
+                  To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* MISSION half */}
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
+              className="relative group overflow-hidden flex items-center justify-center px-8 py-20 md:py-24 min-h-[60vh]"
+            >
+              <motion.img
+                src={missionBg}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                width={1600}
+                height={1600}
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ scale: 1.05 }}
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 8, ease: "easeOut" }}
+              />
+              <div className="absolute inset-0 bg-[#0a0e1a]/[0.55]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/30 via-transparent to-[#0a0e1a]/50" />
+              <div className="relative z-10 max-w-xl text-center">
+                <p className="editorial-label text-accent mb-6 tracking-[0.3em] text-sm font-bold">MISSION</p>
+                <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-white leading-[1.45] font-medium">
+                  To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* CORE VALUES — glassmorphism carousel */}
-        <section className="py-24 md:py-28 bg-white">
-          <div className="container mx-auto px-6 max-w-7xl">
+        {/* CORE VALUES — auto-rotating highlight grid */}
+        <section className="relative py-24 md:py-28 bg-white">
+          {/* DARK → WHITE transition above */}
+          <div aria-hidden className="absolute -top-1 left-0 right-0 h-24 bg-gradient-to-b from-[#0a0e1a] to-white pointer-events-none" />
+          <div className="container mx-auto px-6 max-w-7xl relative">
             <ScrollReveal>
               <div className="text-center mb-14">
                 <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">WHAT GUIDES US</p>
@@ -552,9 +578,12 @@ const AboutPage = () => {
                 </h2>
               </div>
             </ScrollReveal>
-            <ValuesCarousel values={values} />
+            <ValuesGrid values={values} />
           </div>
         </section>
+        {/* WHITE → DARK transition */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
+
 
         {/* STRATEGIC PILLARS — accordion */}
         <section className={`relative ${NAVY} py-20 md:py-24 overflow-hidden`}>
