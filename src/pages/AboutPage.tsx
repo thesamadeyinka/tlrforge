@@ -434,6 +434,54 @@ const labelArcPath = (
   return `M${start.x} ${start.y} A${r} ${r} 0 0 ${sweep} ${end.x} ${end.y}`;
 };
 
+// Single wheel label that orbits with the spinning wheel but stays upright.
+const WheelLabel = ({
+  rot,
+  baseAngle,
+  cx,
+  cy,
+  r,
+  text,
+}: {
+  rot: MotionValue<number>;
+  baseAngle: number;
+  cx: number;
+  cy: number;
+  r: number;
+  text: string;
+}) => {
+  const x = useTransform(rot, (deg) => {
+    const a = ((baseAngle + deg - 90) * Math.PI) / 180;
+    return cx + r * Math.cos(a);
+  });
+  const y = useTransform(rot, (deg) => {
+    const a = ((baseAngle + deg - 90) * Math.PI) / 180;
+    return cy + r * Math.sin(a);
+  });
+  return (
+    <motion.text
+      x={x}
+      y={y}
+      fill="#ffffff"
+      fontSize={12.5}
+      fontWeight={800}
+      textAnchor="middle"
+      dominantBaseline="middle"
+      className="font-sans pointer-events-none select-none"
+      style={{
+        textTransform: "uppercase",
+        letterSpacing: "0.18em",
+        paintOrder: "stroke",
+        stroke: "rgba(10,22,40,0.7)",
+        strokeWidth: 2.5,
+        strokeLinejoin: "round",
+      }}
+    >
+      {text}
+    </motion.text>
+  );
+};
+
 const ValuesWheel = ({
   values,
 }: {
@@ -443,6 +491,19 @@ const ValuesWheel = ({
   const step = 360 / n;
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState<number | null>(null);
+
+  // Continuous wheel rotation (deg). Pauses on hover.
+  const rot = useMotionValue(0);
+  useEffect(() => {
+    if (hover !== null) return;
+    const start = rot.get();
+    const controls = animate(rot, start + 360, {
+      duration: 60,
+      ease: "linear",
+      repeat: Infinity,
+    });
+    return () => controls.stop();
+  }, [hover, rot]);
 
   // Auto-advance every 3s; pause on hover
   useEffect(() => {
@@ -458,7 +519,7 @@ const ValuesWheel = ({
   const cy = 300;
   const rO = 270;       // outer radius
   const rI = 125;       // inner disc ≈ 45% of total diameter (250 / 540)
-  const rLabel = rI + 0.75 * (rO - rI); // 75% of segment radial depth
+  const rLabel = rI + 0.62 * (rO - rI); // mid-segment radial depth
 
   return (
     <div className="relative w-full">
@@ -474,107 +535,72 @@ const ValuesWheel = ({
           role="group"
           aria-label="Core Values wheel"
         >
-          {/* Hidden defs: per-segment label arc paths */}
-          <defs>
-            {values.map((v, i) => {
-              const a1 = i * step - step / 2;
-              const a2 = i * step + step / 2;
-              const centerAngle = ((i * step) % 360 + 360) % 360;
-              // Bottom half = center angle between 90° and 270° (0° = top)
-              const flip = centerAngle > 90 && centerAngle < 270;
-              return (
-                <path
-                  key={`arc-${i}`}
-                  id={`values-arc-${i}`}
-                  d={labelArcPath(cx, cy, rLabel, a1, a2, flip)}
-                  fill="none"
-                />
-              );
-            })}
-          </defs>
-
-          {/* Rotating wheel group — segments + labels + outer ring spin together */}
-          <motion.g
-            style={{ transformOrigin: "300px 300px", transformBox: "fill-box" }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 60, ease: "linear", repeat: Infinity }}
-          >
-            {/* Segments + labels */}
+          {/* Rotating segments + outer ring */}
+          <motion.g style={{ rotate: rot, transformOrigin: "300px 300px", transformBox: "fill-box" }}>
             {values.map((v, i) => {
               const a1 = i * step - step / 2;
               const a2 = i * step + step / 2;
               const isActive = i === display;
               const seg = WHEEL_SEGMENTS[i % WHEEL_SEGMENTS.length];
               return (
-                <g key={v.label}>
-                  <motion.path
-                    d={sectorPath(cx, cy, rO, rI, a1, a2)}
-                    fill={seg.fill}
-                    stroke={seg.stroke}
-                    strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
-                    style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
-                    animate={{
-                      opacity: 1,
-                      scale: isActive ? 1.03 : 1,
-                      filter: isActive
-                        ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
-                        : "drop-shadow(0 0 0 rgba(0,0,0,0))",
-                    }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    onMouseEnter={() => setHover(i)}
-                    onMouseLeave={() => setHover(null)}
-                    onClick={() => setActive(i)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setActive(i);
-                      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-                        e.preventDefault();
-                        setActive((i + 1) % n);
-                      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-                        e.preventDefault();
-                        setActive((i - 1 + n) % n);
-                      }
-                    }}
-                    tabIndex={0}
-                    role="button"
-                    aria-label={`${v.label}. ${v.desc}`}
-                    aria-pressed={i === active}
-                  />
-                  <text
-                    fill="#ffffff"
-                    fontSize={13.5}
-                    fontWeight={800}
-                    className="font-sans pointer-events-none select-none"
-                    style={{
-                      textTransform: "uppercase",
-                      letterSpacing: "0.22em",
-                      paintOrder: "stroke",
-                      stroke: "rgba(10,22,40,0.55)",
-                      strokeWidth: 2.5,
-                      strokeLinejoin: "round",
-                    }}
-                  >
-                    <textPath
-                      href={`#values-arc-${i}`}
-                      startOffset="50%"
-                      textAnchor="middle"
-                    >
-                      {v.label.toUpperCase()}
-                    </textPath>
-                  </text>
-                </g>
+                <motion.path
+                  key={v.label}
+                  d={sectorPath(cx, cy, rO, rI, a1, a2)}
+                  fill={seg.fill}
+                  stroke={seg.stroke}
+                  strokeWidth={seg.fill === "#FFFFFF" ? 3 : 1.5}
+                  style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
+                  animate={{
+                    opacity: 1,
+                    scale: isActive ? 1.03 : 1,
+                    filter: isActive
+                      ? "drop-shadow(0 0 18px rgba(201,168,76,0.75)) brightness(1.08)"
+                      : "drop-shadow(0 0 0 rgba(0,0,0,0))",
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  onMouseEnter={() => setHover(i)}
+                  onMouseLeave={() => setHover(null)}
+                  onClick={() => setActive(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(i);
+                    } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      setActive((i + 1) % n);
+                    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                      e.preventDefault();
+                      setActive((i - 1 + n) % n);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${v.label}. ${v.desc}`}
+                  aria-pressed={i === active}
+                />
               );
             })}
-
-            {/* Thick gold outer ring (spins with wheel) */}
             <circle cx={cx} cy={cy} r={rO} fill="none" stroke="#C9A84C" strokeWidth={4} />
           </motion.g>
+
+          {/* Upright orbiting labels — position rotates with wheel, text stays readable */}
+          {values.map((v, i) => (
+            <WheelLabel
+              key={`label-${i}`}
+              rot={rot}
+              baseAngle={i * step}
+              cx={cx}
+              cy={cy}
+              r={rLabel}
+              text={v.label.toUpperCase()}
+            />
+          ))}
 
           {/* Static inner disc + top tick (do not rotate) */}
           <circle cx={cx} cy={cy} r={rI} fill="#0a1628" />
           <circle cx={cx} cy={cy} r={rI} fill="none" stroke="#C9A84C" strokeWidth={2.5} />
           <circle cx={cx} cy={cy - rO - 14} r={5} fill="#C9A84C" />
+
 
 
           {/* Center living lens — perfectly centered inside the inner disc */}
