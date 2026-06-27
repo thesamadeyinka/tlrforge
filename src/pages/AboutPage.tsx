@@ -332,7 +332,6 @@ const ValuesGrid = ({
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
             onMouseEnter={() => {
               hoverIdx.current = i;
               setActive(i);
@@ -349,7 +348,7 @@ const ValuesGrid = ({
                 : "0 8px 24px -16px rgba(10,14,26,0.12)",
               backgroundColor: isActive ? "rgba(212,175,55,0.06)" : "rgba(255,255,255,1)",
             }}
-            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.55, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
             className="relative overflow-hidden rounded-2xl p-7 md:p-8 border border-primary/10 cursor-pointer"
           >
             {/* Gold top border */}
