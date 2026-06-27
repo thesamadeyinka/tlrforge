@@ -33,16 +33,16 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contact" className="bg-[hsl(224,50%,8%)] text-white py-24 relative">
+    <footer id="contact" className="bg-[hsl(224,50%,8%)] text-white py-14 md:py-16 relative">
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        <div className="grid md:grid-cols-3 gap-16 mb-20">
+        <div className="grid md:grid-cols-3 gap-12 mb-12">
           <div>
-            <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-12 md:h-14 mb-5 opacity-80" />
+            <img src={tlrLogoWhite} alt="The Luminary Rise" className="h-12 md:h-14 mb-5" />
           </div>
 
           <div>
-            <h4 className="editorial-label text-white/30 mb-6">Quick Links</h4>
-            <nav className="space-y-3">
+            <h4 className="editorial-label text-accent mb-5">Quick Links</h4>
+            <nav className="space-y-2.5">
               {[
                 { label: "About", href: "/about" },
                 { label: "Philosophy", href: "/philosophy" },
@@ -52,7 +52,7 @@ const Footer = () => {
                 { label: "Resources", href: "/resources" },
                 { label: "Apply to EVOLVE", href: "/apply" },
               ].map((link) => (
-                <Link key={link.href} to={link.href} className="block text-[13px] text-white/35 hover:text-accent transition-colors duration-300">
+                <Link key={link.href} to={link.href} className="block text-[14px] text-white/80 hover:text-accent transition-colors duration-300">
                   {link.label}
                 </Link>
               ))}
@@ -60,8 +60,8 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="editorial-label text-white/30 mb-6">Join the Community</h4>
-            <p className="text-white/25 text-[12px] mb-5 leading-relaxed">Get insights, updates, and resources delivered to your inbox.</p>
+            <h4 className="editorial-label text-accent mb-5">Join the Community</h4>
+            <p className="text-white/75 text-[13px] mb-4 leading-relaxed">Get insights, updates, and resources delivered to your inbox.</p>
             <form onSubmit={handleNewsletter} className="flex gap-2">
               <Input
                 type="email"
@@ -70,7 +70,7 @@ const Footer = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 maxLength={255}
-                className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 text-sm rounded-md focus:border-accent/40"
+                className="bg-white/[0.06] border-white/20 text-white placeholder:text-white/40 text-sm rounded-md focus:border-accent/60"
               />
               <Button type="submit" className="bg-accent text-accent-foreground hover:bg-accent/90 shrink-0 rounded-md" disabled={loading}>
                 <Mail className="w-4 h-4" />
@@ -79,12 +79,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.05] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[11px] text-white/20">© {new Date().getFullYear()} The Luminary Rise. All rights reserved.</p>
+        <div className="border-t border-white/15 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-[14px] text-white">© {new Date().getFullYear()} The Luminary Rise. All rights reserved.</p>
           <div className="flex gap-2">
             {[Instagram, Twitter, Linkedin, Youtube].map((Icon, i) => (
-              <a key={i} href="#" className="w-8 h-8 rounded-md bg-white/[0.04] flex items-center justify-center hover:bg-accent/15 hover:text-accent transition-all duration-300">
-                <Icon className="w-3.5 h-3.5 text-white/30" />
+              <a key={i} href="#" className="w-9 h-9 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300">
+                <Icon className="w-4 h-4 text-white" />
               </a>
             ))}
           </div>

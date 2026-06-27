@@ -6,11 +6,11 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const ValuePropSection = () => {
   return (
-    <section className="pt-44 pb-32 md:pt-56 md:pb-40 relative overflow-hidden bg-[#0d2b2b]">
-      {/* Top divider — gold hairline + soft glow fade */}
+    <section className="pt-20 pb-20 md:pt-28 md:pb-28 relative overflow-hidden bg-[#0a0e1a]">
+      {/* Top divider — gold hairline */}
       <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent opacity-80" />
-        <div className="h-24 w-full bg-gradient-to-b from-[hsl(220,45%,14%)] to-transparent" />
+        <div className="h-20 w-full bg-gradient-to-b from-white/[0.03] to-transparent" />
       </div>
 
       {/* Concentrated warm gold glow behind headline */}
@@ -81,7 +81,7 @@ const ValuePropSection = () => {
       </div>
 
       {/* Bottom fade into footer */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[hsl(224,50%,8%)] pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[hsl(224,50%,8%)] pointer-events-none z-10" />
     </section>
   );
 };
