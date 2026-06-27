@@ -91,8 +91,8 @@ const akaSteps = [
 
 const commitments = [
   { num: "01", title: "Clarity", desc: "Clarity for emerging leaders — see the path before walking it." },
-  { num: "02", title: "Momentum", desc: "Momentum for personal, professional, and corporate growth." },
-  { num: "03", title: "Structure", desc: "Structure for sustainable, repeatable transformation." },
+  { num: "02", title: "Structure", desc: "Structure for sustainable, repeatable transformation." },
+  { num: "03", title: "Momentum", desc: "Momentum for personal, professional, and corporate growth." },
 ];
 
 const audiences = [
