@@ -954,25 +954,27 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* CORE VALUES — interactive circular wheel on deep navy */}
-        <section className="relative py-16 md:py-20 bg-[#0a0e1a] overflow-hidden">
-          <AmbientParticles count={18} className="opacity-50" />
-          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08),transparent_60%)] pointer-events-none" />
+        {/* DARK → WHITE transition into Core Values */}
+        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
+
+        {/* CORE VALUES — interactive circular wheel on white */}
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
+          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06),transparent_65%)] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-6xl relative">
             <ScrollReveal>
               <div className="text-center mb-14 md:mb-16">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">WHAT GUIDES US</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
                   Our <span className="text-gradient-gold">Core Values</span>
                 </h2>
-                <p className="text-white/60 mt-5 max-w-xl mx-auto text-[15px]">
-                  Hover or tap a segment to focus a value. Click to lock it at the top of the wheel.
-                </p>
               </div>
             </ScrollReveal>
             <ValuesWheel values={values} />
           </div>
         </section>
+
+        {/* WHITE → DARK transition */}
+        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
 
 
