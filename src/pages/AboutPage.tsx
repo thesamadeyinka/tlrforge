@@ -1037,7 +1037,7 @@ const AboutPage = () => {
             <ScrollReveal>
               <div className="text-center mb-14 md:mb-16">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">WHAT GUIDES US</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary leading-[1.1]">
                   Our <span className="text-gradient-gold">Core Values</span>
                 </h2>
               </div>
@@ -1046,22 +1046,17 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
-
-
-
-        {/* STRATEGIC PILLARS — accordion-style expandable layout */}
-        <section className={`relative ${NAVY} py-16 md:py-20 overflow-hidden`}>
-          <div aria-hidden className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.06] blur-[160px] pointer-events-none" />
+        {/* STRATEGIC PILLARS — accordion-style expandable layout (white) */}
+        <section className="relative bg-white py-16 md:py-20 overflow-hidden">
+          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05),transparent_65%)] pointer-events-none" />
           <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
               <div className="text-center mb-12 md:mb-14">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">OUR ARCHITECTURE</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-gold leading-[1.05] tracking-[0.02em]">
-                  The Strategic Pillars
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary leading-[1.05] tracking-[0.02em]">
+                  The <span className="text-gradient-gold">Strategic Pillars</span>
                 </h2>
-                <p className="text-white/65 text-[16px] max-w-2xl mx-auto leading-[1.7] mt-5">
+                <p className="text-primary/60 text-[15.5px] max-w-2xl mx-auto leading-[1.7] mt-5">
                   Three integrated pillars, a complete ecosystem for strategic growth.
                 </p>
               </div>
@@ -1074,33 +1069,33 @@ const AboutPage = () => {
                   <AccordionItem
                     key={p.title}
                     value={`pillar-${i}`}
-                    className="group relative rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] data-[state=open]:bg-white/[0.06] data-[state=open]:border-accent/40 transition-all duration-500 overflow-hidden"
+                    className="group relative rounded-xl border border-primary/10 bg-white hover:bg-primary/[0.02] data-[state=open]:bg-primary/[0.03] data-[state=open]:border-accent/50 shadow-[0_8px_30px_-18px_rgba(10,14,26,0.18)] transition-all duration-500 overflow-hidden"
                   >
                     {/* Gold left accent bar — only when expanded */}
                     <span
                       aria-hidden
-                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-data-[state=open]:scale-y-100 transition-transform duration-500 shadow-[0_0_18px_rgba(212,175,55,0.6)]"
+                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-data-[state=open]:scale-y-100 transition-transform duration-500 shadow-[0_0_18px_rgba(212,175,55,0.5)]"
                     />
                     <AccordionTrigger className="px-6 md:px-8 py-5 hover:no-underline">
                       <div className="flex items-center gap-5 text-left">
-                        <div className="w-12 h-12 rounded-lg bg-accent/15 border border-accent/40 flex items-center justify-center shrink-0 group-data-[state=open]:bg-accent/25 transition-colors">
+                        <div className="w-12 h-12 rounded-lg bg-accent/10 border border-accent/40 flex items-center justify-center shrink-0 group-data-[state=open]:bg-accent/20 transition-colors">
                           <Icon className="w-5 h-5 text-accent" />
                         </div>
-                        <h3 className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">
+                        <h3 className="font-heading text-lg md:text-xl font-bold text-primary tracking-tight">
                           {p.title}
                         </h3>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 md:px-8 pb-7">
                       <div className="md:pl-[68px]">
-                        <p className="text-white/75 text-[15.5px] md:text-[16px] leading-[1.8] mb-6">
+                        <p className="text-primary/70 text-[15px] md:text-[15.5px] leading-[1.8] mb-6">
                           {p.desc}
                         </p>
                         <Button
                           asChild
                           variant="outline"
                           size="sm"
-                          className="bg-transparent border-accent/50 text-accent hover:bg-accent hover:text-[#0a0e1a] hover:border-accent"
+                          className="bg-transparent border-accent/60 text-accent hover:bg-accent hover:text-white hover:border-accent"
                         >
                           <Link to={p.link}>
                             {p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
@@ -1114,6 +1109,9 @@ const AboutPage = () => {
             </Accordion>
           </div>
         </section>
+
+        {/* WHITE → DARK transition into Commitment/AKA */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
 
 
