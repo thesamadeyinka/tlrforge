@@ -99,19 +99,8 @@ const HeroSection = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Cinematic full-bleed background */}
+      {/* Clean dark background (image removed) */}
       <div className="absolute inset-0 bg-[hsl(224,55%,5%)]" />
-      <motion.img
-        src={heroBg}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
-        initial={{ scale: 1.08, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.7 }}
-        transition={{ duration: 2.4, ease: [0.23, 1, 0.32, 1] }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,55%,5%)]/70 via-[hsl(224,55%,5%)]/40 to-[hsl(224,55%,6%)]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(224,55%,5%)]/80 via-transparent to-[hsl(224,55%,5%)]/40" />
       <Suspense fallback={null}>
         <AmbientParticles count={28} />
       </Suspense>
