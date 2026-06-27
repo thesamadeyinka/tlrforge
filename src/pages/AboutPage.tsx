@@ -968,35 +968,14 @@ const AboutPage = () => {
 
 
 
-        {/* STRATEGIC PILLARS — architectural columns */}
-        <section className={`relative ${NAVY} py-20 overflow-hidden`}>
-          {/* Subtle stone/marble texture */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.78  0 0 0 0 0.48  0 0 0 0.55 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>\")",
-            }}
-          />
-          {/* Ground/floor glow */}
-          <div
-            aria-hidden
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-40 bg-[radial-gradient(ellipse_at_bottom,rgba(212,175,55,0.22),transparent_70%)] pointer-events-none"
-          />
-          {/* Faint inscription word behind heading */}
-          <div
-            aria-hidden
-            className="absolute top-20 left-0 right-0 text-center font-heading font-bold tracking-[0.25em] text-[110px] md:text-[180px] leading-none text-white/[0.025] select-none pointer-events-none"
-          >
-            PILLARS
-          </div>
-
-          <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        {/* STRATEGIC PILLARS — accordion-style expandable layout */}
+        <section className={`relative ${NAVY} py-16 md:py-20 overflow-hidden`}>
+          <div aria-hidden className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.06] blur-[160px] pointer-events-none" />
+          <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
-              <div className="text-center mb-16">
+              <div className="text-center mb-12 md:mb-14">
                 <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">OUR ARCHITECTURE</p>
-                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-gold leading-[1.05] tracking-[0.04em]">
+                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gradient-gold leading-[1.05] tracking-[0.02em]">
                   The Strategic Pillars
                 </h2>
                 <p className="text-white/65 text-[16px] max-w-2xl mx-auto leading-[1.7] mt-5">
@@ -1005,54 +984,54 @@ const AboutPage = () => {
               </div>
             </ScrollReveal>
 
-            {/* Pillars row */}
-            <div className="relative">
-              {/* Ground line */}
-              <div aria-hidden className="absolute bottom-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent shadow-[0_0_18px_rgba(212,175,55,0.4)]" />
-              <div className="hidden md:flex items-end justify-center gap-10 lg:gap-16 pt-24">
-                {strategicPillars.map((p, i) => {
-                  const isCenter = i === 1;
-                  const height = isCenter ? 460 : 400;
-                  return (
-                    <ArchPillar
-                      key={p.title}
-                      pillar={p}
-                      index={i}
-                      height={height}
-                    />
-                  );
-                })}
-              </div>
-
-              {/* Mobile stacked variant */}
-              <div className="md:hidden space-y-5 mt-6">
-                {strategicPillars.map((p, i) => (
-                  <motion.div
+            <Accordion type="single" collapsible defaultValue="pillar-0" className="space-y-4">
+              {strategicPillars.map((p, i) => {
+                const Icon = p.icon;
+                return (
+                  <AccordionItem
                     key={p.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.6, delay: i * 0.1 }}
-                    className="relative rounded-xl overflow-hidden border border-accent/20 bg-gradient-to-b from-white/[0.04] to-transparent p-6"
+                    value={`pillar-${i}`}
+                    className="group relative rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] data-[state=open]:bg-white/[0.06] data-[state=open]:border-accent/40 transition-all duration-500 overflow-hidden"
                   >
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-11 h-11 rounded-md bg-accent/15 border border-accent/40 flex items-center justify-center">
-                        <p.icon className="w-5 h-5 text-accent" />
+                    {/* Gold left accent bar — only when expanded */}
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top scale-y-0 group-data-[state=open]:scale-y-100 transition-transform duration-500 shadow-[0_0_18px_rgba(212,175,55,0.6)]"
+                    />
+                    <AccordionTrigger className="px-6 md:px-8 py-5 hover:no-underline">
+                      <div className="flex items-center gap-5 text-left">
+                        <div className="w-12 h-12 rounded-lg bg-accent/15 border border-accent/40 flex items-center justify-center shrink-0 group-data-[state=open]:bg-accent/25 transition-colors">
+                          <Icon className="w-5 h-5 text-accent" />
+                        </div>
+                        <h3 className="font-heading text-xl md:text-2xl font-bold text-white tracking-tight">
+                          {p.title}
+                        </h3>
                       </div>
-                      <h3 className="font-heading text-lg font-bold text-accent tracking-[0.12em] uppercase">{p.title}</h3>
-                    </div>
-                    <p className="text-[14px] text-white/70 leading-[1.65] mb-4">{p.desc}</p>
-                    <Button asChild variant="outline" size="sm" className="bg-transparent border-accent/50 text-accent hover:bg-accent hover:text-[#0a0e1a]">
-                      <Link to={p.link}>
-                        {p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 md:px-8 pb-7">
+                      <div className="md:pl-[68px]">
+                        <p className="text-white/75 text-[15.5px] md:text-[16px] leading-[1.8] mb-6">
+                          {p.desc}
+                        </p>
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="bg-transparent border-accent/50 text-accent hover:bg-accent hover:text-[#0a0e1a] hover:border-accent"
+                        >
+                          <Link to={p.link}>
+                            {p.linkLabel} <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
           </div>
         </section>
+
 
 
         {/* COMMITMENT & AKA-RB — redesigned columns */}
