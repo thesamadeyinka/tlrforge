@@ -22,8 +22,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import type { CarouselApi } from "@/components/ui/carousel";
 import aboutHero from "@/assets/about-hero.jpg";
 import evolveBg1 from "@/assets/evolve-bg-1.jpg";
 import evolveBg2 from "@/assets/evolve-bg-2.jpg";
@@ -122,6 +124,182 @@ const WordReveal = ({ text, className = "" }: { text: string; className?: string
   );
 };
 
+// AKA-RB animated scroll-tied timeline
+const AkaTimeline = ({ steps }: { steps: { label: string; desc: string }[] }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 75%", "end 55%"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const [active, setActive] = useState<boolean[]>(() => steps.map(() => false));
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setActive((prev) => {
+      const next = steps.map((_, i) => v >= (i + 0.5) / steps.length);
+      return prev.every((p, i) => p === next[i]) ? prev : next;
+    });
+  });
+
+  return (
+    <div ref={ref} className="relative pl-14">
+      {/* Track */}
+      <div className="absolute left-[18px] top-2 bottom-2 w-[2px] bg-white/10 rounded-full" />
+      {/* Animated draw */}
+      <motion.div
+        style={{ height: lineHeight }}
+        className="absolute left-[18px] top-2 w-[2px] bg-gradient-to-b from-accent via-accent to-accent/40 rounded-full shadow-[0_0_12px_rgba(212,175,55,0.6)]"
+      />
+      <div className="space-y-10">
+        {steps.map((step, i) => {
+          const on = active[i];
+          return (
+            <div key={step.label} className="relative min-h-[60px]">
+              {/* Node */}
+              <motion.div
+                animate={
+                  on
+                    ? {
+                        scale: [0.7, 1.25, 1],
+                        boxShadow: [
+                          "0 0 0px rgba(212,175,55,0)",
+                          "0 0 32px rgba(212,175,55,0.9)",
+                          "0 0 14px rgba(212,175,55,0.5)",
+                        ],
+                      }
+                    : { scale: 0.7, boxShadow: "0 0 0px rgba(212,175,55,0)" }
+                }
+                transition={{ duration: 0.9, ease: "easeOut" }}
+                className="absolute -left-14 top-1 w-9 h-9 rounded-full bg-accent flex items-center justify-center"
+              >
+                <span className="block w-3 h-3 rounded-full bg-[#0a0e1a] ring-2 ring-accent/80" />
+              </motion.div>
+              {/* Title */}
+              <motion.h4
+                initial={false}
+                animate={on ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+                transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+                className="font-heading text-xl md:text-2xl font-bold text-white mb-2"
+              >
+                {step.label}
+              </motion.h4>
+              {/* Desc */}
+              <motion.p
+                initial={false}
+                animate={on ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+                transition={{ duration: 0.55, delay: 0.18, ease: [0.23, 1, 0.32, 1] }}
+                className="text-white/65 text-[15.5px] leading-[1.75] max-w-md"
+              >
+                {step.desc}
+              </motion.p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+// Core Values auto-advancing carousel with shimmer, indicators, and prominent gold arrows
+const ValuesCarousel = ({
+  values,
+}: {
+  values: { label: string; icon: typeof Target; desc: string }[];
+}) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [selected, setSelected] = useState(0);
+  const [snaps, setSnaps] = useState<number[]>([]);
+  const autoplay = useRef(
+    Autoplay({ delay: 3500, stopOnInteraction: false, stopOnMouseEnter: true }),
+  );
+
+  useEffect(() => {
+    if (!api) return;
+    setSnaps(api.scrollSnapList());
+    setSelected(api.selectedScrollSnap());
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  return (
+    <div className="relative">
+      <Carousel
+        opts={{ align: "start", loop: true }}
+        plugins={[autoplay.current]}
+        setApi={setApi}
+        className="w-full"
+        aria-label="Core values carousel"
+      >
+        <CarouselContent className="-ml-4">
+          {values.map((v, i) => (
+            <CarouselItem key={v.label} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.65, delay: (i % 3) * 0.12, ease: [0.23, 1, 0.32, 1] }}
+                className="relative h-full group rounded-2xl p-8 min-h-[260px] overflow-hidden
+                  bg-gradient-to-br from-primary/[0.04] via-white to-accent/[0.05]
+                  backdrop-blur-xl border border-primary/10
+                  shadow-[0_8px_40px_-18px_hsl(var(--primary)/0.25)]
+                  hover:-translate-y-1.5 hover:shadow-[0_22px_55px_-12px_rgba(212,175,55,0.45)]
+                  hover:border-accent/60 transition-all duration-500"
+              >
+                {/* Gold top border + shimmer */}
+                <span className="absolute top-0 left-0 right-0 h-[2px] bg-accent" />
+                <motion.span
+                  aria-hidden="true"
+                  className="absolute top-0 left-0 h-[2px] w-1/3 bg-gradient-to-r from-transparent via-white/90 to-transparent"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "400%" }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: "linear", delay: i * 0.4 }}
+                />
+                <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(212,175,55,0.25)]">
+                  <v.icon className="w-5 h-5 text-accent" />
+                </div>
+                <h4 className="font-heading font-bold text-primary mb-3 text-lg">{v.label}</h4>
+                <p className="text-[14px] text-primary/65 leading-[1.7]">{v.desc}</p>
+              </motion.div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious
+          className="-left-2 md:-left-6 h-11 w-11 rounded-full bg-accent border-accent text-white hover:bg-accent/90 hover:text-white shadow-[0_8px_24px_-6px_rgba(212,175,55,0.55)] opacity-100"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </CarouselPrevious>
+        <CarouselNext
+          className="-right-2 md:-right-6 h-11 w-11 rounded-full bg-accent border-accent text-white hover:bg-accent/90 hover:text-white shadow-[0_8px_24px_-6px_rgba(212,175,55,0.55)] opacity-100"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </CarouselNext>
+      </Carousel>
+
+      {/* Gold dash indicators */}
+      <div className="flex items-center justify-center gap-2 mt-8" role="tablist" aria-label="Carousel position">
+        {snaps.map((_, i) => {
+          const active = i === selected;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => api?.scrollTo(i)}
+              aria-label={`Go to value ${i + 1}`}
+              aria-selected={active}
+              role="tab"
+              className={`h-[3px] rounded-full transition-all duration-500 ${
+                active ? "w-8 bg-accent shadow-[0_0_10px_rgba(212,175,55,0.7)]" : "w-4 bg-accent/30 hover:bg-accent/60"
+              }`}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 const AboutPage = () => {
   const [bioVisible, setBioVisible] = useState(false);
   const bioLines = [
@@ -153,7 +331,7 @@ const AboutPage = () => {
 
             <div className="relative z-10 max-w-4xl px-6 text-center">
               <ScrollReveal>
-                <h1 className="font-heading text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white mb-8 leading-[1.05] tracking-tight">
+                <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight md:whitespace-nowrap">
                   About <span className="text-gradient-gold">The Luminary Rise</span>
                 </h1>
                 <div className="editorial-line mx-auto mb-8" />
@@ -215,8 +393,8 @@ const AboutPage = () => {
                     transition={{ duration: 0.9, delay: i * 0.18, ease: [0.23, 1, 0.32, 1] }}
                     className="relative bg-white rounded-lg p-8 border border-primary/10 border-l-4 border-l-accent shadow-[0_10px_40px_-12px_rgba(10,14,26,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(10,14,26,0.18)] transition-shadow duration-500"
                   >
-                    <p className="editorial-label text-accent mb-3 tracking-[0.2em] text-xs font-semibold">{c.label}</p>
-                    <p className="text-primary/80 text-[16px] leading-[1.8]">{c.body}</p>
+                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-base font-bold">{c.label}</p>
+                    <p className="text-primary/85 text-[18px] leading-[1.8]">{c.body}</p>
                   </motion.div>
                 ))}
               </div>
@@ -267,46 +445,7 @@ const AboutPage = () => {
                     A framework that turns insight into outcome.
                   </h3>
                 </ScrollReveal>
-                <div className="relative pl-12">
-                  {/* Vertical gold line */}
-                  <motion.div
-                    initial={{ scaleY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
-                    style={{ transformOrigin: "top" }}
-                    className="absolute left-[14px] top-2 bottom-2 w-px bg-gradient-to-b from-accent via-accent/60 to-transparent"
-                  />
-                  <div className="space-y-7">
-                    {akaSteps.map((step, i) => (
-                      <motion.div
-                        key={step.label}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-60px" }}
-                        transition={{ duration: 0.6, delay: 0.3 + i * 0.18, ease: [0.23, 1, 0.32, 1] }}
-                        className="relative"
-                      >
-                        {/* Glowing node */}
-                        <motion.div
-                          initial={{ boxShadow: "0 0 0px rgba(212,175,55,0)" }}
-                          whileInView={{
-                            boxShadow: [
-                              "0 0 0px rgba(212,175,55,0)",
-                              "0 0 28px rgba(212,175,55,0.85)",
-                              "0 0 8px rgba(212,175,55,0.35)",
-                            ],
-                          }}
-                          viewport={{ once: true, margin: "-60px" }}
-                          transition={{ duration: 1.4, delay: 0.3 + i * 0.18, ease: "easeOut" }}
-                          className="absolute -left-12 top-1 w-7 h-7 rounded-full bg-accent border-2 border-accent/80"
-                        />
-                        <h4 className="font-heading text-lg md:text-xl font-bold text-white mb-1">{step.label}</h4>
-                        <p className="text-white/60 text-[15px] leading-[1.7]">{step.desc}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+                <AkaTimeline steps={akaSteps} />
               </div>
             </div>
           </div>
@@ -344,8 +483,8 @@ const AboutPage = () => {
                 className="md:pr-16"
               >
                 <div className="bg-white/[0.04] backdrop-blur-md border border-white/10 border-t-2 border-t-accent rounded-lg p-8 md:p-10 h-full">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-sm font-bold">VISION</p>
-                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-medium">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-base md:text-lg font-extrabold">VISION</p>
+                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-bold">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
                 </div>
@@ -358,8 +497,8 @@ const AboutPage = () => {
                 className="md:pl-16"
               >
                 <div className="bg-white/[0.04] backdrop-blur-md border border-white/10 border-t-2 border-t-accent rounded-lg p-8 md:p-10 h-full">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-sm font-bold">MISSION</p>
-                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-medium">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.25em] text-base md:text-lg font-extrabold">MISSION</p>
+                  <p className="font-heading text-2xl md:text-3xl text-white leading-[1.4] font-bold">
                     To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
                   </p>
                 </div>
@@ -379,38 +518,7 @@ const AboutPage = () => {
                 </h2>
               </div>
             </ScrollReveal>
-            <Carousel opts={{ align: "start", loop: true }} className="w-full" aria-label="Core values carousel">
-              <CarouselContent className="-ml-4">
-                {values.map((v, i) => (
-                  <CarouselItem key={v.label} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-60px" }}
-                      transition={{ duration: 0.7, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
-                      className="h-full group rounded-2xl p-8 min-h-[260px]
-                        bg-gradient-to-br from-primary/[0.04] via-white to-accent/[0.05]
-                        backdrop-blur-xl border border-primary/10 border-t-2 border-t-accent
-                        shadow-[0_8px_40px_-18px_hsl(var(--primary)/0.25)]
-                        hover:-translate-y-1 hover:shadow-[0_18px_50px_-12px_rgba(212,175,55,0.35)]
-                        hover:border-accent/50 transition-all duration-500"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(212,175,55,0.25)]">
-                        <v.icon className="w-5 h-5 text-accent" />
-                      </div>
-                      <h4 className="font-heading font-bold text-primary mb-3 text-lg">{v.label}</h4>
-                      <p className="text-[14px] text-primary/65 leading-[1.7]">{v.desc}</p>
-                    </motion.div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="border-accent/40 text-accent hover:bg-accent hover:text-[#0a0e1a]">
-                <ChevronLeft />
-              </CarouselPrevious>
-              <CarouselNext className="border-accent/40 text-accent hover:bg-accent hover:text-[#0a0e1a]">
-                <ChevronRight />
-              </CarouselNext>
-            </Carousel>
+            <ValuesCarousel values={values} />
           </div>
         </section>
 
