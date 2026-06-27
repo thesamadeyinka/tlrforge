@@ -384,14 +384,15 @@ const ValuesGrid = ({
 };
 
 // ============= Core Values Wheel — interactive circular dial =============
-const WHEEL_GOLDS = [
-  "#7a5a18", // deep amber
-  "#946f1f",
-  "#b08930",
-  "#c9a961",
-  "#d8bd7c",
-  "#e6cf97",
-  "#f1e2b6", // soft champagne
+// Order matches `values` array: Intentionality, Innovation, Integrity, Excellence, Mentorship, Community, Legacy
+const WHEEL_SEGMENTS = [
+  { fill: "#0a1e3f", stroke: "#0a0e1a", text: "#ffffff" }, // Intentionality — deep navy
+  { fill: "#0aa5b8", stroke: "#0a0e1a", text: "#ffffff" }, // Innovation — electric teal
+  { fill: "#ffffff", stroke: "#d4af37", text: "#0a0e1a" }, // Integrity — white w/ gold border
+  { fill: "#d4a017", stroke: "#0a0e1a", text: "#0a0e1a" }, // Excellence — rich gold/amber
+  { fill: "#a0612c", stroke: "#0a0e1a", text: "#ffffff" }, // Mentorship — warm copper
+  { fill: "#3a7d5c", stroke: "#0a0e1a", text: "#ffffff" }, // Community — soft forest green
+  { fill: "#5b1a3a", stroke: "#0a0e1a", text: "#ffffff" }, // Legacy — deep burgundy
 ];
 
 const polar = (cx: number, cy: number, r: number, deg: number) => {
@@ -415,14 +416,6 @@ const sectorPath = (
   return `M${p1.x} ${p1.y} A${rO} ${rO} 0 ${large} 1 ${p2.x} ${p2.y} L${p3.x} ${p3.y} A${rI} ${rI} 0 ${large} 0 ${p4.x} ${p4.y} Z`;
 };
 
-const labelArc = (cx: number, cy: number, r: number, a1: number, a2: number, reverse: boolean) => {
-  const A1 = reverse ? a2 : a1;
-  const A2 = reverse ? a1 : a2;
-  const p1 = polar(cx, cy, r, A1);
-  const p2 = polar(cx, cy, r, A2);
-  const sweep = reverse ? 0 : 1;
-  return `M${p1.x} ${p1.y} A${r} ${r} 0 0 ${sweep} ${p2.x} ${p2.y}`;
-};
 
 const ValuesWheel = ({
   values,
