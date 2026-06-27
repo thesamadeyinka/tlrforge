@@ -35,18 +35,16 @@ const stats = [
 
 const PillarsSection = () => {
   return (
-    <section className="pt-16 pb-10 md:pt-20 md:pb-12 bg-[hsl(224,55%,6%)] relative">
-      {/* Bottom gradient bridge into Events (dark navy) */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-[hsl(224,55%,6%)] pointer-events-none z-10" />
+    <section className="pt-16 pb-10 md:pt-20 md:pb-12 bg-white relative">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="max-w-2xl mx-auto text-center mb-12">
           <StaggeredText
             text="More Than a School, We Are An Ecosystem"
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-5 leading-[1.15]"
+            className="font-heading text-3xl md:text-5xl font-bold text-primary mb-5 leading-[1.15]"
           />
           <ScrollReveal delay={0.3}>
             <div className="editorial-line mx-auto mb-5" />
-            <p className="text-white/70 text-[17px] leading-[1.8] max-w-lg mx-auto">
+            <p className="text-primary/70 text-[17px] leading-[1.8] max-w-lg mx-auto">
               The Luminary Rise is a dynamic ecosystem where emerging leaders, professionals, businesses, and organisations access the knowledge, tools, and support needed to thrive in today's fast-changing world.
             </p>
           </ScrollReveal>
@@ -61,7 +59,7 @@ const PillarsSection = () => {
                   suffix={s.suffix}
                   className="font-heading text-2xl md:text-3xl font-bold text-accent block"
                 />
-                <span className="text-[11px] text-white/55 tracking-wide uppercase mt-1 block">{s.label}</span>
+                <span className="text-[11px] text-primary/60 tracking-wide uppercase mt-1 block">{s.label}</span>
               </div>
             ))}
           </div>
@@ -70,7 +68,7 @@ const PillarsSection = () => {
         <ScrollReveal delay={0.1}>
           <div className="text-center mb-8">
             <h3 className="font-heading text-2xl md:text-3xl font-bold text-accent mb-3">Our Pillars</h3>
-            <h4 className="font-heading text-xl md:text-2xl font-bold text-white leading-[1.2]">
+            <h4 className="font-heading text-xl md:text-2xl font-bold text-primary leading-[1.2]">
               Three Integrated Pillars
             </h4>
           </div>
@@ -90,10 +88,10 @@ const PillarsSection = () => {
                 <Link
                   to={p.link}
                   className="block relative h-full rounded-2xl p-7 md:p-8 min-h-[340px] group overflow-hidden
-                    bg-gradient-to-br from-white/[0.08] via-white/[0.04] to-white/[0.02]
-                    backdrop-blur-xl border border-accent/25
-                    shadow-[0_8px_40px_-12px_hsl(var(--accent)/0.25)]
-                    hover:border-accent/50 hover:shadow-[0_12px_60px_-12px_hsl(var(--accent)/0.45)]
+                    bg-gradient-to-br from-primary/[0.04] via-white to-accent/[0.05]
+                    backdrop-blur-xl border border-primary/10
+                    shadow-[0_8px_40px_-18px_hsl(var(--primary)/0.28)]
+                    hover:border-accent/45 hover:shadow-[0_12px_56px_-18px_hsl(var(--accent)/0.35)]
                     hover:-translate-y-1 transition-all duration-700"
                 >
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-accent/[0.04] to-accent/[0.08] pointer-events-none" />
@@ -104,8 +102,8 @@ const PillarsSection = () => {
                       <p.icon className="w-6 h-6 text-accent" />
                     </div>
                     <div className="editorial-label mb-3 text-accent">Pillar {String(i + 1).padStart(2, "0")}</div>
-                    <h4 className="font-heading font-bold text-white mb-4 text-xl md:text-2xl">{p.title}</h4>
-                    <p className="text-[15px] text-white/70 leading-[1.75] flex-1">{p.desc}</p>
+                    <h4 className="font-heading font-bold text-primary mb-4 text-xl md:text-2xl">{p.title}</h4>
+                    <p className="text-[15px] text-primary/70 leading-[1.75] flex-1">{p.desc}</p>
                     <div className="mt-6 inline-flex items-center gap-2 text-accent text-sm font-sans font-semibold tracking-wide">
                       Explore <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -118,7 +116,7 @@ const PillarsSection = () => {
 
         <ScrollReveal delay={0.2}>
           <div className="text-center">
-            <Button asChild variant="outline" className="font-sans font-semibold text-sm rounded-md tracking-wide bg-transparent border-accent/50 text-white hover:bg-accent/10 hover:border-accent hover:text-accent">
+            <Button asChild variant="outline" className="font-sans font-semibold text-sm rounded-md tracking-wide bg-transparent border-primary/30 text-primary hover:bg-accent hover:border-accent hover:text-accent-foreground">
               <Link to="/about">Learn More About Us <ArrowRight className="w-4 h-4 ml-2" /></Link>
             </Button>
           </div>
