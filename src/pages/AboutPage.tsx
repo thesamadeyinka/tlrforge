@@ -167,7 +167,7 @@ const AboutPage = () => {
 
         {/* WHO WE ARE — pure white + gold particle shimmer */}
         <section className="relative py-24 md:py-28 bg-white overflow-hidden">
-          <AmbientParticles count={18} className="opacity-60" />
+          <AmbientParticles count={12} className="opacity-60" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
             <div className="grid md:grid-cols-5 gap-12 lg:gap-16 items-start">
               <div className="md:col-span-3">
