@@ -720,101 +720,108 @@ const AboutPage = () => {
         {/* WHITE → DARK transition */}
         <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
-        {/* VISION & MISSION — full-bleed split-screen */}
-        <section className="relative overflow-hidden bg-[#0a0e1a]">
-          <div className="grid md:grid-cols-2 min-h-[78vh] md:min-h-[88vh] relative">
-            {/* Vertical gold seam */}
+        {/* VISION & MISSION — stacked horizontal bands */}
+        <section className="relative bg-[#0a0e1a] py-20 md:py-28 overflow-hidden">
+          <AmbientParticles count={10} className="opacity-40" />
+          <div className="container mx-auto px-6 max-w-6xl relative space-y-16 md:space-y-20">
+            {/* MISSION band — slides from left */}
             <motion.div
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
-              style={{ transformOrigin: "top" }}
-              className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent to-transparent z-20 shadow-[0_0_18px_rgba(212,175,55,0.4)]"
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative rounded-2xl bg-gradient-to-r from-[#0d1430] to-[#0a0e1a] border border-white/5 px-8 md:px-14 py-12 md:py-16"
+            >
+              <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
+                <div className="max-w-2xl">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold">MISSION</p>
+                  <p className="font-heading text-2xl md:text-[28px] lg:text-[32px] text-white leading-[1.4] font-medium">
+                    To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
+                  </p>
+                </div>
+                {/* Circular image — floats right, overlaps band edge */}
+                <div className="relative justify-self-center md:justify-self-end md:-mr-10 lg:-mr-20">
+                  <div className="relative w-52 h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden ring-[3px] ring-accent shadow-[0_30px_60px_-15px_rgba(212,175,55,0.45),0_0_0_8px_rgba(10,14,26,1),0_0_0_9px_rgba(212,175,55,0.25)]">
+                    <motion.img
+                      src={missionBg}
+                      alt="People in collaboration"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 6, ease: "easeOut" }}
+                    />
+                  </div>
+                  <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Gold hairline divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformOrigin: "center" }}
+              className="h-px max-w-3xl mx-auto bg-gradient-to-r from-transparent via-accent to-transparent shadow-[0_0_12px_rgba(212,175,55,0.35)]"
             />
 
-            {/* VISION half */}
+            {/* VISION band — slides from right */}
             <motion.div
-              initial={{ opacity: 0, x: -60 }}
+              initial={{ opacity: 0, x: 80 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-              className="relative group overflow-hidden flex items-center justify-center px-8 py-20 md:py-24 min-h-[60vh]"
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative rounded-2xl bg-gradient-to-l from-[#0d1430] to-[#0a0e1a] border border-white/5 px-8 md:px-14 py-12 md:py-16"
             >
-              <motion.img
-                src={visionBg}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-                width={1600}
-                height={1600}
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ scale: 1.05 }}
-                whileHover={{ scale: 1.15 }}
-                transition={{ duration: 8, ease: "easeOut" }}
-              />
-              <div className="absolute inset-0 bg-[#0a0e1a]/[0.55]" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/30 via-transparent to-[#0a0e1a]/50" />
-              <div className="relative z-10 max-w-xl text-center">
-                <p className="editorial-label text-accent mb-6 tracking-[0.3em] text-sm font-bold">VISION</p>
-                <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-white leading-[1.45] font-medium">
-                  To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* MISSION half */}
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
-              className="relative group overflow-hidden flex items-center justify-center px-8 py-20 md:py-24 min-h-[60vh]"
-            >
-              <motion.img
-                src={missionBg}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-                width={1600}
-                height={1600}
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ scale: 1.05 }}
-                whileHover={{ scale: 1.15 }}
-                transition={{ duration: 8, ease: "easeOut" }}
-              />
-              <div className="absolute inset-0 bg-[#0a0e1a]/[0.55]" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/30 via-transparent to-[#0a0e1a]/50" />
-              <div className="relative z-10 max-w-xl text-center">
-                <p className="editorial-label text-accent mb-6 tracking-[0.3em] text-sm font-bold">MISSION</p>
-                <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-white leading-[1.45] font-medium">
-                  To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
-                </p>
+              <div className="grid md:grid-cols-[auto_1fr] gap-10 md:gap-14 items-center">
+                {/* Circular image — floats left, overlaps band edge */}
+                <div className="relative justify-self-center md:justify-self-start md:-ml-10 lg:-ml-20 order-2 md:order-1">
+                  <div className="relative w-52 h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden ring-[3px] ring-accent shadow-[0_30px_60px_-15px_rgba(212,175,55,0.45),0_0_0_8px_rgba(10,14,26,1),0_0_0_9px_rgba(212,175,55,0.25)]">
+                    <motion.img
+                      src={visionBg}
+                      alt="Aerial cityscape at dawn"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 6, ease: "easeOut" }}
+                    />
+                  </div>
+                  <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
+                </div>
+                <div className="max-w-2xl order-1 md:order-2 md:text-right">
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold">VISION</p>
+                  <p className="font-heading text-2xl md:text-[28px] lg:text-[32px] text-white leading-[1.4] font-medium">
+                    To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* CORE VALUES — auto-rotating highlight grid */}
-        <section className="relative py-24 md:py-28 bg-white">
-          {/* DARK → WHITE transition above */}
-          <div aria-hidden className="absolute -top-1 left-0 right-0 h-24 bg-gradient-to-b from-[#0a0e1a] to-white pointer-events-none" />
-          <div className="container mx-auto px-6 max-w-7xl relative">
+        {/* CORE VALUES — interactive circular wheel on deep navy */}
+        <section className="relative py-24 md:py-32 bg-[#0a0e1a] overflow-hidden">
+          <AmbientParticles count={18} className="opacity-50" />
+          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08),transparent_60%)] pointer-events-none" />
+          <div className="container mx-auto px-6 max-w-6xl relative">
             <ScrollReveal>
-              <div className="text-center mb-14">
-                <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">WHAT GUIDES US</p>
-                <h2 className="font-heading text-4xl md:text-5xl font-bold text-primary leading-[1.1]">
+              <div className="text-center mb-14 md:mb-16">
+                <p className="editorial-label text-accent mb-5 tracking-[0.3em] text-sm font-semibold">WHAT GUIDES US</p>
+                <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
                   Our <span className="text-gradient-gold">Core Values</span>
                 </h2>
+                <p className="text-white/60 mt-5 max-w-xl mx-auto text-[15px]">
+                  Hover or tap a segment to focus a value. Click to lock it at the top of the wheel.
+                </p>
               </div>
             </ScrollReveal>
-            <ValuesGrid values={values} />
+            <ValuesWheel values={values} />
           </div>
         </section>
-        {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
+
 
 
         {/* STRATEGIC PILLARS — accordion */}
