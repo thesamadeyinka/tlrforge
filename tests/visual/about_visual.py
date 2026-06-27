@@ -30,7 +30,7 @@ SECTIONS = [
     ("strategic-pillars", "OUR ARCHITECTURE"),
     ("audience", "OUR AUDIENCE"),
     ("leadership", "LEADERSHIP"),
-    ("quote", "rise with it"),
+    ("quote", "adapt"),
     ("cta", "START TODAY"),
 ]
 
