@@ -167,7 +167,7 @@ const AboutPage = () => {
 
         {/* WHO WE ARE — pure white + gold particle shimmer */}
         <section className="relative py-24 md:py-28 bg-white overflow-hidden">
-          <AmbientParticles count={18} className="opacity-60" />
+          <AmbientParticles count={12} className="opacity-60" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
             <div className="grid md:grid-cols-5 gap-12 lg:gap-16 items-start">
               <div className="md:col-span-3">
@@ -316,9 +316,13 @@ const AboutPage = () => {
         <section className="relative py-24 md:py-32 overflow-hidden">
           <img
             src={aboutHero}
-            alt="Aerial cityscape"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
           />
+
           <div className="absolute inset-0 bg-[#0a0e1a]/[0.78]" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/40 via-transparent to-[#0a0e1a]/60" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -375,7 +379,7 @@ const AboutPage = () => {
                 </h2>
               </div>
             </ScrollReveal>
-            <Carousel opts={{ align: "start", loop: true }} className="w-full">
+            <Carousel opts={{ align: "start", loop: true }} className="w-full" aria-label="Core values carousel">
               <CarouselContent className="-ml-4">
                 {values.map((v, i) => (
                   <CarouselItem key={v.label} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
@@ -530,7 +534,7 @@ const AboutPage = () => {
                     className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-accent via-accent/40 to-accent"
                   >
                     <div className="w-full h-full rounded-full overflow-hidden bg-primary/5 border-4 border-white">
-                      <img src="/placeholder.svg" alt="Dr Samuel Omenka" className="w-full h-full object-cover" />
+                      <img src="/placeholder.svg" alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                     </div>
                   </motion.div>
                 </div>
@@ -565,7 +569,7 @@ const AboutPage = () => {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
             >
-              <Quote className="w-16 h-16 md:w-20 md:h-20 text-accent/70 mx-auto mb-10" />
+              <Quote aria-hidden="true" className="w-16 h-16 md:w-20 md:h-20 text-accent/70 mx-auto mb-10" />
             </motion.div>
             <WordReveal
               text={'"At Luminary Rise, we don\'t just adapt to change — we lead it, inspire it, and rise with it."'}

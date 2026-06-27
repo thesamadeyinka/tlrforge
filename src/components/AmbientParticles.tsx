@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useMemo, useRef } from "react";
 
 interface Particle {
   id: number;
@@ -12,6 +12,10 @@ interface Particle {
 }
 
 const AmbientParticles = ({ count = 20, className = "" }: { count?: number; className?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "200px" });
+  const prefersReducedMotion = useReducedMotion();
+
   const particles = useMemo<Particle[]>(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
@@ -24,12 +28,18 @@ const AmbientParticles = ({ count = 20, className = "" }: { count?: number; clas
     }));
   }, [count]);
 
+  const shouldAnimate = inView && !prefersReducedMotion;
+
   return (
-    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
+    >
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-accent"
+          className="absolute rounded-full bg-accent will-change-transform"
           style={{
             width: p.size,
             height: p.size,
@@ -37,15 +47,19 @@ const AmbientParticles = ({ count = 20, className = "" }: { count?: number; clas
             top: `${p.y}%`,
             opacity: p.opacity,
           }}
-          animate={{
-            y: [0, -30, 0, 20, 0],
-            x: [0, 15, -10, 5, 0],
-            opacity: [p.opacity, p.opacity * 1.5, p.opacity, p.opacity * 0.5, p.opacity],
-          }}
+          animate={
+            shouldAnimate
+              ? {
+                  y: [0, -30, 0, 20, 0],
+                  x: [0, 15, -10, 5, 0],
+                  opacity: [p.opacity, p.opacity * 1.5, p.opacity, p.opacity * 0.5, p.opacity],
+                }
+              : { y: 0, x: 0, opacity: p.opacity }
+          }
           transition={{
             duration: p.duration,
             delay: p.delay,
-            repeat: Infinity,
+            repeat: shouldAnimate ? Infinity : 0,
             ease: "easeInOut",
           }}
         />
