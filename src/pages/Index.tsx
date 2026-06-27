@@ -4,6 +4,8 @@ import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import ScrollProgress from "@/components/ScrollProgress";
+import ChapterNav from "@/components/ChapterNav";
+import Chapter from "@/components/Chapter";
 
 const PillarsSection = lazy(() => import("@/components/PillarsSection"));
 const EventsSection = lazy(() => import("@/components/EventsSection"));
@@ -11,7 +13,6 @@ const EvolveFeatureSection = lazy(() => import("@/components/EvolveFeatureSectio
 const WholePersonSection = lazy(() => import("@/components/WholePersonSection"));
 const ValuePropSection = lazy(() => import("@/components/ValuePropSection"));
 const AnimatedGradientBg = lazy(() => import("@/components/AnimatedGradientBg"));
-const ParallaxWrapper = lazy(() => import("@/components/ParallaxWrapper"));
 
 const Index = () => {
   return (
@@ -21,27 +22,43 @@ const Index = () => {
           <AnimatedGradientBg />
         </Suspense>
         <ScrollProgress />
+        <ChapterNav />
         <Header />
-        <HeroSection />
-        <Suspense fallback={<div className="py-28" />}>
-          <ParallaxWrapper speed={-0.1}>
-            <PillarsSection />
-          </ParallaxWrapper>
-        </Suspense>
+
+        {/* Chapter 1 — Reality */}
+        <section id="reality" className="scroll-mt-20">
+          <HeroSection />
+        </section>
+
+        {/* Chapter 2 — EVOLVE */}
+        <Chapter id="evolve">
+          <Suspense fallback={<div className="py-28" />}>
+            <EvolveFeatureSection />
+          </Suspense>
+        </Chapter>
+
         <Suspense fallback={<div className="py-28" />}>
           <EventsSection />
         </Suspense>
+
+        {/* Chapter 3 — Network (pillars incl. The Luminaries Network) */}
+        <Chapter id="network">
+          <Suspense fallback={<div className="py-28" />}>
+            <PillarsSection />
+          </Suspense>
+        </Chapter>
+
         <Suspense fallback={<div className="py-28" />}>
-          <EvolveFeatureSection />
+          <WholePersonSection />
         </Suspense>
-        <Suspense fallback={<div className="py-28" />}>
-          <ParallaxWrapper speed={-0.08}>
-            <WholePersonSection />
-          </ParallaxWrapper>
-        </Suspense>
-        <Suspense fallback={<div className="py-28" />}>
-          <ValuePropSection />
-        </Suspense>
+
+        {/* Chapter 4 — Impact (the climax) */}
+        <Chapter id="impact">
+          <Suspense fallback={<div className="py-28" />}>
+            <ValuePropSection />
+          </Suspense>
+        </Chapter>
+
         <Footer />
       </div>
     </PageTransition>
