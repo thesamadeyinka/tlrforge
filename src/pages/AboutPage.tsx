@@ -897,7 +897,7 @@ const AboutPage = () => {
             >
               <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
                 <div className="max-w-2xl">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold relative -top-0.5">MISSION</p>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[15px] font-extrabold relative -top-0.5">MISSION</p>
                   <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
                   </p>
@@ -955,7 +955,7 @@ const AboutPage = () => {
                   <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
                 </div>
                 <div className="max-w-2xl order-1 md:order-2 md:text-right">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[13px] font-bold relative -top-0.5">VISION</p>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[15px] font-extrabold relative -top-0.5">VISION</p>
                   <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
