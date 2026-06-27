@@ -442,7 +442,7 @@ const AboutPage = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a] via-[#0a0e1a]/85 to-transparent pointer-events-none" />
 
-                  <AccordionTrigger className="relative z-10 px-6 md:px-8 py-6 hover:no-underline">
+                  <AccordionTrigger className="relative z-10 px-6 md:px-8 py-6 hover:no-underline text-accent [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-accent">
                     <div className="flex items-center gap-5 text-left">
                       <div className="w-12 h-12 rounded-md bg-accent/15 border border-accent/30 flex items-center justify-center shrink-0">
                         <p.icon className="w-5 h-5 text-accent" />
