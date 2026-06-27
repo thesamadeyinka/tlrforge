@@ -44,7 +44,7 @@ const PhilosophyPage = () => {
         </section>
 
         {/* Core Belief */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-3xl">
             <ScrollReveal>
               <div className="text-center">
@@ -67,7 +67,7 @@ const PhilosophyPage = () => {
         </section>
 
         {/* Whole Person Integration */}
-        <section className="py-32 bg-secondary grain relative">
+        <section className="py-20 md:py-24 bg-white grain relative">
           <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <ScrollReveal>
               <div className="text-center mb-16">
@@ -94,7 +94,7 @@ const PhilosophyPage = () => {
         </section>
 
         {/* AKA-RB Method */}
-        <section className="py-32 bg-background">
+        <section className="py-20 md:py-24 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <ScrollReveal>
               <div className="text-center mb-16">
@@ -128,15 +128,14 @@ const PhilosophyPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-24 bg-accent">
-          <div className="container mx-auto px-6 max-w-2xl text-center">
-            <p className="editorial-label text-accent-foreground/40 mb-6">Take Action</p>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-accent-foreground mb-4 italic">
-              Experience Transformation First-Hand
-            </h2>
-            <div className="editorial-line mx-auto mb-10 !bg-accent-foreground/20" />
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-sans font-semibold px-8 py-6 rounded-md tracking-wide">
-              <Link to="/apply">Apply to EVOLVE <ArrowRight className="w-4 h-4 ml-2" /></Link>
+        <section className="relative py-24 md:py-28 bg-[#0a0e1a] overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.18] blur-[180px] pointer-events-none" />
+          <div className="container mx-auto px-6 max-w-3xl text-center relative z-10">
+            <p className="editorial-label text-accent mb-6 tracking-[0.2em] text-sm font-bold">TAKE ACTION</p>
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1]">Experience Transformation First-Hand</h2>
+            <div className="editorial-line mx-auto mb-10 !bg-accent/40" />
+            <Button asChild size="lg" className="bg-accent text-[#0a0e1a] hover:bg-accent hover:shadow-[0_0_40px_rgba(212,175,55,0.6)] font-sans font-bold text-base px-10 py-7 rounded-md tracking-wide transition-shadow duration-500">
+              <Link to="/apply">Apply to EVOLVE <ArrowRight className="w-5 h-5 ml-2" /></Link>
             </Button>
           </div>
         </section>
