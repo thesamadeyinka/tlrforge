@@ -443,7 +443,7 @@ const AboutPage = () => {
                 <ScrollReveal>
                   <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">THE AKA-RB METHOD</p>
                   <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-10 leading-[1.15]">
-                    A framework that turns insight into outcome.
+                    A framework that turn insights into desired outcomes
                   </h3>
                 </ScrollReveal>
                 <AkaTimeline steps={akaSteps} />
