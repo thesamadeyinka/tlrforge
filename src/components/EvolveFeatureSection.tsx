@@ -52,7 +52,7 @@ const EvolveFeatureSection = () => {
             <span className="text-gradient-gold">Transformational Growth</span>
           </h2>
           <div className="w-12 h-px bg-accent mx-auto mb-8" />
-          <p className="text-white/70 text-[17px] md:text-lg leading-[1.8] max-w-xl mx-auto mb-10">
+          <p className="text-white text-[17px] md:text-lg leading-[1.8] max-w-xl mx-auto mb-10">
             It is never too late to begin (again). You can become the best version of yourself with TLR's Transformational Growth Framework.
           </p>
           <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold text-sm px-8 rounded-md tracking-wide">
