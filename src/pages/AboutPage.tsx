@@ -382,6 +382,235 @@ const ValuesGrid = ({
     </div>
   );
 };
+
+// ============= Core Values Wheel — interactive circular dial =============
+const WHEEL_GOLDS = [
+  "#7a5a18", // deep amber
+  "#946f1f",
+  "#b08930",
+  "#c9a961",
+  "#d8bd7c",
+  "#e6cf97",
+  "#f1e2b6", // soft champagne
+];
+
+const polar = (cx: number, cy: number, r: number, deg: number) => {
+  const a = ((deg - 90) * Math.PI) / 180;
+  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+};
+
+const sectorPath = (
+  cx: number,
+  cy: number,
+  rO: number,
+  rI: number,
+  a1: number,
+  a2: number
+) => {
+  const p1 = polar(cx, cy, rO, a1);
+  const p2 = polar(cx, cy, rO, a2);
+  const p3 = polar(cx, cy, rI, a2);
+  const p4 = polar(cx, cy, rI, a1);
+  const large = a2 - a1 > 180 ? 1 : 0;
+  return `M${p1.x} ${p1.y} A${rO} ${rO} 0 ${large} 1 ${p2.x} ${p2.y} L${p3.x} ${p3.y} A${rI} ${rI} 0 ${large} 0 ${p4.x} ${p4.y} Z`;
+};
+
+const labelArc = (cx: number, cy: number, r: number, a1: number, a2: number, reverse: boolean) => {
+  const A1 = reverse ? a2 : a1;
+  const A2 = reverse ? a1 : a2;
+  const p1 = polar(cx, cy, r, A1);
+  const p2 = polar(cx, cy, r, A2);
+  const sweep = reverse ? 0 : 1;
+  return `M${p1.x} ${p1.y} A${r} ${r} 0 0 ${sweep} ${p2.x} ${p2.y}`;
+};
+
+const ValuesWheel = ({
+  values,
+}: {
+  values: { label: string; icon: typeof Target; desc: string }[];
+}) => {
+  const n = values.length;
+  const step = 360 / n;
+  const [rotation, setRotation] = useState(0);
+  const [active, setActive] = useState(0);
+  const [hover, setHover] = useState<number | null>(null);
+  const introDone = useRef(false);
+
+  // Dramatic intro: one full rotation, then settle
+  useEffect(() => {
+    if (introDone.current) return;
+    introDone.current = true;
+    const id = window.setTimeout(() => setRotation(360), 50);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  const lockTo = (i: number) => {
+    setActive(i);
+    const targetBase = -i * step; // bring segment i center to top
+    // pick nearest equivalent to current rotation
+    const cur = rotation;
+    const diff = ((((targetBase - cur) % 360) + 540) % 360) - 180;
+    setRotation(cur + diff);
+  };
+
+  const display = hover !== null ? hover : active;
+  const cx = 300;
+  const cy = 300;
+  const rO = 285;
+  const rI = 165;
+  const rLabel = 248;
+
+  return (
+    <div className="relative w-full">
+      {/* Desktop: SVG wheel */}
+      <div className="hidden md:flex relative items-center justify-center mx-auto" style={{ maxWidth: 640 }}>
+        {/* gold ambience */}
+        <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.18),transparent_65%)] blur-2xl pointer-events-none" />
+        <motion.svg
+          viewBox="0 0 600 600"
+          width="100%"
+          className="relative drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+          style={{ maxWidth: 600 }}
+        >
+          <defs>
+            {values.map((_, i) => {
+              const a1 = i * step - step / 2;
+              const a2 = i * step + step / 2;
+              const mid = ((a1 + a2) / 2 + 360) % 360;
+              const reverse = mid > 90 && mid < 270;
+              return (
+                <path
+                  key={`p-${i}`}
+                  id={`wheel-label-${i}`}
+                  d={labelArc(cx, cy, rLabel, a1, a2, reverse)}
+                  fill="none"
+                />
+              );
+            })}
+          </defs>
+          <motion.g
+            animate={{ rotate: rotation }}
+            transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: "300px 300px" }}
+          >
+            {values.map((v, i) => {
+              const a1 = i * step - step / 2;
+              const a2 = i * step + step / 2;
+              const isActive = i === display;
+              const fill = WHEEL_GOLDS[i % WHEEL_GOLDS.length];
+              return (
+                <g key={v.label}>
+                  <motion.path
+                    d={sectorPath(cx, cy, rO, rI, a1, a2)}
+                    fill={fill}
+                    stroke="#0a0e1a"
+                    strokeWidth={2}
+                    style={{ cursor: "pointer", transformOrigin: "300px 300px" }}
+                    animate={{
+                      opacity: isActive ? 1 : 0.7,
+                      scale: isActive ? 1.035 : 1,
+                      filter: isActive
+                        ? "drop-shadow(0 0 18px rgba(212,175,55,0.85)) brightness(1.15)"
+                        : "drop-shadow(0 0 0 rgba(0,0,0,0))",
+                    }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                    onMouseEnter={() => setHover(i)}
+                    onMouseLeave={() => setHover(null)}
+                    onClick={() => lockTo(i)}
+                  />
+                  <text
+                    className="font-heading tracking-[0.28em]"
+                    fill="#0a0e1a"
+                    fontSize={13}
+                    fontWeight={700}
+                    style={{ pointerEvents: "none", textTransform: "uppercase" }}
+                  >
+                    <textPath href={`#wheel-label-${i}`} startOffset="50%" textAnchor="middle">
+                      {v.label}
+                    </textPath>
+                  </text>
+                </g>
+              );
+            })}
+            {/* outer hairline */}
+            <circle cx={cx} cy={cy} r={rO + 4} fill="none" stroke="rgba(212,175,55,0.35)" strokeWidth={1} />
+            <circle cx={cx} cy={cy} r={rI - 4} fill="none" stroke="rgba(212,175,55,0.35)" strokeWidth={1} />
+            {/* tick marker at top to signal locked segment */}
+            <circle cx={cx} cy={cy - rO - 16} r={5} fill="#d4af37" />
+          </motion.g>
+          {/* inner disc (does not rotate) */}
+          <circle cx={cx} cy={cy} r={rI - 8} fill="#0a0e1a" />
+          <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.4)" strokeWidth={1} />
+        </motion.svg>
+        {/* Center living lens — absolutely positioned over inner disc */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="text-center px-10 max-w-[260px]">
+            <motion.div
+              key={display}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+            >
+              <p className="editorial-label text-accent mb-3 text-[10px] tracking-[0.3em]">VALUE {String(display + 1).padStart(2, "0")}</p>
+              <h3 className="font-heading text-2xl lg:text-[28px] text-white mb-3 leading-[1.1]">
+                {values[display].label}
+              </h3>
+              <p className="text-[12.5px] text-white/65 leading-[1.55]">
+                {values[display].desc}
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile: stacked interactive list */}
+      <div className="md:hidden space-y-2.5">
+        {values.map((v, i) => {
+          const isActive = i === active;
+          const bg = WHEEL_GOLDS[i % WHEEL_GOLDS.length];
+          return (
+            <motion.button
+              key={v.label}
+              onClick={() => setActive(i)}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="w-full text-left rounded-xl overflow-hidden border border-white/10"
+              style={{ backgroundColor: isActive ? `${bg}22` : "rgba(255,255,255,0.02)" }}
+            >
+              <div className="flex items-stretch">
+                <div
+                  className="w-1.5 shrink-0"
+                  style={{ background: bg, boxShadow: isActive ? `0 0 14px ${bg}` : undefined }}
+                />
+                <div className="flex-1 px-5 py-4">
+                  <p
+                    className="editorial-label text-[10px] tracking-[0.3em] mb-1"
+                    style={{ color: bg }}
+                  >
+                    VALUE {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h4 className="font-heading text-white text-lg leading-tight">{v.label}</h4>
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-[13px] text-white/70 leading-[1.6] pt-2">{v.desc}</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+
 const AboutPage = () => {
   const [bioVisible, setBioVisible] = useState(false);
   const bioLines = [
