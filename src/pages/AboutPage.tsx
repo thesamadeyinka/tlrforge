@@ -22,8 +22,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import type { CarouselApi } from "@/components/ui/carousel";
 import aboutHero from "@/assets/about-hero.jpg";
 import evolveBg1 from "@/assets/evolve-bg-1.jpg";
 import evolveBg2 from "@/assets/evolve-bg-2.jpg";
