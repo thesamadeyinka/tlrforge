@@ -846,7 +846,7 @@ const AboutPage = () => {
         </section>
 
         {/* HERO → WHO WE ARE transition */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
         {/* WHO WE ARE — pure white + gold particle shimmer */}
         <section className="relative py-16 md:py-20 bg-white overflow-hidden">
@@ -898,7 +898,7 @@ const AboutPage = () => {
                     transition={{ duration: 0.9, delay: i * 0.18, ease: [0.23, 1, 0.32, 1] }}
                     className="relative bg-white rounded-lg p-8 border border-primary/10 border-l-4 border-l-accent shadow-[0_10px_40px_-12px_rgba(10,14,26,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(10,14,26,0.18)] transition-shadow duration-500"
                   >
-                    <p className="editorial-label text-accent mb-4 tracking-[0.2em] text-[17px] font-black">{c.label}</p>
+                    <p className="editorial-label text-accent mb-5 tracking-[0.14em] text-[20px] font-black">{c.label}</p>
                     <p className="text-primary/75 text-[15px] leading-[1.8]">{c.body}</p>
                   </motion.div>
                 ))}
@@ -909,7 +909,7 @@ const AboutPage = () => {
 
 
         {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
         {/* VISION & MISSION — stacked horizontal bands */}
         <section className="relative bg-[#0a0e1a] py-16 md:py-20 overflow-hidden">
@@ -925,7 +925,7 @@ const AboutPage = () => {
             >
               <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
                 <div className="max-w-2xl">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[17px] font-black relative -top-0.5">MISSION</p>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.14em] text-[20px] font-black relative -top-0.5">MISSION</p>
                   <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To build and steward an integrated, high-impact growth ecosystem that cultivates transformative leadership, strengthens institutions, and mobilises strategic capital.
                   </p>
@@ -983,7 +983,7 @@ const AboutPage = () => {
                   <div aria-hidden className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25),transparent_65%)] -m-6 blur-2xl pointer-events-none" />
                 </div>
                 <div className="max-w-2xl order-1 md:order-2 md:text-right">
-                  <p className="editorial-label text-accent mb-5 tracking-[0.32em] text-[17px] font-black relative -top-0.5">VISION</p>
+                  <p className="editorial-label text-accent mb-5 tracking-[0.14em] text-[20px] font-black relative -top-0.5">VISION</p>
                   <p className="font-heading text-[17px] md:text-[22px] lg:text-[26px] text-white leading-[1.45] font-medium">
                     To shape a future where transformational leaders and resilient institutions drive sustainable prosperity and generational impact across nations.
                   </p>
@@ -994,7 +994,7 @@ const AboutPage = () => {
         </section>
 
         {/* DARK → WHITE transition into Core Values */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-[#0a0e1a] to-white" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
         {/* CORE VALUES — interactive circular wheel on white */}
         <section className="relative py-16 md:py-20 bg-white overflow-hidden">
@@ -1013,7 +1013,7 @@ const AboutPage = () => {
         </section>
 
         {/* WHITE → DARK transition */}
-        <div aria-hidden className="h-10 bg-gradient-to-b from-white to-[#0a0e1a]" />
+        <div aria-hidden className="h-24 bg-gradient-to-b from-white to-[#0a0e1a]" />
 
 
 
