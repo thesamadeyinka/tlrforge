@@ -344,46 +344,7 @@ const AboutPage = () => {
                     A framework that turns insight into outcome.
                   </h3>
                 </ScrollReveal>
-                <div className="relative pl-12">
-                  {/* Vertical gold line */}
-                  <motion.div
-                    initial={{ scaleY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
-                    style={{ transformOrigin: "top" }}
-                    className="absolute left-[14px] top-2 bottom-2 w-px bg-gradient-to-b from-accent via-accent/60 to-transparent"
-                  />
-                  <div className="space-y-7">
-                    {akaSteps.map((step, i) => (
-                      <motion.div
-                        key={step.label}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-60px" }}
-                        transition={{ duration: 0.6, delay: 0.3 + i * 0.18, ease: [0.23, 1, 0.32, 1] }}
-                        className="relative"
-                      >
-                        {/* Glowing node */}
-                        <motion.div
-                          initial={{ boxShadow: "0 0 0px rgba(212,175,55,0)" }}
-                          whileInView={{
-                            boxShadow: [
-                              "0 0 0px rgba(212,175,55,0)",
-                              "0 0 28px rgba(212,175,55,0.85)",
-                              "0 0 8px rgba(212,175,55,0.35)",
-                            ],
-                          }}
-                          viewport={{ once: true, margin: "-60px" }}
-                          transition={{ duration: 1.4, delay: 0.3 + i * 0.18, ease: "easeOut" }}
-                          className="absolute -left-12 top-1 w-7 h-7 rounded-full bg-accent border-2 border-accent/80"
-                        />
-                        <h4 className="font-heading text-lg md:text-xl font-bold text-white mb-1">{step.label}</h4>
-                        <p className="text-white/60 text-[15px] leading-[1.7]">{step.desc}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+                <AkaTimeline steps={akaSteps} />
               </div>
             </div>
           </div>
