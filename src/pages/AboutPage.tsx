@@ -1173,10 +1173,12 @@ const AboutPage = () => {
                     transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-accent via-accent/40 to-accent"
                   >
-                    <div className="w-full h-full rounded-full overflow-hidden bg-primary/5 border-4 border-white">
-                      <img src={samuelPortrait.url} alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
-                    </div>
+                    <div className="w-full h-full rounded-full bg-primary/5 border-4 border-white" />
                   </motion.div>
+                  <div className="absolute inset-[7px] rounded-full overflow-hidden border-4 border-white">
+                    <img src={samuelPortrait.url} alt="Portrait of Dr Samuel Omenka" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+                  </div>
+
                 </div>
               </div>
               <div>
