@@ -51,7 +51,7 @@ const values = [
   { label: "Intentionality", icon: Target, desc: "Nothing is accidental; every change is designed." },
   { label: "Innovation", icon: Lightbulb, desc: "We cultivate adaptive thinking and creative solutions that anticipate change and position our leaders and organisations ahead of the curve." },
   { label: "Integrity", icon: Shield, desc: "We remain steadfast in truth, choosing what is right over what is convenient in every sphere of influence." },
-  { label: "Excellence", icon: Award, desc: "We commit to superior standards in thought, character, execution, and outcomes — making excellence not an aspiration but our operational baseline." },
+  { label: "Excellence", icon: Award, desc: "We commit to superior standards in thought, character, execution, and outcomes, making excellence not an aspiration but our operational baseline." },
   { label: "Mentorship", icon: Compass, desc: "We accelerate growth through guided wisdom, structured accountability, and the transfer of insight from experience to emerging potential." },
   { label: "Community", icon: Users, desc: "We build ecosystems of collaboration, shared learning, and mutual accountability where collective growth strengthens individual success." },
   { label: "Legacy", icon: Gem, desc: "We pursue impact that transcends the present, building systems, values, and leaders that endure across generations." },
@@ -449,21 +449,24 @@ const ValuesWheel = ({
   const display = hover !== null ? hover : active;
   const cx = 300;
   const cy = 300;
-  const rO = 285;
-  const rI = 165;
-  const rLabel = 248;
+  const rO = 270;
+  const rI = 160;
+  const rLabel = 232;
 
   return (
     <div className="relative w-full">
       {/* Desktop: SVG wheel */}
-      <div className="hidden md:flex relative items-center justify-center mx-auto" style={{ maxWidth: 640 }}>
+      <div className="hidden md:flex relative items-center justify-center mx-auto w-full px-6" style={{ maxWidth: 620 }}>
         {/* gold ambience */}
         <div aria-hidden className="absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.14),transparent_65%)] blur-2xl pointer-events-none" />
         <motion.svg
           viewBox="0 0 600 600"
           width="100%"
-          className="relative drop-shadow-[0_30px_60px_rgba(10,14,26,0.25)]"
-          style={{ maxWidth: 600 }}
+          preserveAspectRatio="xMidYMid meet"
+          className="relative drop-shadow-[0_30px_60px_rgba(10,14,26,0.25)] block mx-auto"
+          style={{ maxWidth: 560, aspectRatio: "1 / 1", overflow: "visible" }}
+          role="group"
+          aria-label="Core Values wheel"
         >
           <motion.g
             animate={{ rotate: rotation }}
@@ -483,7 +486,7 @@ const ValuesWheel = ({
                     fill={seg.fill}
                     stroke={seg.stroke}
                     strokeWidth={seg.stroke === "#d4af37" ? 3 : 2}
-                    style={{ cursor: "pointer", transformOrigin: "300px 300px" }}
+                    style={{ cursor: "pointer", transformOrigin: "300px 300px", outline: "none" }}
                     animate={{
                       opacity: isActive ? 1 : 0.78,
                       scale: isActive ? 1.035 : 1,
@@ -495,13 +498,29 @@ const ValuesWheel = ({
                     onMouseEnter={() => setHover(i)}
                     onMouseLeave={() => setHover(null)}
                     onClick={() => lockTo(i)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        lockTo(i);
+                      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                        e.preventDefault();
+                        lockTo((i + 1) % n);
+                      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                        e.preventDefault();
+                        lockTo((i - 1 + n) % n);
+                      }
+                    }}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`${v.label}. ${v.desc}`}
+                    aria-pressed={i === active}
                   />
-                  {/* Counter-rotated upright label — always reads correctly */}
+                  {/* Upright label — always reads correctly, consistent radius/size */}
                   <motion.text
                     x={labelPos.x}
                     y={labelPos.y}
                     fill={seg.text}
-                    fontSize={13}
+                    fontSize={12.5}
                     fontWeight={700}
                     textAnchor="middle"
                     dominantBaseline="middle"
@@ -529,27 +548,29 @@ const ValuesWheel = ({
           {/* inner disc (does not rotate) */}
           <circle cx={cx} cy={cy} r={rI - 8} fill="#0a0e1a" />
           <circle cx={cx} cy={cy} r={rI - 8} fill="none" stroke="rgba(212,175,55,0.5)" strokeWidth={1} />
+          {/* Center living lens — rendered inside SVG for perfect centering */}
+          <foreignObject x={cx - (rI - 16)} y={cy - (rI - 16)} width={(rI - 16) * 2} height={(rI - 16) * 2}>
+            <div className="w-full h-full flex items-center justify-center text-center pointer-events-none">
+              <motion.div
+                key={display}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+                className="px-2"
+              >
+                <p className="editorial-label text-accent mb-2 text-[10px] tracking-[0.3em]">VALUE {String(display + 1).padStart(2, "0")}</p>
+                <h3 className="font-heading text-[20px] lg:text-[22px] text-white mb-2 leading-[1.1]">
+                  {values[display].label}
+                </h3>
+                <p className="text-[11.5px] text-white/70 leading-[1.5]">
+                  {values[display].desc}
+                </p>
+              </motion.div>
+            </div>
+          </foreignObject>
         </motion.svg>
-        {/* Center living lens — absolutely positioned over inner disc */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="text-center px-10 max-w-[260px]">
-            <motion.div
-              key={display}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-            >
-              <p className="editorial-label text-accent mb-3 text-[10px] tracking-[0.3em]">VALUE {String(display + 1).padStart(2, "0")}</p>
-              <h3 className="font-heading text-2xl lg:text-[28px] text-white mb-3 leading-[1.1]">
-                {values[display].label}
-              </h3>
-              <p className="text-[12.5px] text-white/70 leading-[1.55]">
-                {values[display].desc}
-              </p>
-            </motion.div>
-          </div>
-        </div>
       </div>
+
 
       {/* Mobile: stacked interactive list */}
       <div className="md:hidden space-y-2.5">
