@@ -59,7 +59,7 @@ const ValuePropSection = () => {
           <h3 className="editorial-label text-[#E8C76A] mb-6 opacity-100">Our Promise</h3>
         </ScrollReveal>
         <StaggeredText
-          text="Stop Aspiring Start Becoming."
+          text="Stop Aspiring Start Becoming"
           className="font-heading text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.05] tracking-tight drop-shadow-[0_0_50px_rgba(201,168,76,0.5)]"
           delay={0.15}
         />
