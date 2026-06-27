@@ -136,11 +136,11 @@ const WholePersonSection = () => {
             >
               <div
                 className="relative h-full rounded-2xl p-7 overflow-hidden
-                  bg-gradient-to-br from-white/[0.07] via-white/[0.04] to-white/[0.02]
-                  backdrop-blur-xl border border-white/10
+                  bg-gradient-to-br from-white/[0.12] via-white/[0.07] to-white/[0.03]
+                  backdrop-blur-xl border border-white/20
                   transition-all duration-500
-                  group-hover:border-accent/40
-                  group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.35)]"
+                  group-hover:border-accent/60
+                  group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.5)]"
               >
                 {/* Hover glow sweep */}
                 <div
