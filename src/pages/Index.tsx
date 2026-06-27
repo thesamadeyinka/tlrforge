@@ -7,6 +7,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import ChapterNav from "@/components/ChapterNav";
 import Chapter from "@/components/Chapter";
 
+const AboutSection = lazy(() => import("@/components/AboutSection"));
 const PillarsSection = lazy(() => import("@/components/PillarsSection"));
 const EventsSection = lazy(() => import("@/components/EventsSection"));
 const EvolveFeatureSection = lazy(() => import("@/components/EvolveFeatureSection"));
@@ -25,34 +26,41 @@ const Index = () => {
         <ChapterNav />
         <Header />
 
-        {/* Chapter 1 — Reality */}
+        {/* 1 — Hero / Reality */}
         <section id="reality" className="scroll-mt-20">
           <HeroSection />
         </section>
 
-        {/* Chapter 2 — EVOLVE */}
-        <Chapter id="evolve">
-          <Suspense fallback={<div className="py-28" />}>
-            <EvolveFeatureSection />
-          </Suspense>
-        </Chapter>
-
+        {/* 2 — Ecosystem */}
         <Suspense fallback={<div className="py-28" />}>
-          <EventsSection />
+          <AboutSection />
         </Suspense>
 
-        {/* Chapter 3 — Network (pillars incl. The Luminaries Network) */}
+        {/* 3 — Pillars / Network */}
         <Chapter id="network">
           <Suspense fallback={<div className="py-28" />}>
             <PillarsSection />
           </Suspense>
         </Chapter>
 
+        {/* 4 — Events */}
+        <Suspense fallback={<div className="py-28" />}>
+          <EventsSection />
+        </Suspense>
+
+        {/* 5 — EVOLVE */}
+        <Chapter id="evolve">
+          <Suspense fallback={<div className="py-28" />}>
+            <EvolveFeatureSection />
+          </Suspense>
+        </Chapter>
+
+        {/* 6 — Our Approach */}
         <Suspense fallback={<div className="py-28" />}>
           <WholePersonSection />
         </Suspense>
 
-        {/* Chapter 4 — Impact (the climax) */}
+        {/* 7 — Our Promise / Impact */}
         <Chapter id="impact">
           <Suspense fallback={<div className="py-28" />}>
             <ValuePropSection />
