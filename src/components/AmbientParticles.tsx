@@ -1,5 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { useMemo } from "react";
 
 interface Particle {
   id: number;
@@ -12,21 +12,8 @@ interface Particle {
 }
 
 const AmbientParticles = ({ count = 20, className = "" }: { count?: number; className?: string }) => {
-  const reduce = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const m = window.matchMedia("(max-width: 640px)");
-    const onChange = () => setIsMobile(m.matches);
-    onChange();
-    m.addEventListener("change", onChange);
-    return () => m.removeEventListener("change", onChange);
-  }, []);
-
-  const effectiveCount = isMobile ? Math.max(6, Math.floor(count / 2)) : count;
-
   const particles = useMemo<Particle[]>(() => {
-    return Array.from({ length: effectiveCount }, (_, i) => ({
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -35,9 +22,7 @@ const AmbientParticles = ({ count = 20, className = "" }: { count?: number; clas
       delay: Math.random() * 5,
       opacity: Math.random() * 0.3 + 0.05,
     }));
-  }, [effectiveCount]);
-
-  if (reduce) return null;
+  }, [count]);
 
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>

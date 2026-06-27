@@ -95,7 +95,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -105,16 +105,13 @@ const HeroSection = () => {
         src={heroBg}
         alt=""
         aria-hidden
-        loading="eager"
-        fetchPriority="high"
-        className="absolute inset-0 w-full h-full object-cover opacity-60 sm:opacity-70 object-[60%_center] sm:object-center"
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
         initial={{ scale: 1.08, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.7 }}
         transition={{ duration: 2.4, ease: [0.23, 1, 0.32, 1] }}
       />
-      {/* Stronger overlays on mobile for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,55%,5%)]/85 via-[hsl(224,55%,5%)]/50 to-[hsl(224,55%,6%)] sm:from-[hsl(224,55%,5%)]/70 sm:via-[hsl(224,55%,5%)]/40" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(224,55%,5%)]/90 via-[hsl(224,55%,5%)]/30 to-[hsl(224,55%,5%)]/40 sm:from-[hsl(224,55%,5%)]/80 sm:via-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,55%,5%)]/70 via-[hsl(224,55%,5%)]/40 to-[hsl(224,55%,6%)]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(224,55%,5%)]/80 via-transparent to-[hsl(224,55%,5%)]/40" />
       <Suspense fallback={null}>
         <AmbientParticles count={28} />
       </Suspense>
