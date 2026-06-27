@@ -1164,14 +1164,16 @@ const AboutPage = () => {
           </div>
         </section>
 
+        {/* DARK → WHITE transition into Who It's For */}
+        <div aria-hidden className="h-24 bg-gradient-to-b from-[#0a0e1a] to-white" />
 
-        {/* WHO IT'S FOR — staggered cards */}
-        <section className={`relative ${NAVY} py-14 md:py-20 border-t border-white/5`}>
+        {/* WHO IT'S FOR — staggered cards (white) */}
+        <section className="relative bg-white py-14 md:py-20">
           <div className="container mx-auto px-6 max-w-5xl">
             <ScrollReveal>
               <div className="text-center mb-12">
                 <p className="editorial-label text-accent mb-5 tracking-[0.2em] text-sm font-semibold">OUR AUDIENCE</p>
-                <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-[1.1]">
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary leading-[1.1]">
                   Who TLR Is <span className="text-gradient-gold">For</span>
                 </h2>
               </div>
@@ -1184,17 +1186,18 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.6, delay: i * 0.15, ease: [0.23, 1, 0.32, 1] }}
-                  className="group flex items-center gap-4 bg-white/[0.04] rounded-lg p-6 border border-white/10 hover:border-accent/40 hover:bg-white/[0.07] hover:-translate-y-1 hover:shadow-[0_10px_30px_-12px_rgba(212,175,55,0.3)] transition-all duration-500"
+                  className="group flex items-center gap-4 bg-white rounded-lg p-6 border border-primary/10 hover:border-accent/50 hover:-translate-y-1 shadow-[0_8px_24px_-16px_rgba(10,14,26,0.18)] hover:shadow-[0_14px_36px_-14px_rgba(212,175,55,0.4)] transition-all duration-500"
                 >
-                  <div className="w-10 h-10 rounded-md bg-accent/15 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-500">
-                    <ArrowRight className="w-4 h-4 text-accent group-hover:text-[#0a0e1a] group-hover:translate-x-0.5 transition-all duration-500" />
+                  <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-500">
+                    <ArrowRight className="w-4 h-4 text-accent group-hover:text-white group-hover:translate-x-0.5 transition-all duration-500" />
                   </div>
-                  <span className="text-[17px] font-medium text-white">{item}</span>
+                  <span className="text-[16px] font-medium text-primary">{item}</span>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
+
 
         {/* LEADERSHIP — gold halo + line-by-line bio */}
         <section className="py-16 md:py-20 bg-white">
