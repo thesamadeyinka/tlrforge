@@ -20,9 +20,9 @@ BREAKPOINTS = [
     ("desktop", 1280, 1800),
 ]
 
-# Section anchors via comment-derived headings/labels we can locate reliably.
+# (slug, text-to-locate). Anchor each on a string unique to one section.
 SECTIONS = [
-    ("hero", "About"),
+    ("hero", "About The Luminary Rise"),
     ("who-we-are", "WHO WE ARE"),
     ("commitment-aka", "OUR COMMITMENT"),
     ("vision-mission", "VISION"),
@@ -30,9 +30,10 @@ SECTIONS = [
     ("strategic-pillars", "OUR ARCHITECTURE"),
     ("audience", "OUR AUDIENCE"),
     ("leadership", "LEADERSHIP"),
-    ("quote", "we lead it"),
+    ("quote", "rise with it"),
     ("cta", "START TODAY"),
 ]
+
 
 
 async def main():
