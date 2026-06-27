@@ -417,22 +417,6 @@ const sectorPath = (
 };
 
 
-// Build an arc path for SVG <textPath>. When `flip` is true, the arc is
-// drawn from a2 → a1 with sweep=0 so text rendered along it reads upright
-// on the bottom half of the wheel (curving downward, never upside-down).
-const labelArcPath = (
-  cx: number,
-  cy: number,
-  r: number,
-  a1: number,
-  a2: number,
-  flip: boolean
-) => {
-  const start = polar(cx, cy, r, flip ? a2 : a1);
-  const end = polar(cx, cy, r, flip ? a1 : a2);
-  const sweep = flip ? 0 : 1;
-  return `M${start.x} ${start.y} A${r} ${r} 0 0 ${sweep} ${end.x} ${end.y}`;
-};
 
 // Single wheel label that orbits with the spinning wheel but stays upright.
 const WheelLabel = ({
