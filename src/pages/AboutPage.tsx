@@ -199,7 +199,109 @@ const AkaTimeline = ({ steps }: { steps: { label: string; desc: string }[] }) =>
     </div>
   );
 };
-const AboutPage = () => {
+// Core Values auto-advancing carousel with shimmer, indicators, and prominent gold arrows
+const ValuesCarousel = ({
+  values,
+}: {
+  values: { label: string; icon: typeof Target; desc: string }[];
+}) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [selected, setSelected] = useState(0);
+  const [snaps, setSnaps] = useState<number[]>([]);
+  const autoplay = useRef(
+    Autoplay({ delay: 3500, stopOnInteraction: false, stopOnMouseEnter: true }),
+  );
+
+  useEffect(() => {
+    if (!api) return;
+    setSnaps(api.scrollSnapList());
+    setSelected(api.selectedScrollSnap());
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  return (
+    <div className="relative">
+      <Carousel
+        opts={{ align: "start", loop: true }}
+        plugins={[autoplay.current]}
+        setApi={setApi}
+        className="w-full"
+        aria-label="Core values carousel"
+      >
+        <CarouselContent className="-ml-4">
+          {values.map((v, i) => (
+            <CarouselItem key={v.label} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.65, delay: (i % 3) * 0.12, ease: [0.23, 1, 0.32, 1] }}
+                className="relative h-full group rounded-2xl p-8 min-h-[260px] overflow-hidden
+                  bg-gradient-to-br from-primary/[0.04] via-white to-accent/[0.05]
+                  backdrop-blur-xl border border-primary/10
+                  shadow-[0_8px_40px_-18px_hsl(var(--primary)/0.25)]
+                  hover:-translate-y-1.5 hover:shadow-[0_22px_55px_-12px_rgba(212,175,55,0.45)]
+                  hover:border-accent/60 transition-all duration-500"
+              >
+                {/* Gold top border + shimmer */}
+                <span className="absolute top-0 left-0 right-0 h-[2px] bg-accent" />
+                <motion.span
+                  aria-hidden="true"
+                  className="absolute top-0 left-0 h-[2px] w-1/3 bg-gradient-to-r from-transparent via-white/90 to-transparent"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "400%" }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: "linear", delay: i * 0.4 }}
+                />
+                <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(212,175,55,0.25)]">
+                  <v.icon className="w-5 h-5 text-accent" />
+                </div>
+                <h4 className="font-heading font-bold text-primary mb-3 text-lg">{v.label}</h4>
+                <p className="text-[14px] text-primary/65 leading-[1.7]">{v.desc}</p>
+              </motion.div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious
+          className="-left-2 md:-left-6 h-11 w-11 rounded-full bg-accent border-accent text-white hover:bg-accent/90 hover:text-white shadow-[0_8px_24px_-6px_rgba(212,175,55,0.55)] opacity-100"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </CarouselPrevious>
+        <CarouselNext
+          className="-right-2 md:-right-6 h-11 w-11 rounded-full bg-accent border-accent text-white hover:bg-accent/90 hover:text-white shadow-[0_8px_24px_-6px_rgba(212,175,55,0.55)] opacity-100"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </CarouselNext>
+      </Carousel>
+
+      {/* Gold dash indicators */}
+      <div className="flex items-center justify-center gap-2 mt-8" role="tablist" aria-label="Carousel position">
+        {snaps.map((_, i) => {
+          const active = i === selected;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => api?.scrollTo(i)}
+              aria-label={`Go to value ${i + 1}`}
+              aria-selected={active}
+              role="tab"
+              className={`h-[3px] rounded-full transition-all duration-500 ${
+                active ? "w-8 bg-accent shadow-[0_0_10px_rgba(212,175,55,0.7)]" : "w-4 bg-accent/30 hover:bg-accent/60"
+              }`}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+
   const [bioVisible, setBioVisible] = useState(false);
   const bioLines = [
     "Dr Samuel Omenka is a senior economist, trusted advisor, visionary leader, and kingdom strategist whose life and work are defined by the dual call to transform economies and amplify Jesus Christ.",
