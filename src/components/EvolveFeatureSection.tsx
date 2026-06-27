@@ -39,10 +39,10 @@ const EvolveFeatureSection = () => {
         />
       </AnimatePresence>
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-[hsl(224,50%,10%)] opacity-80" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(224,50%,8%)]/60 via-transparent to-[hsl(224,50%,8%)]/90" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-accent/5 blur-[160px] pointer-events-none" />
+      {/* Overlays — lighter, more energetic */}
+      <div className="absolute inset-0 bg-[hsl(220,55%,18%)] opacity-60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,55%,14%)]/50 via-transparent to-[hsl(224,55%,10%)]/70" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-accent/15 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-6 py-24 relative z-10 max-w-3xl text-center">
         <ScrollReveal>
